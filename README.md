@@ -1,2 +1,2 @@
 # PumbaParty
-Juego para progra avanzada 2Âºc 2019
+Juego para progra avanzada 2ºc 2019
