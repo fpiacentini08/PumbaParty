@@ -1,10 +1,10 @@
-package rooms;
+package ar.com.pumba.rooms;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import users.User;
+import ar.com.pumba.users.User;
 
 public class Room
 {

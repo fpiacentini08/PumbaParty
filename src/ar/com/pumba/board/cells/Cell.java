@@ -1,6 +1,6 @@
-package board.cells;
+package ar.com.pumba.board.cells;
 
-import effects.Effect;
+import ar.com.pumba.effects.Effect;
 
 public abstract class Cell
 {

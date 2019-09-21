@@ -1,4 +1,4 @@
-package board.cells;
+package ar.com.pumba.board.cells;
 
 public class Position
 {

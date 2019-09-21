@@ -1,4 +1,4 @@
-package users;
+package ar.com.pumba.users;
 
 import java.util.UUID;
 

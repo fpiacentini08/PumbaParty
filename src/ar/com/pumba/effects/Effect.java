@@ -1,4 +1,4 @@
-package effects;
+package ar.com.pumba.effects;
 
 public class Effect
 {

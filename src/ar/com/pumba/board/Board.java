@@ -1,15 +1,15 @@
-package board;
+package ar.com.pumba.board;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import board.cells.Cell;
-import board.cells.Position;
-import board.cells.impl.notwalkable.impl.NotPlayableCellImpl;
-import board.cells.impl.walkable.impl.CommonCellImpl;
-import board.cells.impl.walkable.impl.LoseCoinsCellImpl;
-import board.cells.impl.walkable.impl.WinCoinsCellImpl;
+import ar.com.pumba.board.cells.Cell;
+import ar.com.pumba.board.cells.Position;
+import ar.com.pumba.board.cells.impl.notwalkable.impl.NotPlayableCellImpl;
+import ar.com.pumba.board.cells.impl.walkable.impl.CommonCellImpl;
+import ar.com.pumba.board.cells.impl.walkable.impl.LoseCoinsCellImpl;
+import ar.com.pumba.board.cells.impl.walkable.impl.WinCoinsCellImpl;
 
 public class Board
 {
