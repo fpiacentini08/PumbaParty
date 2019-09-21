@@ -42,4 +42,17 @@ public class User
 	{
 		return password.equals(pass);
 	}
+
+	public User(String username, String password)
+	{
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	public User()
+	{
+		super();
+	}
+
 }
