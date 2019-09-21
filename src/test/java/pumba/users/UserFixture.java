@@ -6,9 +6,9 @@ import main.java.pumba.users.User;
 
 public class UserFixture
 {
-    public static String username = "user.test";
-    public static String password = "1q2w3e4r";
-    public static UUID roomId = UUID.randomUUID();
+    public static final String username = "user.test";
+    public static final String password = "1q2w3e4r";
+    public static final UUID roomId = UUID.randomUUID();
     
 
     private User build()
