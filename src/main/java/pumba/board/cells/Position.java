@@ -37,4 +37,42 @@ public class Position
 		super();
 	}
 
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((posX == null) ? 0 : posX.hashCode());
+		result = prime * result + ((posY == null) ? 0 : posY.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Position other = (Position) obj;
+		if (posX == null)
+		{
+			if (other.posX != null)
+				return false;
+		}
+		else if (!posX.equals(other.posX))
+			return false;
+		if (posY == null)
+		{
+			if (other.posY != null)
+				return false;
+		}
+		else if (!posY.equals(other.posY))
+			return false;
+		return true;
+	}
+
+	
 }
