@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import ar.com.pumba.game.Game;
 import ar.com.pumba.users.User;
 
 public class Room
@@ -14,6 +15,7 @@ public class Room
 	private List<String> usernames;
 	private String mastername;
 	private Boolean playing;
+	private Game game;
 
 	public Room(User master)
 	{
@@ -78,8 +80,7 @@ public class Room
 
 		if (this.usernames.isEmpty())
 		{
-			this.mastername = null;
-			this.playing = false;
+			this.stopGame();
 		}
 		else
 		{
@@ -88,5 +89,20 @@ public class Room
 				this.mastername = this.usernames.get(0);
 			}
 		}
+
+	}
+
+	public void startGame()
+	{
+		this.playing = true;
+		this.game = new Game(usernames);
+		this.game.playGame();
+	}
+
+	public void stopGame()
+	{
+		this.game.stopGame();
+		this.mastername = null;
+		this.playing = false;
 	}
 }

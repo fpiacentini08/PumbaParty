@@ -5,13 +5,19 @@ import java.util.Random;
 import ar.com.pumba.board.cells.Position;
 import ar.com.pumba.effects.Effect;
 
-
 public class Player
 {
 
 	String username;
 	Integer coins;
 	Position position;
+
+	public Player(String username, Position pos)
+	{
+		this.username = username;
+		this.position = pos;
+		this.coins = 0;
+	}
 
 	public String getUsername()
 	{
@@ -54,5 +60,10 @@ public class Player
 		{
 			this.coins += effect.getCoins();
 		}
+	}
+
+	public void playAction()
+	{
+		// TODO Auto-generated method stub
 	}
 }
