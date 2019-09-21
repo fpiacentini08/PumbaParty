@@ -9,6 +9,16 @@ public abstract class Cell
 	protected Effect effect = new Effect();
 	protected Boolean walkable = false;
 
+	
+	
+	public Cell(Position position, Effect effect, Boolean walkable)
+	{
+		super();
+		this.position = position;
+		this.effect = effect;
+		this.walkable = walkable;
+	}
+
 	public Position getPosition()
 	{
 		return position;
