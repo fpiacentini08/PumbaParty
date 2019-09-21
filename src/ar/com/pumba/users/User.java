@@ -26,6 +26,16 @@ public class User
 		this.password = password;
 	}
 
+	public UUID getRoomId()
+	{
+		return roomId;
+	}
+
+	public void setRoomId(UUID roomId)
+	{
+		this.roomId = roomId;
+	}
+
 	public Boolean validatePassword(String pass) // TODO WE SHOULD STORE
 													// PASSWORD HASH, NOT
 													// PASSWORD

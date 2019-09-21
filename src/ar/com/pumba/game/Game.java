@@ -3,6 +3,7 @@ package ar.com.pumba.game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import ar.com.pumba.board.Board;
 import ar.com.pumba.board.cells.Position;
@@ -17,7 +18,7 @@ public class Game
 	private Board board;
 	private List<MiniGame> minigames;
 
-	public Game(List<String> usernames)
+	public Game(Set<String> usernames)
 	{
 		this.players = new ArrayList<>();
 		for (String username : usernames)

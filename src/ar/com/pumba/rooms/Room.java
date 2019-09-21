@@ -1,7 +1,8 @@
 package ar.com.pumba.rooms;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import ar.com.pumba.game.Game;
@@ -12,7 +13,7 @@ public class Room
 	private static final Integer maxUsers = 5;
 
 	private UUID id;
-	private List<String> usernames;
+	private Set<String> usernames;
 	private String mastername;
 	private Boolean playing;
 	private Game game;
@@ -21,7 +22,7 @@ public class Room
 	{
 		super();
 		this.id = UUID.randomUUID();
-		List<String> usersList = new ArrayList<>();
+		Set<String> usersList = new HashSet<>();
 		usersList.add(master.getUsername());
 		this.usernames = usersList;
 		this.mastername = master.getUsername();
@@ -33,12 +34,12 @@ public class Room
 		return id;
 	}
 
-	public List<String> getUsernames()
+	public Set<String> getUsernames()
 	{
 		return usernames;
 	}
 
-	public void setUsernames(List<String> usernames)
+	public void setUsernames(Set<String> usernames)
 	{
 		this.usernames = usernames;
 	}
@@ -86,7 +87,7 @@ public class Room
 		{
 			if (this.mastername.equals(user.getUsername()))
 			{
-				this.mastername = this.usernames.get(0);
+				this.mastername = new ArrayList<>(this.usernames).get(0);
 			}
 		}
 
@@ -105,4 +106,5 @@ public class Room
 		this.mastername = null;
 		this.playing = false;
 	}
+	
 }
