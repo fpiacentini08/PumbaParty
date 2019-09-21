@@ -13,8 +13,8 @@ public class Room
 	private static final Integer maxUsers = 5;
 
 	private UUID id;
-	private Set<String> usernames;
-	private String mastername;
+	private Set<User> users;
+	private User master;
 	private Boolean playing;
 	private Game game;
 
@@ -22,10 +22,10 @@ public class Room
 	{
 		super();
 		this.id = UUID.randomUUID();
-		Set<String> usersList = new HashSet<>();
-		usersList.add(master.getUsername());
-		this.usernames = usersList;
-		this.mastername = master.getUsername();
+		Set<User> usersList = new HashSet<>();
+		usersList.add(master);
+		this.users = usersList;
+		this.master = master;
 		this.playing = false;
 	}
 
@@ -34,24 +34,24 @@ public class Room
 		return id;
 	}
 
-	public Set<String> getUsernames()
+	public Set<User> getUsers()
 	{
-		return usernames;
+		return users;
 	}
 
-	public void setUsernames(Set<String> usernames)
+	public void setUsers(Set<User> users)
 	{
-		this.usernames = usernames;
+		this.users = users;
 	}
 
-	public String getMastername()
+	public User getMaster()
 	{
-		return mastername;
+		return master;
 	}
 
-	public void setMastername(String mastername)
+	public void setMaster(User master)
 	{
-		this.mastername = mastername;
+		this.master = master;
 	}
 
 	public Boolean getPlaying()
@@ -66,28 +66,28 @@ public class Room
 
 	public Boolean enter(User user)
 	{
-		if (usernames.size() > maxUsers)
+		if (users.size() > maxUsers)
 		{
 			return false;
 		}
-		usernames.add(user.getUsername());
+		users.add(user);
 		return true;
 	}
 
 	public void exit(User user)
 	{
 
-		this.usernames.remove(user.getUsername());
+		this.users.remove(user);
 
-		if (this.usernames.isEmpty())
+		if (this.users.isEmpty())
 		{
 			this.stopGame();
 		}
 		else
 		{
-			if (this.mastername.equals(user.getUsername()))
+			if (this.master.equals(user.getUsername()))
 			{
-				this.mastername = new ArrayList<>(this.usernames).get(0);
+				this.master = new ArrayList<>(this.users).get(0);
 			}
 		}
 
@@ -96,15 +96,15 @@ public class Room
 	public void startGame()
 	{
 		this.playing = true;
-		this.game = new Game(usernames);
+		this.game = new Game(users);
 		this.game.playGame();
 	}
 
 	public void stopGame()
 	{
 		this.game.stopGame();
-		this.mastername = null;
+		this.master = null;
 		this.playing = false;
 	}
-	
+
 }

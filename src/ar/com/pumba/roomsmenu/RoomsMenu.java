@@ -57,7 +57,7 @@ public class RoomsMenu
 		{
 			roomToExit.exit(user);
 			user.setRoomId(null);
-			if (roomToExit.getUsernames().isEmpty())
+			if (roomToExit.getUsers().isEmpty())
 			{
 				rooms.remove(rooms.indexOf(roomToExit));
 			}
@@ -66,7 +66,7 @@ public class RoomsMenu
 
 	private Boolean isInARoom(User user)
 	{
-		return !rooms.stream().filter(rm -> rm.getUsernames().contains(user.getUsername())).collect(Collectors.toList())
+		return !rooms.stream().filter(rm -> rm.getUsers().contains(user)).collect(Collectors.toList())
 				.isEmpty();
 	}
 

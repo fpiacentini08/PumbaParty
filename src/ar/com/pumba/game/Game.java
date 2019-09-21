@@ -10,6 +10,7 @@ import ar.com.pumba.board.cells.Position;
 import ar.com.pumba.effects.Effect;
 import ar.com.pumba.minigame.MiniGame;
 import ar.com.pumba.players.Player;
+import ar.com.pumba.users.User;
 
 public class Game
 {
@@ -18,13 +19,13 @@ public class Game
 	private Board board;
 	private List<MiniGame> minigames;
 
-	public Game(Set<String> usernames)
+	public Game(Set<User> users)
 	{
 		this.players = new ArrayList<>();
-		for (String username : usernames)
+		for (User user : users)
 		{
 			Position defaultPos = board.defaultPosition();
-			this.players.add(new Player(username, defaultPos));
+			this.players.add(new Player(user, defaultPos));
 		}
 	}
 

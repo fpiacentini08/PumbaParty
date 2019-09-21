@@ -1,9 +1,13 @@
 package ar.com.pumba.players;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import ar.com.pumba.actions.Action;
 import ar.com.pumba.board.cells.Position;
 import ar.com.pumba.effects.Effect;
+import ar.com.pumba.users.User;
 
 public class Player
 {
@@ -11,12 +15,14 @@ public class Player
 	String username;
 	Integer coins;
 	Position position;
+	List<Action> actions;
 
-	public Player(String username, Position pos)
+	public Player(User user, Position pos)
 	{
-		this.username = username;
+		this.username = user.getUsername();
 		this.position = pos;
 		this.coins = 0;
+		actions = defaultActions();
 	}
 
 	public String getUsername()
@@ -62,8 +68,14 @@ public class Player
 		}
 	}
 
+	private List<Action> defaultActions()
+	{
+		return new ArrayList<>();
+	}
+
 	public void playAction()
 	{
-		// TODO Auto-generated method stub
+		// TO DO IMPLEMENT THIS
+		this.actions.get(0).play();
 	}
 }
