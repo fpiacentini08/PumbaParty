@@ -13,7 +13,7 @@ import main.java.pumba.board.cells.impl.notwalkable.impl.NotPlayableCellImpl;
 public class NotPlayableCellTest
 {
 	@Test
-	public void notWalkableCellTest() {
+	public void notPlayableCellTest() {
 		Cell nWCell = new NotPlayableCellImpl(PositionFixture.withDefaults());
 		assertNotNull(nWCell);
 		assertNull(nWCell.getEffect());
