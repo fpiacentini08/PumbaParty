@@ -9,7 +9,7 @@ public class CellB extends Cell
 	public CellB(Position pos)
 	{
 		super();
-		this.effect = new Effect();
+		this.effect = new Effect(); // TODO CUSTOM EFFECT
 		this.position = pos;
 	}
 	 
