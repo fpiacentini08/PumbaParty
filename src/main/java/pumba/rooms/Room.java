@@ -39,19 +39,9 @@ public class Room
 		return users;
 	}
 
-	public void setUsers(Set<User> users)
-	{
-		this.users = users;
-	}
-
 	public User getMaster()
 	{
 		return master;
-	}
-
-	public void setMaster(User master)
-	{
-		this.master = master;
 	}
 
 	public Boolean getPlaying()
@@ -59,17 +49,18 @@ public class Room
 		return playing;
 	}
 
-	public void setPlaying(Boolean playing)
-	{
-		this.playing = playing;
-	}
-
 	public Boolean enter(User user)
 	{
-		if (users.size() > maxUsers)
+		if (users.contains(user))
+		{
+			// ITS ALREADY IN
+			return true;
+		}
+		if (users.size() >= maxUsers)
 		{
 			return false;
 		}
+
 		users.add(user);
 		return true;
 	}
@@ -85,7 +76,7 @@ public class Room
 		}
 		else
 		{
-			if (this.master.equals(user.getUsername()))
+			if (this.master.equals(user))
 			{
 				this.master = new ArrayList<>(this.users).get(0);
 			}
@@ -102,9 +93,13 @@ public class Room
 
 	public void stopGame()
 	{
-		this.game.stopGame();
+		if (this.playing)
+		{
+			this.game.stopGame();
+			this.playing = false;
+		}
 		this.master = null;
-		this.playing = false;
+
 	}
 
 }

@@ -20,11 +20,6 @@ public class RoomsMenu
 		return rooms;
 	}
 
-	public void setRooms(List<Room> rooms)
-	{
-		this.rooms = rooms;
-	}
-
 	public Boolean createRoom(User user)
 	{
 		if (!isInARoom(user))
