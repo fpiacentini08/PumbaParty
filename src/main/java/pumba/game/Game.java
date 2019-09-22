@@ -21,6 +21,7 @@ public class Game
 
 	public Game(Set<User> users)
 	{
+		this.board = new Board();
 		this.players = new ArrayList<>();
 		for (User user : users)
 		{

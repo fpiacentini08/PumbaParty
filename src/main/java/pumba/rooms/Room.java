@@ -73,6 +73,7 @@ public class Room
 		if (this.users.isEmpty())
 		{
 			this.stopGame();
+			this.emptyRoom();
 		}
 		else
 		{
@@ -84,11 +85,17 @@ public class Room
 
 	}
 
+	private void emptyRoom()
+	{
+		this.master = null;
+		this.users = null;
+	}
+
 	public void startGame()
 	{
 		this.playing = true;
 		this.game = new Game(users);
-		this.game.playGame();
+		// this.game.playGame();
 	}
 
 	public void stopGame()
@@ -98,7 +105,6 @@ public class Room
 			this.game.stopGame();
 			this.playing = false;
 		}
-		this.master = null;
 
 	}
 
