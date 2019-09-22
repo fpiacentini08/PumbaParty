@@ -46,19 +46,19 @@ public class Board
 				switch (rand.nextInt(4))
 				{
 					case 0:
-						this.cells.add(new NotPlayableCellImpl(new Position(x, y)));
+						cellsList.add(new NotPlayableCellImpl(new Position(x, y)));
 						break;
 					case 1:
-						this.cells.add(new CommonCellImpl(new Position(x, y)));
+						cellsList.add(new CommonCellImpl(new Position(x, y)));
 						break;
 					case 2:
-						this.cells.add(new LoseCoinsCellImpl(new Position(x, y)));
+						cellsList.add(new LoseCoinsCellImpl(new Position(x, y)));
 						break;
 					case 3:
-						this.cells.add(new WinCoinsCellImpl(new Position(x, y)));
+						cellsList.add(new WinCoinsCellImpl(new Position(x, y)));
 						break;
 					default:
-						this.cells.add(new CommonCellImpl(new Position(x, y)));
+						cellsList.add(new CommonCellImpl(new Position(x, y)));
 						break;
 				}
 			}
