@@ -24,11 +24,6 @@ public class Board
 		return cells;
 	}
 
-	public void setCells(List<Cell> cells)
-	{
-		this.cells = cells;
-	}
-
 	public static Integer getDimension()
 	{
 		return dimension;

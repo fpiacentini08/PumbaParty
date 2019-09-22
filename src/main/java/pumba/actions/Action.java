@@ -3,8 +3,13 @@ package main.java.pumba.actions;
 public class Action
 {
 
+	public Action()
+	{
+		super();
+	}
+
 	public void play()
 	{
-		// TODO Auto-generated method stub
+		System.out.println("ACTION PLAYED");
 	}
 }

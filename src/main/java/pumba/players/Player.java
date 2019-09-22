@@ -30,11 +30,6 @@ public class Player
 		return username;
 	}
 
-	public void setUsername(String username)
-	{
-		this.username = username;
-	}
-
 	public Integer getCoins()
 	{
 		return coins;
@@ -64,7 +59,7 @@ public class Player
 	{
 		if (effect != null && effect.getCoins() != null)
 		{
-			this.coins += effect.getCoins();
+			this.coins = this.coins + effect.getCoins() >= 0 ? this.coins + effect.getCoins() : 0;
 		}
 	}
 
