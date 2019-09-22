@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 import main.java.pumba.board.cells.Cell;
 import main.java.pumba.board.cells.Position;
-import main.java.pumba.board.cells.impl.notwalkable.impl.NotPlayableCellImpl;
-import main.java.pumba.board.cells.impl.walkable.impl.CommonCellImpl;
-import main.java.pumba.board.cells.impl.walkable.impl.LoseCoinsCellImpl;
-import main.java.pumba.board.cells.impl.walkable.impl.WinCoinsCellImpl;
+import main.java.pumba.board.cells.notwalkable.impl.NotPlayableCellImpl;
+import main.java.pumba.board.cells.walkable.impl.CommonCellImpl;
+import main.java.pumba.board.cells.walkable.impl.LoseCoinsCellImpl;
+import main.java.pumba.board.cells.walkable.impl.WinCoinsCellImpl;
 import main.java.pumba.effects.Effect;
 
 public class Board

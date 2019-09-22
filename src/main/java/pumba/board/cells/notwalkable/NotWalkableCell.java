@@ -1,4 +1,4 @@
-package main.java.pumba.board.cells.impl.notwalkable;
+package main.java.pumba.board.cells.notwalkable;
 
 import main.java.pumba.board.cells.Cell;
 import main.java.pumba.board.cells.Position;

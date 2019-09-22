@@ -1,7 +1,7 @@
-package main.java.pumba.board.cells.impl.notwalkable.impl;
+package main.java.pumba.board.cells.notwalkable.impl;
 
 import main.java.pumba.board.cells.Position;
-import main.java.pumba.board.cells.impl.notwalkable.NotWalkableCell;
+import main.java.pumba.board.cells.notwalkable.NotWalkableCell;
 
 public class NotPlayableCellImpl extends NotWalkableCell
 {
