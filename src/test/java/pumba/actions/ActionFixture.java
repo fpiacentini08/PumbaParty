@@ -1,14 +1,15 @@
 package test.java.pumba.actions;
 
 import main.java.pumba.actions.Action;
-import main.java.pumba.actions.impl.ActionSayHiImpl;
+import main.java.pumba.actions.impl.ActionThrowBomb;
+//import main.java.pumba.actions.impl.ActionSayHiImpl;
 
 public class ActionFixture
 {
 
     private Action build()
     {
-    	Action action = new ActionSayHiImpl();
+    	Action action = new ActionThrowBomb();
         return action;
     }
 
