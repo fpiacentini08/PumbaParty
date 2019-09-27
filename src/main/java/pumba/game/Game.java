@@ -89,14 +89,7 @@ public class Game
 
 		Log.debug("El jugador " + player.getUsername() + " realiza accion.");
 
-		Effect effect=player.playAction();
-		for (Player player1 : players)
-		{
-			if(player1!=player) {
-				player1.applyEffect(effect);
-			}
-		}
-		
+		player.playAction();
 	}
 
 	private Position selectFinalPosition(List<Position> possiblePositions)

@@ -71,9 +71,9 @@ public class Player implements Comparable<Player>
 		return actions;
 	}
 
-	public Effect playAction()
+	public void playAction()
 	{
-		return this.actions.get(0).play();
+		this.actions.get(0).play();
 	}
 
 	@Override
