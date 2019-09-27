@@ -62,7 +62,9 @@ public class Game
 	{
 		Integer steps = player.throwDice();
 
-		Log.debug(player.getUsername() + " tira el dado.");
+		Log.debug(player.getUsername() + " tira el dado. Sale " + steps);
+
+		Log.debug(player.getUsername() + " se encuentra en " + player.getPosition());
 
 		List<Position> possiblePositions = board.move(player.getPosition(), steps);
 
@@ -94,7 +96,8 @@ public class Game
 
 	private Position selectFinalPosition(List<Position> possiblePositions)
 	{
-		return possiblePositions.get(0); // SELECTS FIRST BY DEFECT
+		Random rand = new Random();
+		return possiblePositions.get(rand.nextInt(possiblePositions.size() - 1));
 	}
 
 	public void playGame()

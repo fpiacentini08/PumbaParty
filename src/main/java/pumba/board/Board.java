@@ -2,9 +2,11 @@ package main.java.pumba.board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import main.java.pumba.board.cells.Cell;
@@ -44,16 +46,16 @@ public class Board
 				switch (rand.nextInt(4))
 				{
 					case 0:
-						cellsList.add(new NotPlayableCellImpl(new Position(x, y)));
+						cellsList.add(new CommonCellImpl(new Position(x, y)));
 						break;
 					case 1:
 						cellsList.add(new CommonCellImpl(new Position(x, y)));
 						break;
 					case 2:
-						cellsList.add(new LoseCoinsCellImpl(new Position(x, y)));
+						cellsList.add(new CommonCellImpl(new Position(x, y)));
 						break;
 					case 3:
-						cellsList.add(new WinCoinsCellImpl(new Position(x, y)));
+						cellsList.add(new CommonCellImpl(new Position(x, y)));
 						break;
 					default:
 						cellsList.add(new CommonCellImpl(new Position(x, y)));
@@ -81,11 +83,28 @@ public class Board
 
 	public List<Position> move(Position initialPosition, Integer steps)
 	{
-		// TO DO IMPLEMENT THIS METHOD
-		// THERE CAN BE MORE THAN ONE POSSIBLE FINAL POSITION
-		List<Position> list = new ArrayList<>();
-		list.add(defaultPosition());
-		return list;
+		Set<Position> possiblePositions = new HashSet<>();
+
+		if (steps == 0)
+		{
+			List<Position> finalStep = new ArrayList<>();
+			finalStep.add(initialPosition);
+			return finalStep;
+
+		}
+		else
+		{
+			List<Position> adjacentPositions = adjacenceMap.get(initialPosition);
+
+			for (Position pos : adjacentPositions)
+			{
+				possiblePositions.addAll(this.move(pos, steps - 1));
+			}
+
+		}
+		possiblePositions.remove(initialPosition);
+		return new ArrayList<>(possiblePositions);
+
 	}
 
 	public List<Position> move(Position initialPosition, Integer steps, Position finalPosition)
@@ -137,8 +156,6 @@ public class Board
 		return adjacenceMap;
 	}
 
-	
-	
 	public Map<Position, List<Position>> getAdjacenceMap()
 	{
 		return adjacenceMap;
@@ -159,4 +176,5 @@ public class Board
 
 		return false;
 	}
+
 }

@@ -94,8 +94,80 @@ public class BoardTest
 				assertTrue(adjacenceMap.containsKey(cell.getPosition()));
 			}
 		}
-		
-		
+	}
+
+	private void boardTestMoveTest(Position initialPosition, Integer steps, Position... positions)
+	{
+		Board board = new Board();
+		board.setTestBoard();
+
+		List<Position> possiblePositions = board.move(initialPosition, steps);
+
+		for (int i = 0; i < positions.length; i++)
+		{
+			assertTrue(possiblePositions.contains(positions[i]));
+
+		}
 
 	}
+
+	@Test
+	public void boardTestMove01Test()
+	{
+		Position pos = new Position(0, 0);
+		Position posExpected1 = new Position(0, 1);
+		Position posExpected2 = new Position(1, 0);
+		boardTestMoveTest(pos, 1, posExpected1, posExpected2);
+
+	}
+
+	@Test
+	public void boardTestMove02Test()
+	{
+		Position pos = new Position(0, 0);
+		Position posExpected1 = new Position(0, 2);
+		Position posExpected2 = new Position(2, 0);
+		Position posExpected3 = new Position(1, 1);
+		boardTestMoveTest(pos, 2, posExpected1, posExpected2, posExpected3);
+
+	}
+
+	@Test
+	public void boardTestMove03Test()
+	{
+		Position pos = new Position(0, 0);
+		Position posExpected1 = new Position(0, 4);
+		Position posExpected2 = new Position(4, 0);
+		Position posExpected3 = new Position(1, 3);
+		Position posExpected4 = new Position(3, 1);
+		Position posExpected5 = new Position(2, 2);
+		Position posExpected6 = new Position(1, 1);
+		Position posExpected7 = new Position(2, 0);
+		Position posExpected8 = new Position(0, 2);
+		boardTestMoveTest(pos, 4, posExpected1, posExpected2, posExpected3, posExpected4, posExpected5, posExpected6,
+				posExpected7, posExpected8);
+
+	}
+
+	@Test
+	public void boardTestMove04Test()
+	{
+		Position pos = new Position(0, 0);
+		Position posExpected1 = new Position(0, 6);
+		Position posExpected2 = new Position(6, 0);
+		Position posExpected3 = new Position(5, 1);
+		Position posExpected4 = new Position(1, 5);
+		Position posExpected5 = new Position(2, 4);
+		Position posExpected6 = new Position(4, 2);
+		Position posExpected7 = new Position(3, 3);
+		Position posExpected8 = new Position(0, 4);
+		Position posExpected9 = new Position(4, 0);
+		Position posExpected10 = new Position(1, 3);
+		Position posExpected11 = new Position(3, 1);
+		Position posExpected12 = new Position(2, 2);
+		boardTestMoveTest(pos, 6, posExpected1, posExpected2, posExpected3, posExpected4, posExpected5, posExpected6,
+				posExpected7, posExpected8, posExpected9, posExpected10, posExpected11, posExpected12);
+
+	}
+
 }
