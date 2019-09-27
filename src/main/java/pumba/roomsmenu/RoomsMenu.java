@@ -1,14 +1,14 @@
 package main.java.pumba.roomsmenu;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import main.java.pumba.rooms.Room;
 import main.java.pumba.users.User;
 
 public class RoomsMenu
 {
-	List<Room> rooms;
+	List<Room> rooms = new ArrayList<Room>();
 
 	public RoomsMenu()
 	{
@@ -22,7 +22,7 @@ public class RoomsMenu
 
 	public Boolean createRoom(User user)
 	{
-		if (!isInARoom(user))
+		if (user.getRoomId() == null)
 		{
 			Room room = new Room(user);
 			user.setRoomId(room.getId());
@@ -35,15 +35,16 @@ public class RoomsMenu
 	public Boolean enterRoom(User user, Room roomToEnter)
 	{
 
-		if (!isInARoom(user) && roomToEnter != null && rooms.contains(roomToEnter))
+		if (user.getRoomId() == null && roomToEnter != null && rooms.contains(roomToEnter))
 		{
 			if (roomToEnter.enter(user))
 			{
 				user.setRoomId(roomToEnter.getId());
 				return true;
 			}
+			return false;
 		}
-		return false;
+		return user.getRoomId().equals(roomToEnter.getId());
 	}
 
 	public void exitRoom(User user, Room roomToExit)
@@ -57,12 +58,6 @@ public class RoomsMenu
 				rooms.remove(rooms.indexOf(roomToExit));
 			}
 		}
-	}
-
-	private Boolean isInARoom(User user)
-	{
-		return !rooms.stream().filter(rm -> rm.getUsers().contains(user)).collect(Collectors.toList())
-				.isEmpty();
 	}
 
 }
