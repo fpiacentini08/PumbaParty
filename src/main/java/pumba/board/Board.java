@@ -1,7 +1,9 @@
 package main.java.pumba.board;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -18,6 +20,7 @@ public class Board
 
 	private List<Cell> cells;
 	private static final Integer dimension = 20;
+	private Map<Position, List<Position>> adjacenceMap;
 
 	public List<Cell> getCells()
 	{
@@ -59,6 +62,21 @@ public class Board
 			}
 		}
 		this.cells = cellsList;
+		this.adjacenceMap = createAdjacentMap();
+	}
+
+	public void setTestBoard()
+	{
+		List<Cell> cellsList = new ArrayList<>();
+		for (int x = 0; x < dimension; x++)
+		{
+			for (int y = 0; y < dimension; y++)
+			{
+				cellsList.add(new CommonCellImpl(new Position(x, y)));
+			}
+		}
+		this.cells = cellsList;
+		this.adjacenceMap = createAdjacentMap();
 	}
 
 	public List<Position> move(Position initialPosition, Integer steps)
@@ -92,5 +110,53 @@ public class Board
 	public Position defaultPosition()
 	{
 		return new Position(0, 0);
+	}
+
+	protected Map<Position, List<Position>> createAdjacentMap()
+	{
+		List<Cell> walkableCells = cells.stream().filter(cell -> cell.getWalkable()).collect(Collectors.toList());
+		List<Position> positions = new ArrayList<>();
+		for (Cell cell : walkableCells)
+		{
+			positions.add(cell.getPosition());
+		}
+		adjacenceMap = new HashMap<Position, List<Position>>();
+		for (Position referencePosition : positions)
+		{
+			List<Position> adjacentPositions = new ArrayList<>();
+			for (Position position : positions)
+			{
+				if (adjacentPositions(referencePosition, position))
+				{
+					adjacentPositions.add(position);
+				}
+			}
+			adjacenceMap.put(referencePosition, adjacentPositions);
+
+		}
+		return adjacenceMap;
+	}
+
+	
+	
+	public Map<Position, List<Position>> getAdjacenceMap()
+	{
+		return adjacenceMap;
+	}
+
+	public static Boolean adjacentPositions(Position pos1, Position pos2)
+	{
+
+		if (pos1.getPosX().equals(pos2.getPosX()) && Math.abs(pos1.getPosY() - pos2.getPosY()) == 1)
+		{
+			return true;
+		}
+
+		if (pos1.getPosY().equals(pos2.getPosY()) && Math.abs(pos1.getPosX() - pos2.getPosX()) == 1)
+		{
+			return true;
+		}
+
+		return false;
 	}
 }
