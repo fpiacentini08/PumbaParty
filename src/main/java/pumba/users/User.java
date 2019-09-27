@@ -60,8 +60,6 @@ public class User
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((roomId == null) ? 0 : roomId.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -76,20 +74,6 @@ public class User
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (password == null)
-		{
-			if (other.password != null)
-				return false;
-		}
-		else if (!password.equals(other.password))
-			return false;
-		if (roomId == null)
-		{
-			if (other.roomId != null)
-				return false;
-		}
-		else if (!roomId.equals(other.roomId))
-			return false;
 		if (username == null)
 		{
 			if (other.username != null)
@@ -99,7 +83,6 @@ public class User
 			return false;
 		return true;
 	}
-
 
 	
 }

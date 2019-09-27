@@ -1,6 +1,6 @@
 package main.java.pumba.roomsmenu;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import main.java.pumba.rooms.Room;
@@ -8,7 +8,7 @@ import main.java.pumba.users.User;
 
 public class RoomsMenu
 {
-	List<Room> rooms = new ArrayList<Room>();
+	List<Room> rooms = new LinkedList<Room>();
 
 	public RoomsMenu()
 	{
@@ -53,7 +53,10 @@ public class RoomsMenu
 		{
 			roomToExit.exit(user);
 			user.setRoomId(null);
-			if (roomToExit.getUsers().isEmpty())
+
+//			rooms.get(rooms.indexOf(roomToExit)).getUsers().remove(user);
+
+			if (roomToExit.getUsers() == null || roomToExit.getUsers().isEmpty())
 			{
 				rooms.remove(rooms.indexOf(roomToExit));
 			}
