@@ -129,4 +129,24 @@ public class RoomsMenuTest
 
 	}
 
+	
+
+	@Test
+	public void exitRoomBeingAMasterTest()
+	{
+		final User user1 = new User("test1", "test1");
+		final User user2 = new User("test2", "test2");
+		RoomsMenu roomsMenu = new RoomsMenu();
+		assertTrue(roomsMenu.createRoom(user1));
+		assertTrue(roomsMenu.enterRoom(user2, roomsMenu.getRooms().get(0)));
+		roomsMenu.exitRoom(user1, roomsMenu.getRooms().get(0));
+		assertEquals(1, roomsMenu.getRooms().get(0).getUsers().size(), 0);
+		assertTrue(roomsMenu.getRooms().get(0).getUsers().contains(user2));
+		assertTrue(roomsMenu.getRooms().get(0).getMaster().equals(user2));
+		assertNull(user1.getRoomId());
+		consistentRoomIdWithUsers(roomsMenu);
+		roomsMenu.exitRoom(user2, roomsMenu.getRooms().get(0));
+		assertEquals(0, roomsMenu.getRooms().size(), 0);
+
+	}
 }

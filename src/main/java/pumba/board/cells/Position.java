@@ -37,15 +37,6 @@ public class Position
 		super();
 	}
 
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((posX == null) ? 0 : posX.hashCode());
-		result = prime * result + ((posY == null) ? 0 : posY.hashCode());
-		return result;
-	}
 
 	@Override
 	public boolean equals(Object obj)

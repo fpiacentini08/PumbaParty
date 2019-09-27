@@ -8,6 +8,7 @@ import main.java.pumba.actions.Action;
 import main.java.pumba.board.cells.Position;
 import main.java.pumba.effects.Effect;
 import main.java.pumba.users.User;
+import test.java.pumba.actions.ActionFixture;
 
 public class Player implements Comparable<Player>
 {
@@ -65,13 +66,14 @@ public class Player implements Comparable<Player>
 
 	private List<Action> defaultActions()
 	{
-		return new ArrayList<>();
+		List<Action> actions = new ArrayList<>();
+		actions.add(ActionFixture.withDefaults());
+		return actions;
 	}
 
 	public void playAction()
 	{
-		// TO DO IMPLEMENT THIS
-		// this.actions.get(0).play();
+		this.actions.get(0).play();
 	}
 
 	@Override

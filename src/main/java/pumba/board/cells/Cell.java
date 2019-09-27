@@ -33,51 +33,6 @@ public abstract class Cell
 	{
 		return walkable;
 	}
-
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((effect == null) ? 0 : effect.hashCode());
-		result = prime * result + ((position == null) ? 0 : position.hashCode());
-		result = prime * result + ((walkable == null) ? 0 : walkable.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cell other = (Cell) obj;
-		if (effect == null)
-		{
-			if (other.effect != null)
-				return false;
-		}
-		else if (!effect.equals(other.effect))
-			return false;
-		if (position == null)
-		{
-			if (other.position != null)
-				return false;
-		}
-		else if (!position.equals(other.position))
-			return false;
-		if (walkable == null)
-		{
-			if (other.walkable != null)
-				return false;
-		}
-		else if (!walkable.equals(other.walkable))
-			return false;
-		return true;
-	}
-
+	
 	
 }
