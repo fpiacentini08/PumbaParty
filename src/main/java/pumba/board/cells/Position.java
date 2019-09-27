@@ -37,7 +37,6 @@ public class Position
 		super();
 	}
 
-
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -65,5 +64,10 @@ public class Position
 		return true;
 	}
 
-	
+	@Override
+	public String toString()
+	{
+		return "(" + posX + "," + posY + ")";
+	}
+
 }

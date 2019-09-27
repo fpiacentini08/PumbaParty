@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import main.java.pumba.board.Board;
 import main.java.pumba.board.cells.Position;
 import main.java.pumba.effects.Effect;
+import main.java.pumba.log.Log;
 import main.java.pumba.minigame.MiniGame;
 import main.java.pumba.minigame.impl.MinigameThrowTheDiceImpl;
 import main.java.pumba.players.Player;
@@ -60,17 +61,34 @@ public class Game
 	private void playTurn(Player player)
 	{
 		Integer steps = player.throwDice();
+
+		Log.debug(player.getUsername() + " tira el dado.");
+
 		List<Position> possiblePositions = board.move(player.getPosition(), steps);
+
 		Position selectedPosition = player.getPosition();
+
 		do
 		{
 			selectedPosition = selectFinalPosition(possiblePositions);
 			possiblePositions = board.move(player.getPosition(), steps, selectedPosition);
 		} while (possiblePositions.size() > 1);
 
+		Log.debug(player.getUsername() + " se mueve a " + selectedPosition);
+
 		player.setPosition(selectedPosition);
+
 		Effect cellEffect = board.getCellEffect(selectedPosition);
+
+		Log.debug("Se le aplica efecto al jugador " + player.getUsername() + " "
+				+ (cellEffect != null ? cellEffect.getCoins() : 0));
+
 		player.applyEffect(cellEffect);
+
+		Log.debug(player.getUsername() + " tiene " + player.getCoins() + " monedas");
+
+		Log.debug("El jugador " + player.getUsername() + " realiza accion.");
+
 		player.playAction();
 	}
 
@@ -83,19 +101,45 @@ public class Game
 	{
 
 		Random rand = new Random();
+
+		Log.debug("Comienza el juego!");
+		Log.debugLine();
+
 		for (int i = 0; i < turns; i++)
 		{
+			Log.debug("Ronda numero " + (i + 1));
 			for (Player player : players)
 			{
+				Log.debugLine();
+				Log.debug("Empieza el turno de " + player.getUsername());
+
 				this.playTurn(player);
 			}
+			Log.debugLine();
+
+			Log.debug("Empieza el minijuego");
 
 			MiniGame minigame = minigames.get(rand.nextInt(minigames.size()));
+
 			Map<String, Integer> mapCoins = minigame.play(getUsernames());
+
+			Log.debug("Termina el minijuego");
+
 			updatePlayersCoins(mapCoins);
 
+			Log.debugLine();
+
+			this.showPodium();
+
 		}
+
+		Log.debugLine();
+
+		Log.debug("Termina el juego");
+		Log.debug("Quien gano?");
+
 		this.showPodium();
+
 		this.stopGame();
 	}
 
@@ -119,7 +163,8 @@ public class Game
 
 		for (Player player : players)
 		{
-			System.out.println("Puesto Nro " + puesto++ + " para " + player.getUsername());
+			Log.debug("Puesto Nro " + puesto++ + " para " + player.getUsername() + ". " + player.getCoins()
+					+ " monedas.");
 		}
 
 	}
