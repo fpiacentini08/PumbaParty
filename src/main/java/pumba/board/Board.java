@@ -65,7 +65,9 @@ public class Board
 	{
 		// TO DO IMPLEMENT THIS METHOD
 		// THERE CAN BE MORE THAN ONE POSSIBLE FINAL POSITION
-		return new ArrayList<Position>();
+		List<Position> list = new ArrayList<>();
+		list.add(defaultPosition());
+		return list;
 	}
 
 	public List<Position> move(Position initialPosition, Integer steps, Position finalPosition)

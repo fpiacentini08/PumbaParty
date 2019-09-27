@@ -9,7 +9,7 @@ import main.java.pumba.board.cells.Position;
 import main.java.pumba.effects.Effect;
 import main.java.pumba.users.User;
 
-public class Player
+public class Player implements Comparable<Player>
 {
 
 	String username;
@@ -71,6 +71,20 @@ public class Player
 	public void playAction()
 	{
 		// TO DO IMPLEMENT THIS
-		this.actions.get(0).play();
+		// this.actions.get(0).play();
+	}
+
+	@Override
+	public int compareTo(Player otherPlayer)
+	{
+		if (this.coins > otherPlayer.getCoins())
+		{
+			return 1;
+		}
+		else if (this.coins < otherPlayer.getCoins())
+		{
+			return -1;
+		}
+		return 0;
 	}
 }
