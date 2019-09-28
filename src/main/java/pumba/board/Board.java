@@ -1,5 +1,4 @@
 package main.java.pumba.board;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -61,6 +60,20 @@ public class Board
 						cellsList.add(new CommonCellImpl(new Position(x, y)));
 						break;
 				}
+			}
+		}
+		TemplateBoard template = new TemplateBoard();
+		for (int i = 0; i < template.mat.length; i++) {
+			for (int j = 0; j < template.mat.length; j++) {
+				if(template.mat[i][j]==0)
+				    cellsList.add(new NotPlayableCellImpl(new Position(i, j)));
+				else if(template.mat[i][j]==1)
+					cellsList.add(new CommonCellImpl(new Position(i, j)));
+				else if(template.mat[i][j]==2)
+					cellsList.add(new WinCoinsCellImpl(new Position(i, j)));
+				else
+					cellsList.add(new LoseCoinsCellImpl(new Position(i, j)));
+					
 			}
 		}
 		this.cells = cellsList;
