@@ -1,7 +1,8 @@
 package main.java.pumba.actions;
 
+import main.java.pumba.effects.Effect;
+
 public interface Action
 {
-
-	public void play();
+   public Effect play();
 }
