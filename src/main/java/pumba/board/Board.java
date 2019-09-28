@@ -1,4 +1,5 @@
 package main.java.pumba.board;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,7 +22,13 @@ public class Board
 
 	private List<Cell> cells;
 	private static final Integer dimension = 20;
+	private static final int NOT_PLAYABLE = 0;
+	private static final int COMMON = 1;
+	private static final int WIN_COINS = 2;
+	private static final int LOSE_COINS = 3;
 	private Map<Position, List<Position>> adjacenceMap;
+
+	private Random rand = new Random();
 
 	public List<Cell> getCells()
 	{
@@ -37,43 +44,31 @@ public class Board
 	{
 		super();
 		List<Cell> cellsList = new ArrayList<>();
-		for (int x = 0; x < dimension; x++)
+
+		TemplateBoard template = new TemplateBoard();
+		for (int i = 0; i < template.mat.length; i++)
 		{
-			for (int y = 0; y < dimension; y++)
+			for (int j = 0; j < template.mat.length; j++)
 			{
-				Random rand = new Random();
-				switch (rand.nextInt(4))
+				switch (template.mat[i][j])
 				{
-					case 0:
-						cellsList.add(new CommonCellImpl(new Position(x, y)));
+					case NOT_PLAYABLE:
+						cellsList.add(new NotPlayableCellImpl(new Position(i, j)));
 						break;
-					case 1:
-						cellsList.add(new CommonCellImpl(new Position(x, y)));
+					case COMMON:
+						cellsList.add(new CommonCellImpl(new Position(i, j)));
 						break;
-					case 2:
-						cellsList.add(new CommonCellImpl(new Position(x, y)));
+					case WIN_COINS:
+						cellsList.add(new WinCoinsCellImpl(new Position(i, j)));
 						break;
-					case 3:
-						cellsList.add(new CommonCellImpl(new Position(x, y)));
+					case LOSE_COINS:
+						cellsList.add(new LoseCoinsCellImpl(new Position(i, j)));
 						break;
 					default:
-						cellsList.add(new CommonCellImpl(new Position(x, y)));
+						cellsList.add(new LoseCoinsCellImpl(new Position(i, j)));
 						break;
 				}
-			}
-		}
-		TemplateBoard template = new TemplateBoard();
-		for (int i = 0; i < template.mat.length; i++) {
-			for (int j = 0; j < template.mat.length; j++) {
-				if(template.mat[i][j]==0)
-				    cellsList.add(new NotPlayableCellImpl(new Position(i, j)));
-				else if(template.mat[i][j]==1)
-					cellsList.add(new CommonCellImpl(new Position(i, j)));
-				else if(template.mat[i][j]==2)
-					cellsList.add(new WinCoinsCellImpl(new Position(i, j)));
-				else
-					cellsList.add(new LoseCoinsCellImpl(new Position(i, j)));
-					
+
 			}
 		}
 		this.cells = cellsList;
@@ -141,7 +136,10 @@ public class Board
 
 	public Position defaultPosition()
 	{
-		return new Position(0, 0);
+		List<Cell> walkableCells = cells.stream().filter(cell -> cell.getWalkable() && cell instanceof CommonCellImpl)
+				.collect(Collectors.toList());
+
+		return walkableCells.get(rand.nextInt(walkableCells.size() - 1)).getPosition();
 	}
 
 	protected Map<Position, List<Position>> createAdjacentMap()
