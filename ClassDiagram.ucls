@@ -1,177 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.3" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="main.java.pumba.board.cells.walkable.WalkableCell" project="PumbaParty" 
-    file="/PumbaParty/src/main/java/pumba/board/cells/walkable/WalkableCell.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="96" width="248" x="1051" y="1574"/>    
+  <class id="1" language="java" name="main.java.pumba.actions.impl.ActionThrowBomb" project="PumbaParty" 
+    file="/PumbaParty/src/main/java/pumba/actions/impl/ActionThrowBomb.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-99" y="1615"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="main.java.pumba.minigame.impl.MinigameThrowTheDiceImpl" project="PumbaParty" 
+  <class id="2" language="java" name="main.java.pumba.board.cells.walkable.WalkableCell" project="PumbaParty" 
+    file="/PumbaParty/src/main/java/pumba/board/cells/walkable/WalkableCell.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="667" y="1922"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="main.java.pumba.minigame.impl.MinigameThrowTheDiceImpl" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/minigame/impl/MinigameThrowTheDiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="569" y="784"/>    
+    <position height="136" width="293" x="-225" y="647"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="3" language="java" name="main.java.pumba.actions.Action" project="PumbaParty" 
+  <interface id="4" language="java" name="main.java.pumba.actions.Action" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/actions/Action.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="644" y="1199"/>    
+    <position height="-1" width="-1" x="115" y="1359"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="4" language="java" name="main.java.pumba.board.cells.notwalkable.NotWalkableCell" project="PumbaParty" 
+  <class id="5" language="java" name="main.java.pumba.board.cells.notwalkable.NotWalkableCell" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/board/cells/notwalkable/NotWalkableCell.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="96" width="268" x="1339" y="1574"/>    
+    <position height="-1" width="-1" x="1073" y="1922"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="main.java.pumba.board.cells.Cell" project="PumbaParty" 
+  <class id="6" language="java" name="main.java.pumba.board.cells.Cell" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/board/cells/Cell.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="176" width="226" x="1086" y="1358"/>    
+    <position height="-1" width="-1" x="895" y="1754"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="main.java.pumba.board.cells.walkable.impl.CommonCellImpl" project="PumbaParty" 
+  <class id="7" language="java" name="main.java.pumba.board.cells.walkable.impl.CommonCellImpl" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/board/cells/walkable/impl/CommonCellImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="96" width="277" x="488" y="1890"/>    
+    <position height="96" width="277" x="10" y="2071"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="main.java.pumba.minigame.MiniGame" project="PumbaParty" 
+  <interface id="8" language="java" name="main.java.pumba.minigame.MiniGame" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/minigame/MiniGame.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="96" width="293" x="488" y="982"/>    
+    <position height="-1" width="-1" x="327" y="783"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="8" language="java" name="main.java.pumba.board.cells.walkable.impl.coins.LoseCoinsCellImpl" 
+  <class id="9" language="java" name="main.java.pumba.board.cells.walkable.impl.coins.LoseCoinsCellImpl" 
     project="PumbaParty" file="/PumbaParty/src/main/java/pumba/board/cells/walkable/impl/coins/LoseCoinsCellImpl.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="136" width="314" x="805" y="1890"/>    
+    <position height="136" width="314" x="327" y="2071"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="main.java.pumba.board.cells.Position" project="PumbaParty" 
+  <class id="10" language="java" name="main.java.pumba.board.cells.Position" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/board/cells/Position.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="639" y="1510"/>    
+    <position height="-1" width="-1" x="363" y="1729"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="main.java.pumba.game.Game" project="PumbaParty" 
+  <class id="11" language="java" name="main.java.pumba.game.Game" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/game/Game.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1276" y="541"/>    
+    <position height="-1" width="-1" x="885" y="869"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="main.java.pumba.board.cells.notwalkable.impl.NotPlayableCellImpl" 
+  <class id="12" language="java" name="main.java.pumba.board.cells.notwalkable.impl.NotPlayableCellImpl" 
     project="PumbaParty" file="/PumbaParty/src/main/java/pumba/board/cells/notwalkable/impl/NotPlayableCellImpl.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="96" width="297" x="1513" y="1890"/>    
+    <position height="96" width="297" x="1035" y="2071"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="main.java.pumba.effects.Effect" project="PumbaParty" 
+  <class id="13" language="java" name="main.java.pumba.effects.Effect" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/effects/Effect.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1721" y="1447"/>    
+    <position height="-1" width="-1" x="1347" y="1764"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="main.java.pumba.rooms.Room" project="PumbaParty" 
+  <class id="14" language="java" name="main.java.pumba.rooms.Room" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/rooms/Room.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="336" width="178" x="586" y="230"/>    
+    <position height="-1" width="-1" x="873" y="446"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="main.java.pumba.board.cells.walkable.impl.coins.WinCoinsCellImpl" 
+  <class id="15" language="java" name="main.java.pumba.board.cells.walkable.impl.coins.WinCoinsCellImpl" 
     project="PumbaParty" file="/PumbaParty/src/main/java/pumba/board/cells/walkable/impl/coins/WinCoinsCellImpl.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="136" width="314" x="1159" y="1890"/>    
+    <position height="136" width="314" x="681" y="2071"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="main.java.pumba.users.User" project="PumbaParty" 
+  <class id="16" language="java" name="main.java.pumba.users.User" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/users/User.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="177" y="392"/>    
+    <position height="-1" width="-1" x="367" y="462"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="main.java.pumba.players.Player" project="PumbaParty" 
+  <class id="17" language="java" name="main.java.pumba.players.Player" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/players/Player.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1064" y="1117"/>    
+    <position height="-1" width="-1" x="363" y="1075"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="main.java.pumba.board.Board" project="PumbaParty" 
+  <class id="18" language="java" name="main.java.pumba.board.Board" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/board/Board.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1484" y="1098"/>    
+    <position height="-1" width="-1" x="889" y="1348"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="main.java.pumba.roomsmenu.RoomsMenu" project="PumbaParty" 
+  <class id="19" language="java" name="main.java.pumba.roomsmenu.RoomsMenu" project="PumbaParty" 
     file="/PumbaParty/src/main/java/pumba/roomsmenu/RoomsMenu.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="683" y="91"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="19" language="java" name="main.java.pumba.actions.impl.ActionSayHiImpl" project="PumbaParty" 
-    file="/PumbaParty/src/main/java/pumba/actions/impl/ActionSayHiImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="343" y="1198"/>    
+    <position height="-1" width="-1" x="881" y="112"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -179,134 +179,134 @@
     </display>  
   </class>  
   <generalization id="20">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="5"/>  
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
   </generalization>  
-  <realization id="21">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <association id="22">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="23" name="position"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="25">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="26" name="players"/>      
-      <multiplicity id="27" minimum="0" maximum="2147483647"/>    
+  <association id="21">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="22" name="users"/>      
+      <multiplicity id="23" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="28">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="29" name="game"/>      
-      <multiplicity id="30" minimum="0" maximum="1"/>    
+  <association id="24">    
+    <bendpoint x="352" y="1519"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="25" name="position"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="31">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <association id="32">    
-    <bendpoint x="830" y="1358"/>    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="33" name="position"/>      
-      <multiplicity id="34" minimum="0" maximum="1"/>    
+  <association id="27">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="28" name="board"/>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="18" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="35">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="36" name="board"/>      
-      <multiplicity id="37" minimum="0" maximum="1"/>    
+  <generalization id="30">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="31">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="32" name="players"/>      
+      <multiplicity id="33" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="17" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="34">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="35" name="game"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="37">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
   <association id="38">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="39" name="users"/>      
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="39" name="cells"/>      
       <multiplicity id="40" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="41">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <association id="42">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="43" name="effect"/>      
-      <multiplicity id="44" minimum="0" maximum="1"/>    
+  <association id="41">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="42" name="minigames"/>      
+      <multiplicity id="43" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="45">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="46" name="minigames"/>      
-      <multiplicity id="47" minimum="0" maximum="2147483647"/>    
+  <association id="44">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="45" name="rooms"/>      
+      <multiplicity id="46" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="48">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="49" name="master"/>      
-      <multiplicity id="50" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="51">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="52">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="53" name="actions"/>      
-      <multiplicity id="54" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="55">    
+  <association id="47">    
     <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="56" name="cells"/>      
-      <multiplicity id="57" minimum="0" maximum="2147483647"/>    
+      <attribute id="48" name="actions"/>      
+      <multiplicity id="49" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="58">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="1"/>  
+  <association id="50">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="51" name="master"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="53">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="2"/>  
   </generalization>  
-  <generalization id="59">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="1"/>  
+  <association id="54">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="55" name="position"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="57">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="2"/>  
   </generalization>  
-  <generalization id="60">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <association id="61">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="62" name="rooms"/>      
-      <multiplicity id="63" minimum="0" maximum="2147483647"/>    
+  <association id="58">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="59" name="effect"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <realization id="61">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <generalization id="62">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="63">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
