@@ -73,6 +73,10 @@ public class Board
 		}
 		this.cells = cellsList;
 		this.adjacenceMap = createAdjacentMap();
+		this.adjacenceMap.get(new Position(3,18));
+		this.adjacenceMap.get(new Position(2,18));
+		this.adjacenceMap.get(new Position(4,18));
+		
 	}
 
 	public void setTestBoard()
@@ -139,7 +143,7 @@ public class Board
 		List<Cell> walkableCells = cells.stream().filter(cell -> cell.getWalkable() && cell instanceof CommonCellImpl)
 				.collect(Collectors.toList());
 
-		return walkableCells.get(rand.nextInt(walkableCells.size() - 1)).getPosition();
+		return walkableCells.get(rand.nextInt(walkableCells.size())).getPosition();
 	}
 
 	protected Map<Position, List<Position>> createAdjacentMap()

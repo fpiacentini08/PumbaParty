@@ -112,6 +112,19 @@ public class BoardTest
 	}
 
 	@Test
+	public void boardTestMoveTestPrueba()
+	{
+		Position initialPosition = new Position(3, 18);
+		Integer steps = 2;
+		Board board = new Board();
+
+		List<Position> possiblePositions = board.move(initialPosition, steps);
+
+		assertNotNull(possiblePositions);
+
+	}
+	
+	@Test
 	public void boardTestMove01Test()
 	{
 		Position pos = new Position(0, 0);

@@ -23,6 +23,7 @@ public class Game
 	private static final Integer turns = 3;
 	private Board board;
 	private List<MiniGame> minigames;
+	private Random rand = new Random();
 
 	public Game(Set<User> users)
 	{
@@ -108,14 +109,11 @@ public class Game
 
 	private Position selectFinalPosition(List<Position> possiblePositions)
 	{
-		Random rand = new Random();
-		return possiblePositions.get(rand.nextInt(possiblePositions.size() - 1));
+		return possiblePositions.get(rand.nextInt(possiblePositions.size()));
 	}
 
 	public void playGame()
 	{
-
-		Random rand = new Random();
 
 		Log.debug("Comienza el juego!");
 		Log.debugLine();
