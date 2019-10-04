@@ -4,8 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import pumba.users.repository.UserModel;
-
 public class UserRepository
 {
 
@@ -15,11 +13,13 @@ public class UserRepository
 		return emf.createEntityManager();
 	}
 
-	public static void create(String username, String password)
+	public void create(String username, String password)
 	{
 		EntityManager em = createEntityManager();
 		em.getTransaction().begin();
-		UserModel user = new UserModel(username, password);
+		UserModel user = new UserModel();
+		user.setPassword(password);
+		user.setUsername(username);
 		em.persist(user);
 		em.flush();
 		em.getTransaction().commit();

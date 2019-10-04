@@ -17,7 +17,7 @@ public class UserHandler
 			throw new PumbaException(ErrorMessages.INVALID_PASSWORD,ErrorCodes.INVALID_PASSWORD);
 		}
 		
-		UserRepository.create(username, password);
+		new UserRepository().create(username, password);
 		
 	}
 }
