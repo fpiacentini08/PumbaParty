@@ -23,16 +23,23 @@ public class LoginMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object) throws PumbaException
+	public void processResponse(Object object) 
 	{
 		ClientListener listener = (ClientListener) object;
 		LoginMessage message = (LoginMessage) listener.getMessage();
+		try
+		{
+			UserHandler.createUser(username, password);
+			this.setApproved(true);
+		}
+		catch (PumbaException e)
+		{
+			this.setApproved(false);
+		}
 		
-		UserHandler.createUser(username, password);
 		
 		for (ClientListener connected : PumbaServer.getConnectedClients())
 		{
-			this.setApproved(true);
 			try
 			{
 				connected.sendMessage(this);
