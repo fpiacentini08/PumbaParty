@@ -1,6 +1,4 @@
-package main.java.pumba.board;
-
-import main.java.pumba.board.Board;
+package pumba.board;
 
 public class TemplateBoard
 {

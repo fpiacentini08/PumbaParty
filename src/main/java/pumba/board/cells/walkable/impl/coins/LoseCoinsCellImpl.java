@@ -1,10 +1,10 @@
-package main.java.pumba.board.cells.walkable.impl.coins;
+package pumba.board.cells.walkable.impl.coins;
 
 import java.util.Random;
 
-import main.java.pumba.board.cells.Position;
-import main.java.pumba.board.cells.walkable.WalkableCell;
-import main.java.pumba.effects.Effect;
+import pumba.board.cells.Position;
+import pumba.board.cells.walkable.WalkableCell;
+import pumba.effects.Effect;
 
 public class LoseCoinsCellImpl extends WalkableCell
 {

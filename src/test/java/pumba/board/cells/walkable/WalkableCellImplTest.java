@@ -1,4 +1,4 @@
-package test.java.pumba.board.cells.walkable;
+package pumba.board.cells.walkable;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -7,11 +7,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import main.java.pumba.board.cells.Cell;
-import main.java.pumba.board.cells.walkable.impl.CommonCellImpl;
-import main.java.pumba.board.cells.walkable.impl.coins.LoseCoinsCellImpl;
-import main.java.pumba.board.cells.walkable.impl.coins.WinCoinsCellImpl;
-import test.java.pumba.board.cells.PositionFixture;
+import pumba.board.cells.Cell;
+import pumba.board.cells.PositionFixture;
+import pumba.board.cells.walkable.impl.CommonCellImpl;
+import pumba.board.cells.walkable.impl.coins.LoseCoinsCellImpl;
+import pumba.board.cells.walkable.impl.coins.WinCoinsCellImpl;
 
 public class WalkableCellImplTest
 {

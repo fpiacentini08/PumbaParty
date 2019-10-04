@@ -1,10 +1,12 @@
-package main.java.pumba.messages;
+package pumba.messages;
 
 import java.io.IOException;
 
-import main.java.pumba.messages.utils.SocketMessage;
-import main.java.pumba.server.ClientListener;
-import main.java.pumba.server.PumbaServer;
+import pumba.exceptions.PumbaException;
+import pumba.messages.utils.SocketMessage;
+import pumba.server.ClientListener;
+import pumba.server.PumbaServer;
+import pumba.users.UserHandler;
 
 public class LoginMessage extends SocketMessage
 {
@@ -21,17 +23,16 @@ public class LoginMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object)
+	public void processResponse(Object object) throws PumbaException
 	{
 		ClientListener listener = (ClientListener) object;
 		LoginMessage message = (LoginMessage) listener.getMessage();
 		
-		
+		UserHandler.createUser(username, password);
 		
 		for (ClientListener connected : PumbaServer.getConnectedClients())
 		{
 			this.setApproved(true);
-			this.setContent("Recibi el mensaje correctamente.");
 			try
 			{
 				connected.sendMessage(this);

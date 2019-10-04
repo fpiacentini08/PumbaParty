@@ -1,12 +1,12 @@
-package main.java.pumba.minigame.impl;
+package pumba.minigame.impl;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import main.java.pumba.log.Log;
-import main.java.pumba.minigame.MiniGame;
+import pumba.log.Log;
+import pumba.minigame.MiniGame;
 
 public class MinigameThrowTheDiceImpl implements MiniGame
 {

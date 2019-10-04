@@ -1,4 +1,4 @@
-package main.java.pumba.server;
+package pumba.server;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,9 +9,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
-import main.java.pumba.log.Log;
-import main.java.pumba.messages.utils.SocketMessage;
-import main.java.pumba.messages.utils.SocketMessageSerializer;
+import pumba.exceptions.PumbaException;
+import pumba.log.Log;
+import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.SocketMessageSerializer;
 
 public class ClientListener extends Thread
 {
@@ -46,6 +47,10 @@ public class ClientListener extends Thread
 			}
 		}
 		catch (IOException | ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (PumbaException e)
 		{
 			e.printStackTrace();
 		}

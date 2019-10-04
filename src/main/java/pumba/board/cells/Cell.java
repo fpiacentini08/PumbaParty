@@ -1,6 +1,6 @@
-package main.java.pumba.board.cells;
+package pumba.board.cells;
 
-import main.java.pumba.effects.Effect;
+import pumba.effects.Effect;
 
 public abstract class Cell
 {

@@ -1,6 +1,8 @@
-package main.java.pumba.messages.utils;
+package pumba.messages.utils;
 
 import com.google.gson.Gson;
+
+import pumba.exceptions.PumbaException;
 
 public abstract class SocketMessage
 {
@@ -27,7 +29,7 @@ public abstract class SocketMessage
 		this.approved = approved;
 	}
 
-	public abstract void processResponse(Object object);
+	public abstract void processResponse(Object object) throws PumbaException;
 
 	@Override
 	public String toString()

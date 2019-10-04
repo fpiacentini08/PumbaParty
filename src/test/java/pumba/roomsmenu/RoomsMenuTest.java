@@ -1,4 +1,4 @@
-package test.java.pumba.roomsmenu;
+package pumba.roomsmenu;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -8,9 +8,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import main.java.pumba.rooms.Room;
-import main.java.pumba.roomsmenu.RoomsMenu;
-import main.java.pumba.users.User;
+import pumba.rooms.Room;
+import pumba.users.User;
 
 public class RoomsMenuTest
 {

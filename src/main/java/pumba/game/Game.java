@@ -1,4 +1,4 @@
-package main.java.pumba.game;
+package pumba.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,14 +8,14 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import main.java.pumba.board.Board;
-import main.java.pumba.board.cells.Position;
-import main.java.pumba.effects.Effect;
-import main.java.pumba.log.Log;
-import main.java.pumba.minigame.MiniGame;
-import main.java.pumba.minigame.impl.MinigameThrowTheDiceImpl;
-import main.java.pumba.players.Player;
-import main.java.pumba.users.User;
+import pumba.board.Board;
+import pumba.board.cells.Position;
+import pumba.effects.Effect;
+import pumba.log.Log;
+import pumba.minigame.MiniGame;
+import pumba.minigame.impl.MinigameThrowTheDiceImpl;
+import pumba.players.Player;
+import pumba.users.User;
 
 public class Game
 {

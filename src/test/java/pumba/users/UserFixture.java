@@ -1,8 +1,6 @@
-package test.java.pumba.users;
+package pumba.users;
 
 import java.util.UUID;
-
-import main.java.pumba.users.User;
 
 public class UserFixture
 {

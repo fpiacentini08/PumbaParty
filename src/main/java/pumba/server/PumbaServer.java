@@ -1,4 +1,4 @@
-package main.java.pumba.server;
+package pumba.server;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import pumba.server.ClientListener;
 
 public class PumbaServer extends Thread
 {

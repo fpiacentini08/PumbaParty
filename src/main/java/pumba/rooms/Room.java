@@ -1,12 +1,12 @@
-package main.java.pumba.rooms;
+package pumba.rooms;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import main.java.pumba.game.Game;
-import main.java.pumba.users.User;
+import pumba.game.Game;
+import pumba.users.User;
 
 public class Room
 {

@@ -1,10 +1,10 @@
-package main.java.pumba.roomsmenu;
+package pumba.roomsmenu;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import main.java.pumba.rooms.Room;
-import main.java.pumba.users.User;
+import pumba.rooms.Room;
+import pumba.users.User;
 
 public class RoomsMenu
 {

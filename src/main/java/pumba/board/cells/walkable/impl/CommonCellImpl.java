@@ -1,7 +1,7 @@
-package main.java.pumba.board.cells.walkable.impl;
+package pumba.board.cells.walkable.impl;
 
-import main.java.pumba.board.cells.Position;
-import main.java.pumba.board.cells.walkable.WalkableCell;
+import pumba.board.cells.Position;
+import pumba.board.cells.walkable.WalkableCell;
 
 public class CommonCellImpl extends WalkableCell
 {

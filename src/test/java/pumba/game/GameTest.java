@@ -1,4 +1,4 @@
-package test.java.pumba.game;
+package pumba.game;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -6,10 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import main.java.pumba.game.Game;
-import main.java.pumba.players.Player;
-import main.java.pumba.rooms.Room;
-import test.java.pumba.room.RoomFixture;
+import pumba.players.Player;
+import pumba.room.RoomFixture;
+import pumba.rooms.Room;
 
 public class GameTest
 {

@@ -1,4 +1,4 @@
-package main.java.pumba.users;
+package pumba.users;
 
 import java.util.UUID;
 

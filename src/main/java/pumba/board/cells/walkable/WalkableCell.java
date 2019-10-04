@@ -1,8 +1,8 @@
-package main.java.pumba.board.cells.walkable;
+package pumba.board.cells.walkable;
 
-import main.java.pumba.board.cells.Cell;
-import main.java.pumba.board.cells.Position;
-import main.java.pumba.effects.Effect;
+import pumba.board.cells.Cell;
+import pumba.board.cells.Position;
+import pumba.effects.Effect;
 
 public abstract class WalkableCell extends Cell
 {
