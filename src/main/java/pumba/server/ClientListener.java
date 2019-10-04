@@ -10,8 +10,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 import main.java.pumba.log.Log;
-import main.java.pumba.messages.SocketMessage;
-import main.java.pumba.messages.SocketMessageSerializer;
+import main.java.pumba.messages.utils.SocketMessage;
+import main.java.pumba.messages.utils.SocketMessageSerializer;
 
 public class ClientListener extends Thread
 {
@@ -42,7 +42,7 @@ public class ClientListener extends Thread
 			while (!this.disconnect)
 			{
 				this.message = this.receiveMessage();
-				this.message.process(this);
+				this.message.processResponse(this);
 			}
 		}
 		catch (IOException | ClassNotFoundException e)
@@ -109,4 +109,16 @@ public class ClientListener extends Thread
 	{
 		return this.socket.getInetAddress().getHostAddress();
 	}
+
+	public SocketMessage getMessage()
+	{
+		return message;
+	}
+
+	public void setMessage(SocketMessage message)
+	{
+		this.message = message;
+	}
+
+
 }
