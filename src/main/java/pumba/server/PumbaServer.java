@@ -10,13 +10,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
-import pumba.server.ClientListener;
 
 public class PumbaServer extends Thread
 {
@@ -34,6 +35,8 @@ public class PumbaServer extends Thread
 	private final static int WIDTH_LOG = WIDTH - 25;
 
 	public static JTextArea log;
+
+	private static EntityManager dataBaseConnection;
 
 	public static void main(String[] args)
 	{
@@ -136,6 +139,12 @@ public class PumbaServer extends Thread
 		frame.setVisible(true);
 	}
 
+	private static EntityManager createEntityManager()
+	{
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Repository");
+		return emf.createEntityManager();
+	}
+
 	public void run()
 	{
 		try
@@ -144,6 +153,8 @@ public class PumbaServer extends Thread
 			log.append("Iniciando el servidor..." + System.lineSeparator());
 			serverSocket = new ServerSocket(PUERTO);
 			log.append("Servidor esperando conexiones..." + System.lineSeparator());
+
+			dataBaseConnection = createEntityManager();
 
 			while (true)
 			{
@@ -154,17 +165,28 @@ public class PumbaServer extends Thread
 				atencion.start();
 				connectedClients.add(atencion);
 			}
+
 		}
 		catch (Exception e)
 		{
 			log.append("Fallo la conexion." + System.lineSeparator());
 			e.printStackTrace();
+			dataBaseConnection.close();
 		}
 	}
 
 	public static ArrayList<ClientListener> getConnectedClients()
 	{
 		return connectedClients;
+	}
+
+	public static EntityManager getDataBaseEntityManager()
+	{
+		if (!dataBaseConnection.isOpen())
+		{
+			dataBaseConnection = createEntityManager();
+		}
+		return dataBaseConnection;
 	}
 
 }

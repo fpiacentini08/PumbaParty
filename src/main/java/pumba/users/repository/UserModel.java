@@ -46,6 +46,12 @@ public class UserModel implements Serializable
 		return Base64.getEncoder().encodeToString(pass.getBytes());
 	}
 
+
+	public Boolean verifyPassword(String pass)
+	{
+		return Base64.getEncoder().encodeToString(pass.getBytes()).equals(this.password);
+	}
+	
 	public String getUsername()
 	{
 		return username;

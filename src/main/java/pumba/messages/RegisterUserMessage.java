@@ -9,14 +9,14 @@ import pumba.server.ClientListener;
 import pumba.server.PumbaServer;
 import pumba.users.UserHandler;
 
-public class LoginMessage extends SocketMessage
+public class RegisterUserMessage extends SocketMessage
 {
 
 	private String username;
 	private String password;
 	
 	
-	public LoginMessage(String username, String password)
+	public RegisterUserMessage(String username, String password)
 	{
 		super();
 		this.username = username;
@@ -27,13 +27,12 @@ public class LoginMessage extends SocketMessage
 	public void processResponse(Object object) 
 	{
 		ClientListener listener = (ClientListener) object;
+		RegisterUserMessage message = (RegisterUserMessage) listener.getMessage();
 		try
 		{
-			UserHandler.login(username, password);
-			
+			UserHandler.createUser(username, password);
 			this.setApproved(true);
 		}
-		
 		catch (PumbaException e)
 		{
 			this.setApproved(false);
@@ -42,7 +41,7 @@ public class LoginMessage extends SocketMessage
 		catch (Exception e)
 		{
 			this.setApproved(false);
-			this.setErrorMessage(ErrorMessages.ERROR_FIND_USER);
+			this.setErrorMessage(ErrorMessages.ERROR_CREATE_USER);
 		}
 		
 		

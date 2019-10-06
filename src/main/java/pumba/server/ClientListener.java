@@ -74,10 +74,12 @@ public class ClientListener extends Thread
 
 	public SocketMessage receiveMessage() throws JsonSyntaxException, ClassNotFoundException, IOException
 	{
-		SocketMessage message = gson.fromJson((String) this.in.readObject(), SocketMessage.class);
+		String inMessage = (String)this.in.readObject();
+		SocketMessage message = gson.fromJson(inMessage, SocketMessage.class);
 		Log.debugLine();
 		Log.debug("INBOUND MESSAGE");
-		Log.debug(message.toString());
+		Log.debug(inMessage);
+		Log.debugLine();
 		return message;
 	}
 

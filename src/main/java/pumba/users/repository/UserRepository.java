@@ -1,25 +1,19 @@
 package pumba.users.repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import pumba.exceptions.ErrorCodes;
 import pumba.exceptions.ErrorMessages;
 import pumba.exceptions.PumbaException;
+import pumba.server.PumbaServer;
 
 public class UserRepository
 {
 
-	private static EntityManager createEntityManager()
-	{
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Repository");
-		return emf.createEntityManager();
-	}
 
-	public void create(String username, String password) throws PumbaException
+	public static void create(String username, String password) throws PumbaException
 	{
-		EntityManager em = createEntityManager();
+		EntityManager em = PumbaServer.getDataBaseEntityManager();
 		em.getTransaction().begin();
 
 		if(em.find(UserModel.class, username) != null) {
@@ -32,6 +26,19 @@ public class UserRepository
 		em.persist(user);
 		em.flush();
 		em.getTransaction().commit();
+	}
+
+	public static void login(String username, String password) throws PumbaException
+	{
+		EntityManager em = PumbaServer.getDataBaseEntityManager();
+		UserModel user = em.find(UserModel.class, username);
+		if(user == null) {
+			throw new PumbaException(ErrorMessages.INVALID_USERNAME, ErrorCodes.INVALID_USERNAME);
+		}
+
+		if(!user.verifyPassword(password)) {
+			throw new PumbaException(ErrorMessages.INVALID_PASSWORD, ErrorCodes.INVALID_PASSWORD);
+		}
 	}
 
 }

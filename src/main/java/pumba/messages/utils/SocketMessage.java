@@ -6,17 +6,17 @@ import pumba.exceptions.PumbaException;
 
 public abstract class SocketMessage
 {
-	private String content;
+	private String errorMessage;
 	private Boolean approved;
 
-	public String getContent()
+	public String getErrorMessage()
 	{
-		return content;
+		return errorMessage;
 	}
 
-	public void setContent(String content)
+	public void setErrorMessage(String errorMessage)
 	{
-		this.content = content;
+		this.errorMessage = errorMessage;
 	}
 
 	public Boolean getApproved()

@@ -17,7 +17,22 @@ public class UserHandler
 			throw new PumbaException(ErrorMessages.INVALID_PASSWORD,ErrorCodes.INVALID_PASSWORD);
 		}
 		
-		new UserRepository().create(username, password);
+		UserRepository.create(username, password);
+		
+	}
+
+	public static void login(String username, String password) throws PumbaException
+	{
+		if(username == null)
+		{
+			throw new PumbaException(ErrorMessages.INVALID_USERNAME,ErrorCodes.INVALID_USERNAME);
+		}
+		if(password == null)
+		{
+			throw new PumbaException(ErrorMessages.INVALID_PASSWORD,ErrorCodes.INVALID_PASSWORD);
+		}
+		
+		UserRepository.login(username, password);
 		
 	}
 }
