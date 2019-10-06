@@ -2,34 +2,36 @@ package pumba.rooms;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
-import java.util.UUID;
 
 import pumba.game.Game;
-import pumba.users.User;
+import pumba.users.repository.User;
 
 public class Room
 {
 	private static final Integer maxUsers = 5;
 
-	private UUID id;
+	private long id;
 	private Set<User> users;
 	private User master;
 	private Boolean playing;
 	private Game game;
 
+	private Random rand = new Random();
+	
 	public Room(User master)
 	{
 		super();
-		this.id = UUID.randomUUID();
-		Set<User> usersList = new HashSet<>();
+		this.id = rand.nextLong();
+		Set<User> usersList = new HashSet<User>();
 		usersList.add(master);
 		this.users = usersList;
 		this.master = master;
 		this.playing = false;
 	}
 
-	public UUID getId()
+	public long getId()
 	{
 		return id;
 	}
@@ -68,7 +70,7 @@ public class Room
 	public void exit(User user)
 	{
 
-		this.users.remove(user);
+		users.remove(user);
 
 		if (this.users.isEmpty())
 		{

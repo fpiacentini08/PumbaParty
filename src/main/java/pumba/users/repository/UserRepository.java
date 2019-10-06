@@ -16,11 +16,11 @@ public class UserRepository
 		EntityManager em = PumbaServer.getDataBaseEntityManager();
 		em.getTransaction().begin();
 
-		if(em.find(UserModel.class, username) != null) {
+		if(em.find(User.class, username) != null) {
 			throw new PumbaException(ErrorMessages.INVALID_USERNAME, ErrorCodes.INVALID_USERNAME);
 		}
 
-		UserModel user = new UserModel();
+		User user = new User();
 		user.setUsername(username);
 		user.setPassword(password);
 		em.persist(user);
@@ -31,7 +31,7 @@ public class UserRepository
 	public static void login(String username, String password) throws PumbaException
 	{
 		EntityManager em = PumbaServer.getDataBaseEntityManager();
-		UserModel user = em.find(UserModel.class, username);
+		User user = em.find(User.class, username);
 		if(user == null) {
 			throw new PumbaException(ErrorMessages.INVALID_USERNAME, ErrorCodes.INVALID_USERNAME);
 		}

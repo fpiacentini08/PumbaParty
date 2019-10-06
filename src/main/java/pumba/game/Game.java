@@ -15,7 +15,7 @@ import pumba.log.Log;
 import pumba.minigame.MiniGame;
 import pumba.minigame.impl.MinigameThrowTheDiceImpl;
 import pumba.players.Player;
-import pumba.users.User;
+import pumba.users.repository.User;
 
 public class Game
 {

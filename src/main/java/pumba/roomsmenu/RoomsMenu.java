@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import pumba.rooms.Room;
-import pumba.users.User;
+import pumba.users.repository.User;
 
 public class RoomsMenu
 {
@@ -22,7 +22,7 @@ public class RoomsMenu
 
 	public Boolean createRoom(User user)
 	{
-		if (user.getRoomId() == null)
+		if (user.getRoomId() == User.NOT_IN_A_ROOM)
 		{
 			Room room = new Room(user);
 			user.setRoomId(room.getId());
@@ -35,7 +35,7 @@ public class RoomsMenu
 	public Boolean enterRoom(User user, Room roomToEnter)
 	{
 
-		if (user.getRoomId() == null && roomToEnter != null && rooms.contains(roomToEnter))
+		if (user.getRoomId() == User.NOT_IN_A_ROOM && roomToEnter != null && rooms.contains(roomToEnter))
 		{
 			if (roomToEnter.enter(user))
 			{
@@ -44,7 +44,7 @@ public class RoomsMenu
 			}
 			return false;
 		}
-		return user.getRoomId().equals(roomToEnter.getId());
+		return user.getRoomId() == (roomToEnter.getId());
 	}
 
 	public void exitRoom(User user, Room roomToExit)
@@ -52,7 +52,7 @@ public class RoomsMenu
 		if (roomToExit != null && rooms.contains(roomToExit))
 		{
 			roomToExit.exit(user);
-			user.setRoomId(null);
+			user.setRoomId(User.NOT_IN_A_ROOM);
 
 //			rooms.get(rooms.indexOf(roomToExit)).getUsers().remove(user);
 

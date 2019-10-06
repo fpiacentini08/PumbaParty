@@ -1,12 +1,14 @@
 package pumba.users;
 
-import java.util.UUID;
+import java.util.Random;
+
+import pumba.users.repository.User;
 
 public class UserFixture
 {
     public static final String username = "user.test";
     public static final String password = "1q2w3e4r";
-    public static final UUID roomId = UUID.randomUUID();
+    public static final long roomId = new Random(100).nextLong();
     
 
     private User build()

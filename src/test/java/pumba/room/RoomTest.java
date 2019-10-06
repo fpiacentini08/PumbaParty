@@ -9,8 +9,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import pumba.rooms.Room;
-import pumba.users.User;
 import pumba.users.UserFixture;
+import pumba.users.repository.User;
 
 public class RoomTest
 {

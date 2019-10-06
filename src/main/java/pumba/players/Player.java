@@ -8,7 +8,7 @@ import pumba.actions.Action;
 import pumba.actions.ActionFixture;
 import pumba.board.cells.Position;
 import pumba.effects.Effect;
-import pumba.users.User;
+import pumba.users.repository.User;
 
 public class Player implements Comparable<Player>
 {
