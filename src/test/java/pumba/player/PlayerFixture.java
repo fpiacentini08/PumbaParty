@@ -3,8 +3,8 @@ package pumba.player;
 import pumba.board.cells.Position;
 import pumba.board.cells.PositionFixture;
 import pumba.players.Player;
+import pumba.users.User;
 import pumba.users.UserFixture;
-import pumba.users.repository.User;
 
 public class PlayerFixture
 {

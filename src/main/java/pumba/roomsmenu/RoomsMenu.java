@@ -2,9 +2,10 @@ package pumba.roomsmenu;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import pumba.rooms.Room;
-import pumba.users.repository.User;
+import pumba.users.User;
 
 public class RoomsMenu
 {
@@ -53,14 +54,16 @@ public class RoomsMenu
 		{
 			roomToExit.exit(user);
 			user.setRoomId(User.NOT_IN_A_ROOM);
-
-//			rooms.get(rooms.indexOf(roomToExit)).getUsers().remove(user);
-
 			if (roomToExit.getUsers() == null || roomToExit.getUsers().isEmpty())
 			{
 				rooms.remove(rooms.indexOf(roomToExit));
 			}
 		}
+	}
+
+	public Room getRoomFromMaster(String master)
+	{
+		return rooms.stream().filter(room -> master.equals(room.getMaster())).collect(Collectors.toList()).get(0);
 	}
 
 }

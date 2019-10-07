@@ -6,6 +6,7 @@ import pumba.exceptions.ErrorCodes;
 import pumba.exceptions.ErrorMessages;
 import pumba.exceptions.PumbaException;
 import pumba.server.PumbaServer;
+import pumba.users.User;
 
 public class UserRepository
 {
@@ -39,6 +40,26 @@ public class UserRepository
 		if(!user.verifyPassword(password)) {
 			throw new PumbaException(ErrorMessages.INVALID_PASSWORD, ErrorCodes.INVALID_PASSWORD);
 		}
+	}
+
+	public static User find(String username) throws PumbaException
+	{
+		EntityManager em = PumbaServer.getDataBaseEntityManager();
+		User user = em.find(User.class, username);
+		if(user == null) {
+			throw new PumbaException(ErrorMessages.INVALID_USERNAME, ErrorCodes.INVALID_USERNAME);
+		}
+		return user;
+	}
+
+	public static User update(User user)
+	{
+		EntityManager em = PumbaServer.getDataBaseEntityManager();
+		em.getTransaction().begin();
+		em.persist(user);
+		em.flush();
+		em.getTransaction().commit();
+		return user;
 	}
 
 }

@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import pumba.rooms.Room;
-import pumba.users.repository.User;
+import pumba.users.User;
 
 public class RoomsMenuTest
 {
@@ -31,8 +31,8 @@ public class RoomsMenuTest
 		assertTrue(roomsMenu.createRoom(user1));
 
 		assertEquals(1, roomsMenu.getRooms().size(), 0);
-		assertTrue(roomsMenu.getRooms().get(0).getMaster().equals(user1));
-		assertEquals(roomsMenu.getRooms().get(0).getId(), roomsMenu.getRooms().get(0).getMaster().getRoomId());
+		assertTrue(roomsMenu.getRooms().get(0).getMaster().equals(user1.getUsername()));
+		
 
 	}
 
@@ -140,7 +140,7 @@ public class RoomsMenuTest
 		roomsMenu.exitRoom(user1, roomsMenu.getRooms().get(0));
 		assertEquals(1, roomsMenu.getRooms().get(0).getUsers().size(), 0);
 		assertTrue(roomsMenu.getRooms().get(0).getUsers().contains(user2));
-		assertTrue(roomsMenu.getRooms().get(0).getMaster().equals(user2));
+		assertTrue(roomsMenu.getRooms().get(0).getMaster().equals(user2.getUsername()));
 		assertEquals(User.NOT_IN_A_ROOM, user1.getRoomId(), 0);
 		consistentRoomIdWithUsers(roomsMenu);
 		roomsMenu.exitRoom(user2, roomsMenu.getRooms().get(0));

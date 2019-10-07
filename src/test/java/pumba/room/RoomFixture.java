@@ -1,8 +1,8 @@
 package pumba.room;
 
 import pumba.rooms.Room;
+import pumba.users.User;
 import pumba.users.UserFixture;
-import pumba.users.repository.User;
 
 public class RoomFixture
 {

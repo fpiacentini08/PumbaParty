@@ -2,8 +2,6 @@ package pumba.users;
 
 import java.util.Random;
 
-import pumba.users.repository.User;
-
 public class UserFixture
 {
     public static final String username = "user.test";

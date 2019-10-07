@@ -1,4 +1,4 @@
-package pumba.users.repository;
+package pumba.users;
 
 import java.io.Serializable;
 import java.util.Base64;
@@ -16,16 +16,16 @@ public class User implements Serializable
 
 	private static final long serialVersionUID = 301433115654715343L;
 
-	public static final long NOT_IN_A_ROOM = Long.MIN_VALUE;
+	public static final long NOT_IN_A_ROOM = 0;
 
 	@Id
-	@Column(name = "username", length = 50, unique = true, nullable = false)
+	@Column(name = "username", length = 50, unique = true, nullable = false, columnDefinition = "VARCHAR(255)")
 	private String username;
 
-	@Column(name = "password", length = 50, nullable = false)
+	@Column(name = "password", length = 50, nullable = false, columnDefinition = "VARCHAR(255)")
 	private String password;
 
-	@Column(name = "room_id", nullable = false)
+	@Column(name = "room_id", nullable = false, columnDefinition = "BIGINT")
 	private long roomId = NOT_IN_A_ROOM;
 
 	public User(String username, String password)

@@ -8,8 +8,6 @@ import java.util.Base64;
 
 import org.junit.Test;
 
-import pumba.users.repository.User;
-
 public class UserTest
 {
 	@Test

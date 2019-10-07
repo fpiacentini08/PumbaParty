@@ -6,20 +6,24 @@ import java.util.Random;
 import java.util.Set;
 
 import pumba.game.Game;
-import pumba.users.repository.User;
+import pumba.users.User;
 
 public class Room
 {
 	private static final Integer maxUsers = 5;
 
 	private long id;
-	private Set<User> users;
-	private User master;
+
+	private String master;
+
 	private Boolean playing;
+
+	private Set<User> users = new HashSet<User>();
+
 	private Game game;
 
 	private Random rand = new Random();
-	
+
 	public Room(User master)
 	{
 		super();
@@ -27,7 +31,7 @@ public class Room
 		Set<User> usersList = new HashSet<User>();
 		usersList.add(master);
 		this.users = usersList;
-		this.master = master;
+		this.master = master.getUsername();
 		this.playing = false;
 	}
 
@@ -41,7 +45,7 @@ public class Room
 		return users;
 	}
 
-	public User getMaster()
+	public String getMaster()
 	{
 		return master;
 	}
@@ -79,9 +83,9 @@ public class Room
 		}
 		else
 		{
-			if (this.master.equals(user))
+			if (this.master.equals(user.getUsername()))
 			{
-				this.master = new ArrayList<>(this.users).get(0);
+				this.master = new ArrayList<>(this.users).get(0).getUsername();
 			}
 		}
 
