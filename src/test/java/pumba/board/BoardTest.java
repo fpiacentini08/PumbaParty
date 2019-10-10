@@ -1,4 +1,4 @@
-package test.java.pumba.board;
+package pumba.board;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -10,10 +10,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import main.java.pumba.board.Board;
-import main.java.pumba.board.cells.Cell;
-import main.java.pumba.board.cells.Position;
-import main.java.pumba.effects.Effect;
+import pumba.board.cells.Cell;
+import pumba.board.cells.Position;
+import pumba.effects.Effect;
 
 public class BoardTest
 {

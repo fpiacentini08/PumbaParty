@@ -1,4 +1,4 @@
-package test.java.pumba.room;
+package pumba.room;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -8,9 +8,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import main.java.pumba.rooms.Room;
-import main.java.pumba.users.User;
-import test.java.pumba.users.UserFixture;
+import pumba.rooms.Room;
+import pumba.users.User;
+import pumba.users.UserFixture;
 
 public class RoomTest
 {
@@ -32,7 +32,7 @@ public class RoomTest
 		assertNotNull(room.getPlaying());
 		assertNotNull(room.getUsers());
 
-		assertEquals(UserFixture.withDefaults(), room.getMaster());
+		assertEquals(UserFixture.withDefaults().getUsername(), room.getMaster());
 		assertFalse(room.getPlaying());
 
 		assertEquals(1, room.getUsers().size(), 0);
@@ -58,8 +58,8 @@ public class RoomTest
 		assertFalse(room.getUsers().contains(user5));
 		assertFalse(room.getUsers().contains(user6));
 
-		assertTrue(room.getUsers().contains(room.getMaster()));
-		assertEquals(RoomFixture.master, room.getMaster());
+		assertTrue(room.getUsers().contains(RoomFixture.master));
+		assertEquals(RoomFixture.master.getUsername(), room.getMaster());
 
 	}
 
@@ -76,17 +76,17 @@ public class RoomTest
 
 		room.exit(user1);
 		assertFalse(room.getUsers().contains(user1));
-		assertEquals(RoomFixture.master, room.getMaster());
+		assertEquals(RoomFixture.master.getUsername(), room.getMaster());
 
 		room.exit(user2);
 		assertFalse(room.getUsers().contains(user2));
-		assertEquals(RoomFixture.master, room.getMaster());
+		assertEquals(RoomFixture.master.getUsername(), room.getMaster());
 		assertEquals(3, room.getUsers().size(), 0);
 
-		room.exit(room.getMaster());
+		room.exit(RoomFixture.master);
 		assertNotNull(room.getMaster());
 		assertFalse(room.getUsers().contains(UserFixture.withDefaults()));
-		assertFalse(room.getMaster().equals(RoomFixture.master));
+		assertFalse(room.getMaster().equals(RoomFixture.master.getUsername()));
 
 	}
 
@@ -101,11 +101,11 @@ public class RoomTest
 		assertTrue(room.enter(user3));
 		assertTrue(room.enter(user4));
 
-		room.exit(room.getMaster());
+		room.exit(RoomFixture.master);
 
 		assertNotNull(room.getMaster());
-		assertFalse(room.getMaster().equals(RoomFixture.master));
-		assertFalse(room.getUsers().contains(RoomFixture.master));
+		assertFalse(room.getMaster().equals(RoomFixture.master.getUsername()));
+		assertFalse(room.getUsers().contains(RoomFixture.master.getUsername()));
 
 		room.exit(user1);
 		assertNotNull(room.getMaster());
@@ -140,12 +140,12 @@ public class RoomTest
 		assertTrue(room.getPlaying());
 		assertTrue(room.enter(user1));
 
-		room.exit(room.getMaster());
+		room.exit(RoomFixture.master);
 
 		assertNotNull(room.getMaster());
 		assertFalse(room.getMaster().equals(RoomFixture.master));
 		assertFalse(room.getUsers().contains(RoomFixture.master));
-		assertEquals(user1, room.getMaster());
+		assertEquals(user1.getUsername(), room.getMaster());
 		assertTrue(room.getPlaying());
 
 		room.exit(user1);

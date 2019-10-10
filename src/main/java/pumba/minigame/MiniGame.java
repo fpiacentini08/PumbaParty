@@ -1,4 +1,4 @@
-package main.java.pumba.minigame;
+package pumba.minigame;
 
 import java.util.List;
 import java.util.Map;

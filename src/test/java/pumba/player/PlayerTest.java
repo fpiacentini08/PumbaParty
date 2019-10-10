@@ -1,4 +1,4 @@
-package test.java.pumba.player;
+package pumba.player;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,10 +9,9 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import main.java.pumba.board.cells.Position;
-import main.java.pumba.effects.Effect;
-import main.java.pumba.players.Player;
-import test.java.pumba.effects.EffectFixture;
+import pumba.board.cells.Position;
+import pumba.effects.Effect;
+import pumba.players.Player;
 
 public class PlayerTest
 {

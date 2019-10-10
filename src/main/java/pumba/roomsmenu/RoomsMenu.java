@@ -1,10 +1,11 @@
-package main.java.pumba.roomsmenu;
+package pumba.roomsmenu;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import main.java.pumba.rooms.Room;
-import main.java.pumba.users.User;
+import pumba.rooms.Room;
+import pumba.users.User;
 
 public class RoomsMenu
 {
@@ -22,7 +23,7 @@ public class RoomsMenu
 
 	public Boolean createRoom(User user)
 	{
-		if (user.getRoomId() == null)
+		if (user.getRoomId() == User.NOT_IN_A_ROOM)
 		{
 			Room room = new Room(user);
 			user.setRoomId(room.getId());
@@ -35,7 +36,7 @@ public class RoomsMenu
 	public Boolean enterRoom(User user, Room roomToEnter)
 	{
 
-		if (user.getRoomId() == null && roomToEnter != null && rooms.contains(roomToEnter))
+		if (user.getRoomId() == User.NOT_IN_A_ROOM && roomToEnter != null && rooms.contains(roomToEnter))
 		{
 			if (roomToEnter.enter(user))
 			{
@@ -44,7 +45,7 @@ public class RoomsMenu
 			}
 			return false;
 		}
-		return user.getRoomId().equals(roomToEnter.getId());
+		return user.getRoomId() == (roomToEnter.getId());
 	}
 
 	public void exitRoom(User user, Room roomToExit)
@@ -52,15 +53,17 @@ public class RoomsMenu
 		if (roomToExit != null && rooms.contains(roomToExit))
 		{
 			roomToExit.exit(user);
-			user.setRoomId(null);
-
-//			rooms.get(rooms.indexOf(roomToExit)).getUsers().remove(user);
-
+			user.setRoomId(User.NOT_IN_A_ROOM);
 			if (roomToExit.getUsers() == null || roomToExit.getUsers().isEmpty())
 			{
 				rooms.remove(rooms.indexOf(roomToExit));
 			}
 		}
+	}
+
+	public Room getRoomFromMaster(String master)
+	{
+		return rooms.stream().filter(room -> master.equals(room.getMaster())).collect(Collectors.toList()).get(0);
 	}
 
 }

@@ -1,35 +1,41 @@
-package main.java.pumba.rooms;
+package pumba.rooms;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
-import java.util.UUID;
 
-import main.java.pumba.game.Game;
-import main.java.pumba.users.User;
+import pumba.game.Game;
+import pumba.users.User;
 
 public class Room
 {
 	private static final Integer maxUsers = 5;
 
-	private UUID id;
-	private Set<User> users;
-	private User master;
+	private long id;
+
+	private String master;
+
 	private Boolean playing;
+
+	private Set<User> users = new HashSet<User>();
+
 	private Game game;
+
+	private Random rand = new Random();
 
 	public Room(User master)
 	{
 		super();
-		this.id = UUID.randomUUID();
-		Set<User> usersList = new HashSet<>();
+		this.id = rand.nextLong();
+		Set<User> usersList = new HashSet<User>();
 		usersList.add(master);
 		this.users = usersList;
-		this.master = master;
+		this.master = master.getUsername();
 		this.playing = false;
 	}
 
-	public UUID getId()
+	public long getId()
 	{
 		return id;
 	}
@@ -39,7 +45,7 @@ public class Room
 		return users;
 	}
 
-	public User getMaster()
+	public String getMaster()
 	{
 		return master;
 	}
@@ -68,7 +74,7 @@ public class Room
 	public void exit(User user)
 	{
 
-		this.users.remove(user);
+		users.remove(user);
 
 		if (this.users.isEmpty())
 		{
@@ -77,9 +83,9 @@ public class Room
 		}
 		else
 		{
-			if (this.master.equals(user))
+			if (this.master.equals(user.getUsername()))
 			{
-				this.master = new ArrayList<>(this.users).get(0);
+				this.master = new ArrayList<>(this.users).get(0).getUsername();
 			}
 		}
 

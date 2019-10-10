@@ -1,10 +1,10 @@
-package test.java.pumba.player;
+package pumba.player;
 
-import main.java.pumba.board.cells.Position;
-import main.java.pumba.players.Player;
-import main.java.pumba.users.User;
-import test.java.pumba.board.cells.PositionFixture;
-import test.java.pumba.users.UserFixture;
+import pumba.board.cells.Position;
+import pumba.board.cells.PositionFixture;
+import pumba.players.Player;
+import pumba.users.User;
+import pumba.users.UserFixture;
 
 public class PlayerFixture
 {

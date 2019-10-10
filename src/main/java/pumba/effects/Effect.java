@@ -1,4 +1,4 @@
-package main.java.pumba.effects;
+package pumba.effects;
 
 public class Effect
 {

@@ -1,14 +1,14 @@
-package main.java.pumba.players;
+package pumba.players;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import main.java.pumba.actions.Action;
-import main.java.pumba.board.cells.Position;
-import main.java.pumba.effects.Effect;
-import main.java.pumba.users.User;
-import test.java.pumba.actions.ActionFixture;
+import pumba.actions.Action;
+import pumba.actions.impl.ActionThrowBomb;
+import pumba.board.cells.Position;
+import pumba.effects.Effect;
+import pumba.users.User;
 
 public class Player implements Comparable<Player>
 {
@@ -67,7 +67,7 @@ public class Player implements Comparable<Player>
 	private List<Action> defaultActions()
 	{
 		List<Action> actions = new ArrayList<>();
-		actions.add(ActionFixture.withDefaults());
+		actions.add(new ActionThrowBomb());
 		return actions;
 	}
 

@@ -1,16 +1,14 @@
-package test.java.pumba.roomsmenu;
+package pumba.roomsmenu;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import main.java.pumba.rooms.Room;
-import main.java.pumba.roomsmenu.RoomsMenu;
-import main.java.pumba.users.User;
+import pumba.rooms.Room;
+import pumba.users.User;
 
 public class RoomsMenuTest
 {
@@ -33,8 +31,8 @@ public class RoomsMenuTest
 		assertTrue(roomsMenu.createRoom(user1));
 
 		assertEquals(1, roomsMenu.getRooms().size(), 0);
-		assertTrue(roomsMenu.getRooms().get(0).getMaster().equals(user1));
-		assertEquals(roomsMenu.getRooms().get(0).getId(), roomsMenu.getRooms().get(0).getMaster().getRoomId());
+		assertTrue(roomsMenu.getRooms().get(0).getMaster().equals(user1.getUsername()));
+		
 
 	}
 
@@ -122,7 +120,7 @@ public class RoomsMenuTest
 		roomsMenu.exitRoom(user2, roomsMenu.getRooms().get(0));
 		assertEquals(1, roomsMenu.getRooms().get(0).getUsers().size(), 0);
 		assertTrue(roomsMenu.getRooms().get(0).getUsers().contains(user1));
-		assertNull(user2.getRoomId());
+		assertEquals(User.NOT_IN_A_ROOM, user2.getRoomId(), 0);
 		consistentRoomIdWithUsers(roomsMenu);
 		roomsMenu.exitRoom(user1, roomsMenu.getRooms().get(0));
 		assertEquals(0, roomsMenu.getRooms().size(), 0);
@@ -142,8 +140,8 @@ public class RoomsMenuTest
 		roomsMenu.exitRoom(user1, roomsMenu.getRooms().get(0));
 		assertEquals(1, roomsMenu.getRooms().get(0).getUsers().size(), 0);
 		assertTrue(roomsMenu.getRooms().get(0).getUsers().contains(user2));
-		assertTrue(roomsMenu.getRooms().get(0).getMaster().equals(user2));
-		assertNull(user1.getRoomId());
+		assertTrue(roomsMenu.getRooms().get(0).getMaster().equals(user2.getUsername()));
+		assertEquals(User.NOT_IN_A_ROOM, user1.getRoomId(), 0);
 		consistentRoomIdWithUsers(roomsMenu);
 		roomsMenu.exitRoom(user2, roomsMenu.getRooms().get(0));
 		assertEquals(0, roomsMenu.getRooms().size(), 0);

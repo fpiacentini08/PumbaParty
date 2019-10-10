@@ -1,4 +1,4 @@
-package main.java.pumba.board.cells;
+package pumba.board.cells;
 
 public class Position
 {

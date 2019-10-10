@@ -1,4 +1,4 @@
-package main.java.pumba.board;
+package pumba.board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,13 +9,13 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import main.java.pumba.board.cells.Cell;
-import main.java.pumba.board.cells.Position;
-import main.java.pumba.board.cells.notwalkable.impl.NotPlayableCellImpl;
-import main.java.pumba.board.cells.walkable.impl.CommonCellImpl;
-import main.java.pumba.board.cells.walkable.impl.coins.LoseCoinsCellImpl;
-import main.java.pumba.board.cells.walkable.impl.coins.WinCoinsCellImpl;
-import main.java.pumba.effects.Effect;
+import pumba.board.cells.Cell;
+import pumba.board.cells.Position;
+import pumba.board.cells.notwalkable.impl.NotPlayableCellImpl;
+import pumba.board.cells.walkable.impl.CommonCellImpl;
+import pumba.board.cells.walkable.impl.coins.LoseCoinsCellImpl;
+import pumba.board.cells.walkable.impl.coins.WinCoinsCellImpl;
+import pumba.effects.Effect;
 
 public class Board
 {

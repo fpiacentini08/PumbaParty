@@ -1,6 +1,4 @@
-package test.java.pumba.board.cells;
-
-import main.java.pumba.board.cells.Position;
+package pumba.board.cells;
 
 public class PositionFixture
 {

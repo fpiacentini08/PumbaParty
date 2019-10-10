@@ -1,6 +1,4 @@
-package test.java.pumba.effects;
-
-import main.java.pumba.effects.Effect;
+package pumba.effects;
 
 public class EffectFixture
 {

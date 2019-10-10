@@ -1,8 +1,8 @@
-package test.java.pumba.room;
+package pumba.room;
 
-import main.java.pumba.rooms.Room;
-import main.java.pumba.users.User;
-import test.java.pumba.users.UserFixture;
+import pumba.rooms.Room;
+import pumba.users.User;
+import pumba.users.UserFixture;
 
 public class RoomFixture
 {

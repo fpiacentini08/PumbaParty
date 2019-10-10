@@ -1,6 +1,6 @@
-package main.java.pumba.actions;
+package pumba.actions;
 
-import main.java.pumba.effects.Effect;
+import pumba.effects.Effect;
 
 public interface Action
 {
