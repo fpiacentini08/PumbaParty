@@ -21,11 +21,7 @@ public class Board
 {
 
 	private List<Cell> cells;
-	private static final Integer dimension = 20;
-	private static final int NOT_PLAYABLE = 0;
-	private static final int COMMON = 1;
-	private static final int WIN_COINS = 2;
-	private static final int LOSE_COINS = 3;
+	private static final Integer dimension = TemplateBoard.dimension;
 	private Map<Position, List<Position>> adjacenceMap;
 
 	private Random rand = new Random();
@@ -52,16 +48,16 @@ public class Board
 			{
 				switch (template.mat[i][j])
 				{
-					case NOT_PLAYABLE:
+					case TemplateBoard.NOT_PLAYABLE:
 						cellsList.add(new NotPlayableCellImpl(new Position(i, j)));
 						break;
-					case COMMON:
+					case TemplateBoard.COMMON:
 						cellsList.add(new CommonCellImpl(new Position(i, j)));
 						break;
-					case WIN_COINS:
+					case TemplateBoard.WIN_COINS:
 						cellsList.add(new WinCoinsCellImpl(new Position(i, j)));
 						break;
-					case LOSE_COINS:
+					case TemplateBoard.LOSE_COINS:
 						cellsList.add(new LoseCoinsCellImpl(new Position(i, j)));
 						break;
 					default:

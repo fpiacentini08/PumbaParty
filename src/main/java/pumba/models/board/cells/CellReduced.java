@@ -4,6 +4,7 @@ public class CellReduced
 {
 
 	protected PositionReduced position;
+	protected Boolean walkable;
 
 	public CellReduced(PositionReduced position)
 	{
@@ -20,5 +21,22 @@ public class CellReduced
 	{
 		return position;
 	}
+
+	public Boolean getWalkable()
+	{
+		return walkable;
+	}
+
+	public void setWalkable(Boolean walkable)
+	{
+		this.walkable = walkable;
+	}
+
+	public void setPosition(PositionReduced position)
+	{
+		this.position = position;
+	}
+	
+	
 
 }
