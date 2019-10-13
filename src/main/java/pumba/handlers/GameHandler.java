@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import pumba.board.cells.Position;
+import pumba.effects.Effect;
 import pumba.exceptions.ErrorMessages;
 import pumba.exceptions.PumbaException;
 import pumba.game.Game;
@@ -95,6 +96,39 @@ public class GameHandler
 
 		}
 		return possiblePositions;
+	}
+
+	public static String applyCellEffect() throws PumbaException
+	{
+		State actualState = game.getState();
+		if (!actualState.getActiveStep().equals(StepEnum.CELL_EFFECT.ordinal()))
+		{
+			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);
+		}
+		Effect effect = game.getBoard().getCellEffect(actualState.getActivePlayer().getPosition());
+		for (Player player : game.getPlayers())
+		{
+			if (player.getUsername().equals(actualState.getActivePlayer().getUsername()))
+			{
+				player.applyEffect(effect);
+			}
+		}
+
+		StringBuilder effectDescription = new StringBuilder();
+		if (effect == null || effect.getCoins() == 0)
+		{
+			effectDescription.append("Parece que no hay nada.");
+		}
+		else if (effect.getCoins() > 0)
+		{
+			effectDescription.append("Has encontrado " + effect.getCoins() + " bichos.\nViscosos, pero sabrosos.");
+		}
+		else
+		{
+			effectDescription.append("Una hiena te robo " + effect.getCoins() * -1 + " bichos.\nHakuna matata..");
+
+		}
+		return effectDescription.toString();
 	}
 
 }
