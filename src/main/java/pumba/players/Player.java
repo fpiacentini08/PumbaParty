@@ -3,9 +3,12 @@ package pumba.players;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import pumba.actions.Action;
+import pumba.actions.impl.ActionDoNothing;
 import pumba.actions.impl.ActionThrowBomb;
+import pumba.actions.impl.ActionThrowDiceAgain;
 import pumba.board.cells.Position;
 import pumba.effects.Effect;
 import pumba.users.User;
@@ -18,7 +21,7 @@ public class Player implements Comparable<Player>
 	Position position;
 	List<Action> actions;
 	Integer lastDiceResult;
-	
+
 	public Player(User user, Position pos)
 	{
 		this.username = user.getUsername();
@@ -52,9 +55,19 @@ public class Player implements Comparable<Player>
 		this.position = position;
 	}
 
+	public List<Action> getActions()
+	{
+		return actions;
+	}
+
+	public void setActions(List<Action> actions)
+	{
+		this.actions = actions;
+	}
+
 	public Integer throwDice()
 	{
-		lastDiceResult = new Random().nextInt(6) + 1; 
+		lastDiceResult = new Random().nextInt(6) + 1;
 		return lastDiceResult;
 	}
 
@@ -70,6 +83,8 @@ public class Player implements Comparable<Player>
 	{
 		List<Action> actions = new ArrayList<>();
 		actions.add(new ActionThrowBomb());
+		actions.add(new ActionThrowDiceAgain());
+		actions.add(new ActionDoNothing());
 		return actions;
 	}
 
@@ -78,6 +93,16 @@ public class Player implements Comparable<Player>
 		return this.actions.get(0).play();
 	}
 
+	public Effect playAction(String actionDescription)
+	{
+		List<Action> playerActions = this.actions.stream()
+				.filter(action -> action.getActionDescription().equals(actionDescription)).collect(Collectors.toList());
+		return playerActions.get(0).play();
+
+	}
+
+
+	
 	@Override
 	public int compareTo(Player otherPlayer)
 	{
@@ -101,6 +126,6 @@ public class Player implements Comparable<Player>
 	{
 		this.lastDiceResult = lastDiceResult;
 	}
-	
-	
+
+
 }

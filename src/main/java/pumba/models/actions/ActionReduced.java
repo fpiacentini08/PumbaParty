@@ -1,13 +1,9 @@
-package pumba.actions;
+package pumba.models.actions;
 
-import pumba.effects.Effect;
-
-public abstract class Action
+public class ActionReduced
 {
-	protected String actionDescription = "Accion abstracta";
-	protected Boolean available = true;
-
-	public abstract Effect play();
+	private String actionDescription;
+	private Boolean available;
 
 	public String getActionDescription()
 	{
@@ -17,6 +13,11 @@ public abstract class Action
 	public void setActionDescription(String actionDescription)
 	{
 		this.actionDescription = actionDescription;
+	}
+
+	public ActionReduced()
+	{
+		super();
 	}
 
 	public Boolean getAvailable()

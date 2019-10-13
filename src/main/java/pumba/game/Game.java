@@ -21,7 +21,7 @@ import pumba.users.User;
 public class Game
 {
 	private List<Player> players;
-	private static final Integer turns = 3;
+	private static final Integer rounds = 3;
 	private Board board;
 	private List<MiniGame> minigames;
 	private Random rand = new Random();
@@ -63,7 +63,7 @@ public class Game
 
 	public static Integer getTurns()
 	{
-		return turns;
+		return rounds;
 	}
 
 	public State getState()
@@ -135,7 +135,7 @@ public class Game
 		Log.debug("Comienza el juego!");
 		Log.debugLine();
 
-		for (int i = 0; i < turns; i++)
+		for (int i = 0; i < rounds; i++)
 		{
 			Log.debug("Ronda numero " + (i + 1));
 			for (Player player : players)
@@ -202,6 +202,44 @@ public class Game
 	public void stopGame()
 	{
 		// TODO Auto-generated method stub
+	}
+
+	public void nextPlayer()
+	{
+		Player activePlayer = getActivePlayer();
+		if (this.players.indexOf(activePlayer) < this.players.size() - 1)
+		{
+			this.state.nextPlayerTurn(this.players.get(this.players.indexOf(activePlayer) + 1));
+		}
+		else
+		{
+			this.state.playMinigame();
+		}
+	}
+
+	public Player getActivePlayer()
+	{
+		List<Player> activePlayer = this.players.stream()
+				.filter(player -> player.getUsername().equals(this.state.getActivePlayer().getUsername()))
+				.collect(Collectors.toList());
+		return activePlayer.get(0);
+	}
+
+	public void nextRound()
+	{
+		System.out.println("---------------------");
+		System.out.println(Game.rounds);
+		System.out.println(Game.rounds);
+		System.out.println("---------------------");
+		if (this.state.getActiveRound().compareTo(Game.rounds) < 0)
+		{
+			this.state.nextRound(this.players.get(0));
+		}
+		else
+		{
+			this.state.endGame();
+		}
+
 	}
 
 }
