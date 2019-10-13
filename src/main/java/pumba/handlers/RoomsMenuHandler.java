@@ -1,11 +1,11 @@
-package pumba.roomsmenu;
+package pumba.handlers;
 
 import java.util.List;
 
 import pumba.exceptions.PumbaException;
 import pumba.rooms.Room;
+import pumba.roomsmenu.RoomsMenu;
 import pumba.users.User;
-import pumba.users.UserHandler;
 
 public class RoomsMenuHandler
 {

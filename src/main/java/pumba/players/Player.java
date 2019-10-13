@@ -17,7 +17,8 @@ public class Player implements Comparable<Player>
 	Integer coins;
 	Position position;
 	List<Action> actions;
-
+	Integer lastDiceResult;
+	
 	public Player(User user, Position pos)
 	{
 		this.username = user.getUsername();
@@ -53,7 +54,8 @@ public class Player implements Comparable<Player>
 
 	public Integer throwDice()
 	{
-		return new Random().nextInt(6) + 1;
+		lastDiceResult = new Random().nextInt(6) + 1; 
+		return lastDiceResult;
 	}
 
 	public void applyEffect(Effect effect)
@@ -89,4 +91,16 @@ public class Player implements Comparable<Player>
 		}
 		return 0;
 	}
+
+	public Integer getLastDiceResult()
+	{
+		return lastDiceResult;
+	}
+
+	public void setLastDiceResult(Integer lastDiceResult)
+	{
+		this.lastDiceResult = lastDiceResult;
+	}
+	
+	
 }

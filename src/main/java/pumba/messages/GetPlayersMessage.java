@@ -8,20 +8,18 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import pumba.board.Board;
-import pumba.board.cells.Cell;
-import pumba.handlers.BoardHandler;
+import pumba.handlers.GameHandler;
 import pumba.messages.utils.SocketMessage;
-import pumba.models.board.cells.CellReduced;
+import pumba.models.players.PlayerReduced;
+import pumba.players.Player;
 import pumba.server.ClientListener;
 import pumba.server.PumbaServer;
 
-public class GetBoardMessage extends SocketMessage
+public class GetPlayersMessage extends SocketMessage
 {
-	private List<CellReduced> cells = new ArrayList<>();
-	private Integer dimension;
+	private List<PlayerReduced> players = new ArrayList<>();
 
-	public GetBoardMessage()
+	public GetPlayersMessage()
 	{
 		super();
 	}
@@ -34,12 +32,12 @@ public class GetBoardMessage extends SocketMessage
 		mapper.disable(DeserializationFeature.UNWRAP_ROOT_VALUE);
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-		Board board = BoardHandler.getBoard();
-		for(Cell cell : board.getCells()) {
-			this.cells.add(mapper.convertValue(cell, CellReduced.class));
+		List<Player> gamePlayers = GameHandler.getPlayers();
+		for (Player player : gamePlayers)
+		{
+			this.players.add(mapper.convertValue(player, PlayerReduced.class));
 		}
-		
-		this.dimension = Board.getDimension();
+
 		this.setApproved(true);
 
 		for (ClientListener connected : PumbaServer.getConnectedClients())
@@ -54,26 +52,6 @@ public class GetBoardMessage extends SocketMessage
 			}
 		}
 
-	}
-
-	public List<CellReduced> getCells()
-	{
-		return cells;
-	}
-
-	public void setCells(List<CellReduced> cells)
-	{
-		this.cells = cells;
-	}
-
-	public Integer getDimension()
-	{
-		return dimension;
-	}
-
-	public void setDimension(Integer dimension)
-	{
-		this.dimension = dimension;
 	}
 
 }

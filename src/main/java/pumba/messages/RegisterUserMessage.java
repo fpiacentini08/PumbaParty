@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import pumba.exceptions.ErrorMessages;
 import pumba.exceptions.PumbaException;
+import pumba.handlers.UserHandler;
 import pumba.messages.utils.SocketMessage;
 import pumba.server.ClientListener;
 import pumba.server.PumbaServer;
-import pumba.users.UserHandler;
 
 public class RegisterUserMessage extends SocketMessage
 {

@@ -1,8 +1,9 @@
-package pumba.board;
+package pumba.handlers;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import pumba.board.Board;
 import pumba.game.Game;
 import pumba.users.User;
 

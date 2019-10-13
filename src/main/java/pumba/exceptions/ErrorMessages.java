@@ -10,6 +10,7 @@ public class ErrorMessages
 	public static final String ERROR_CREATE_USER = "Error creando al usuario.";
 	public static final String ERROR_FIND_USER = "Error buscando al usuario.";
 	public static final String ERROR_CREATE_ROOM = "Error creando sala.";
+	public static final String INVALID_STEP = "Paso de sencuencia de juego invalido.";
 
 
 }

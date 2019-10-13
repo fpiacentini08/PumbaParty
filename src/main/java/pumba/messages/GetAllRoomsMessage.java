@@ -5,9 +5,9 @@ import java.util.List;
 
 import pumba.exceptions.ErrorMessages;
 import pumba.exceptions.PumbaException;
+import pumba.handlers.RoomsMenuHandler;
 import pumba.messages.utils.SocketMessage;
 import pumba.rooms.Room;
-import pumba.roomsmenu.RoomsMenuHandler;
 import pumba.server.ClientListener;
 import pumba.server.PumbaServer;
 

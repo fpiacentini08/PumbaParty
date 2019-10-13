@@ -1,8 +1,9 @@
-package pumba.users;
+package pumba.handlers;
 
 import pumba.exceptions.ErrorCodes;
 import pumba.exceptions.ErrorMessages;
 import pumba.exceptions.PumbaException;
+import pumba.users.User;
 import pumba.users.repository.UserRepository;
 
 public class UserHandler

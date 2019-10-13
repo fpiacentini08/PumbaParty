@@ -100,7 +100,7 @@ public class BoardTest
 		Board board = new Board();
 		board.setTestBoard();
 
-		List<Position> possiblePositions = board.move(initialPosition, steps);
+		List<Position> possiblePositions = board.getPossiblePositions(initialPosition, steps);
 
 		for (int i = 0; i < positions.length; i++)
 		{
@@ -117,7 +117,7 @@ public class BoardTest
 		Integer steps = 2;
 		Board board = new Board();
 
-		List<Position> possiblePositions = board.move(initialPosition, steps);
+		List<Position> possiblePositions = board.getPossiblePositions(initialPosition, steps);
 
 		assertNotNull(possiblePositions);
 

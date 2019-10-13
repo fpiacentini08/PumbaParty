@@ -69,10 +69,10 @@ public class Board
 		}
 		this.cells = cellsList;
 		this.adjacenceMap = createAdjacentMap();
-		this.adjacenceMap.get(new Position(3,18));
-		this.adjacenceMap.get(new Position(2,18));
-		this.adjacenceMap.get(new Position(4,18));
-		
+		this.adjacenceMap.get(new Position(3, 18));
+		this.adjacenceMap.get(new Position(2, 18));
+		this.adjacenceMap.get(new Position(4, 18));
+
 	}
 
 	public void setTestBoard()
@@ -89,7 +89,7 @@ public class Board
 		this.adjacenceMap = createAdjacentMap();
 	}
 
-	public List<Position> move(Position initialPosition, Integer steps)
+	public List<Position> getPossiblePositions(Position initialPosition, Integer steps)
 	{
 		Set<Position> possiblePositions = new HashSet<>();
 
@@ -106,7 +106,7 @@ public class Board
 
 			for (Position pos : adjacentPositions)
 			{
-				possiblePositions.addAll(this.move(pos, steps - 1));
+				possiblePositions.addAll(this.getPossiblePositions(pos, steps - 1));
 			}
 
 		}
@@ -119,7 +119,7 @@ public class Board
 	{
 		// IT VERIFIES THAT THE FINAL POSITION SENT IS A POSIBBLE FINAL POSITION
 		// IF NOT, RETURNS POSSIBLE POSITIONS
-		List<Position> possiblePos = move(initialPosition, steps);
+		List<Position> possiblePos = getPossiblePositions(initialPosition, steps);
 		if (possiblePos.contains(finalPosition))
 		{
 			possiblePos.clear();
@@ -134,12 +134,11 @@ public class Board
 		return cell.getEffect();
 	}
 
-	public Position defaultPosition()
+	public List<Cell> getWalkableCells()
 	{
 		List<Cell> walkableCells = cells.stream().filter(cell -> cell.getWalkable() && cell instanceof CommonCellImpl)
 				.collect(Collectors.toList());
-
-		return walkableCells.get(rand.nextInt(walkableCells.size())).getPosition();
+		return walkableCells;
 	}
 
 	protected Map<Position, List<Position>> createAdjacentMap()

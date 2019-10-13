@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import pumba.board.Board;
+import pumba.board.cells.Cell;
 import pumba.board.cells.Position;
 import pumba.effects.Effect;
 import pumba.log.Log;
@@ -25,18 +26,24 @@ public class Game
 	private List<MiniGame> minigames;
 	private Random rand = new Random();
 
+	private State state;
+
 	public Game(Set<User> users)
 	{
 		this.board = new Board();
 		this.players = new ArrayList<>();
+		List<Cell> walkableCell = board.getWalkableCells();
+		Collections.shuffle(walkableCell);
+		int i = 0;
 		for (User user : users)
 		{
-			Position defaultPos = board.defaultPosition();
+			Position defaultPos = walkableCell.get(i++).getPosition();
 			this.players.add(new Player(user, defaultPos));
 		}
 		List<MiniGame> minigames = new ArrayList<MiniGame>();
 		minigames.add(new MinigameThrowTheDiceImpl());
 		this.minigames = minigames;
+		state = new State(this.players.get(0));
 	}
 
 	public List<Player> getPlayers()
@@ -59,6 +66,16 @@ public class Game
 		return turns;
 	}
 
+	public State getState()
+	{
+		return state;
+	}
+
+	public void setState(State state)
+	{
+		this.state = state;
+	}
+
 	private void playTurn(Player player)
 	{
 		Integer steps = player.throwDice();
@@ -67,7 +84,7 @@ public class Game
 
 		Log.debug(player.getUsername() + " se encuentra en " + player.getPosition());
 
-		List<Position> possiblePositions = board.move(player.getPosition(), steps);
+		List<Position> possiblePositions = board.getPossiblePositions(player.getPosition(), steps);
 
 		Position selectedPosition = player.getPosition();
 

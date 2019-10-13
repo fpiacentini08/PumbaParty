@@ -1,51 +1,46 @@
 package pumba.messages;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import pumba.exceptions.ErrorMessages;
+import pumba.board.cells.Position;
 import pumba.exceptions.PumbaException;
-import pumba.handlers.UserHandler;
+import pumba.handlers.GameHandler;
 import pumba.messages.utils.SocketMessage;
+import pumba.models.board.cells.PositionReduced;
 import pumba.server.ClientListener;
 import pumba.server.PumbaServer;
 
-public class LoginMessage extends SocketMessage
+public class GetPossiblePositionsMessage extends SocketMessage
 {
 
-	private String username;
-	private String password;
-	
-	
-	public LoginMessage(String username, String password)
+	List<PositionReduced> possiblePositions = new ArrayList<>();
+
+	public GetPossiblePositionsMessage()
 	{
 		super();
-		this.username = username;
-		this.password = password;
+
 	}
 
 	@Override
-	public void processResponse(Object object) 
+	public void processResponse(Object object)
 	{
-		ClientListener listener = (ClientListener) object;
 		try
 		{
-			UserHandler.login(username, password);
-			
+			List<Position> positions = GameHandler.getPossiblePositions();
+			for (Position pos : positions)
+			{
+				possiblePositions.add(mapper.convertValue(pos, PositionReduced.class));
+			}
 			this.setApproved(true);
 		}
-		
 		catch (PumbaException e)
 		{
 			this.setApproved(false);
 			this.setErrorMessage(e.getMessage());
-		}		
-		catch (Exception e)
-		{
-			this.setApproved(false);
-			this.setErrorMessage(ErrorMessages.ERROR_FIND_USER);
 		}
-		
-		
+
 		for (ClientListener connected : PumbaServer.getConnectedClients())
 		{
 			try
