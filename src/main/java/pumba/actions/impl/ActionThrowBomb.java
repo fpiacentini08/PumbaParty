@@ -9,7 +9,7 @@ public class ActionThrowBomb extends Action
 	public ActionThrowBomb()
 	{
 		super();
-		this.actionDescription = "Lanzar dado bomba";
+		this.actionDescription = "Lanzar bomba aleatoria";
 	}
 
 	@Override

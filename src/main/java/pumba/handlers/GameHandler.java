@@ -1,11 +1,11 @@
 package pumba.handlers;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import pumba.actions.Action;
 import pumba.board.cells.Position;
@@ -27,19 +27,18 @@ public class GameHandler
 	public static void startTestGame()
 	{
 		Set<User> users = new HashSet<>();
-		users.add(new User("pumba123", "test1"));
 		users.add(new User("simb@", "test2"));
-//		users.add(new User("pepegrillo", "test3"));
-//		users.add(new User("zabu", "test4"));
-//		users.add(new User("scar22", "test5"));
+		users.add(new User("zazu00", "test3"));
+		users.add(new User("Timon.I.AM", "test4"));
+		users.add(new User("pumba123", "test1"));
+		users.add(new User("scar22", "test5"));
 		game = new Game(users);
 	}
-
 
 	public static List<Player> getPlayers()
 	{
 		List<Player> players = new ArrayList<>(game.getPlayers());
-		Collections.sort(players, Collections.reverseOrder());
+		// Collections.sort(players, Collections.reverseOrder());
 		return players;
 	}
 
@@ -68,8 +67,12 @@ public class GameHandler
 			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);
 		}
 		actualState.nextState();
-		return game.getBoard().getPossiblePositionsOptimized(actualState.getActivePlayer().getPosition(),
-				actualState.getActivePlayer().getLastDiceResult());
+		List<Position> positions = game.getBoard().getPossiblePositionsOptimized(
+				actualState.getActivePlayer().getPosition(), actualState.getActivePlayer().getLastDiceResult());
+
+		return positions.stream().filter(pos -> game.getPlayers().stream()
+				.filter(player -> player.getPosition().equals(pos)).collect(Collectors.toList()).size() < 1)
+				.collect(Collectors.toList());
 	}
 
 	public static List<Position> move(Position finalPosition) throws PumbaException
@@ -187,9 +190,16 @@ public class GameHandler
 					otherPlayer.applyEffect(actionEffect);
 				}
 			}
+			resultDescription
+					.append("La bomba le saco " + Math.abs(actionEffect.getCoins()) + "\nbichos a los demas jugadores.");
+
 			if (!hasBeenChanges)
 			{
-				resultDescription.append("Pero nadie tiene bichos.");
+				resultDescription.append("\nPero nadie tiene bichos.\n");
+			}
+			else {
+				resultDescription.append("\nHakuna matata!\n");
+
 			}
 			actualState.nextState();
 
@@ -205,9 +215,8 @@ public class GameHandler
 			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);
 		}
 		game.nextPlayer();
-		
-	}
 
+	}
 
 	public static void finishRound() throws PumbaException
 	{
@@ -217,9 +226,8 @@ public class GameHandler
 			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);
 		}
 		game.nextRound();
-		
-	}
 
+	}
 
 	public static void updateScores(Map<String, Integer> score)
 	{
