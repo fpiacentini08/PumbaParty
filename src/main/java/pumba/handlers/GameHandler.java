@@ -30,6 +30,8 @@ public class GameHandler
 		users.add(new User("pumba123", "test1"));
 		users.add(new User("simb@", "test2"));
 //		users.add(new User("pepegrillo", "test3"));
+//		users.add(new User("zabu", "test4"));
+//		users.add(new User("scar22", "test5"));
 		game = new Game(users);
 	}
 
@@ -66,7 +68,7 @@ public class GameHandler
 			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);
 		}
 		actualState.nextState();
-		return game.getBoard().getPossiblePositions(actualState.getActivePlayer().getPosition(),
+		return game.getBoard().getPossiblePositionsOptimized(actualState.getActivePlayer().getPosition(),
 				actualState.getActivePlayer().getLastDiceResult());
 	}
 

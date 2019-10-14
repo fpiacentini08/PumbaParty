@@ -1,6 +1,7 @@
 package pumba.board;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -115,11 +116,20 @@ public class Board
 
 	}
 
+	public List<Position> getPossiblePositionsOptimized(Position initialPosition, Integer steps)
+	{
+		List<Position> possiblePositions = getPossiblePositions(initialPosition, steps);
+		return possiblePositions.stream()
+				.filter(pos -> steps
+						.equals( Math.abs(initialPosition.getPosX() - pos.getPosX()) + Math.abs(initialPosition.getPosY() - pos.getPosY())))
+				.collect(Collectors.toList());
+	}
+
 	public List<Position> move(Position initialPosition, Integer steps, Position finalPosition)
 	{
 		// IT VERIFIES THAT THE FINAL POSITION SENT IS A POSIBBLE FINAL POSITION
 		// IF NOT, RETURNS POSSIBLE POSITIONS
-		List<Position> possiblePos = getPossiblePositions(initialPosition, steps);
+		List<Position> possiblePos = getPossiblePositionsOptimized(initialPosition, steps);
 		if (possiblePos.contains(finalPosition))
 		{
 			possiblePos.clear();
@@ -149,6 +159,7 @@ public class Board
 		{
 			positions.add(cell.getPosition());
 		}
+
 		adjacenceMap = new HashMap<Position, List<Position>>();
 		for (Position referencePosition : positions)
 		{
@@ -160,6 +171,7 @@ public class Board
 					adjacentPositions.add(position);
 				}
 			}
+			Collections.reverse(adjacentPositions);
 			adjacenceMap.put(referencePosition, adjacentPositions);
 
 		}

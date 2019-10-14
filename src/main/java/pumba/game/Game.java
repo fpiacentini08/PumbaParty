@@ -84,7 +84,7 @@ public class Game
 
 		Log.debug(player.getUsername() + " se encuentra en " + player.getPosition());
 
-		List<Position> possiblePositions = board.getPossiblePositions(player.getPosition(), steps);
+		List<Position> possiblePositions = board.getPossiblePositionsOptimized(player.getPosition(), steps);
 
 		Position selectedPosition = player.getPosition();
 
