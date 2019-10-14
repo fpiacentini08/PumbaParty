@@ -28,10 +28,10 @@ public class GameHandler
 	{
 		Set<User> users = new HashSet<>();
 		users.add(new User("simb@", "test2"));
-		users.add(new User("zazu00", "test3"));
-		users.add(new User("Timon.I.AM", "test4"));
-		users.add(new User("pumba123", "test1"));
-		users.add(new User("scar22", "test5"));
+//		users.add(new User("zazu00", "test3"));
+//		users.add(new User("Timon.I.AM", "test4"));
+//		users.add(new User("pumba123", "test1"));
+//		users.add(new User("scar22", "test5"));
 		game = new Game(users);
 	}
 
