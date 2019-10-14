@@ -101,8 +101,12 @@ public class Player implements Comparable<Player>
 
 	}
 
+	public void grantCoins(Integer coins)
+	{
+		this.coins = this.coins + coins >= 0 ? this.coins + coins : 0;
 
-	
+	}
+
 	@Override
 	public int compareTo(Player otherPlayer)
 	{
@@ -126,6 +130,5 @@ public class Player implements Comparable<Player>
 	{
 		this.lastDiceResult = lastDiceResult;
 	}
-
 
 }

@@ -1,31 +1,29 @@
 package pumba.messages;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import pumba.game.MainState;
-import pumba.handlers.GameHandler;
 import pumba.messages.utils.SocketMessage;
-import pumba.models.game.StateReduced;
+import pumba.minigame.throwthedice.handler.ThrowTheDiceMinigameHandler;
 import pumba.server.ClientListener;
 import pumba.server.PumbaServer;
 
-public class NextStepMessage extends SocketMessage
+public class ThrowTheDiceMinigameGetPlayers extends SocketMessage
 {
-
-	private StateReduced actualState;
-
-	public NextStepMessage()
+	private Map<String, Integer> players = new HashMap<>();
+	
+	
+	public ThrowTheDiceMinigameGetPlayers()
 	{
 		super();
 	}
 
 	@Override
-	public void processResponse(Object object) 
+	public void processResponse(Object object)
 	{
 
-		MainState state = GameHandler.nextStep();
-
-		this.actualState = mapper.convertValue(state, StateReduced.class);
+		this.players = ThrowTheDiceMinigameHandler.getPlayers();
 
 		this.setApproved(true);
 

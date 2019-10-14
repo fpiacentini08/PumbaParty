@@ -105,7 +105,7 @@ public class RoomTest
 
 		assertNotNull(room.getMaster());
 		assertFalse(room.getMaster().equals(RoomFixture.master.getUsername()));
-		assertFalse(room.getUsers().contains(RoomFixture.master.getUsername()));
+		assertFalse(room.getUsers().contains(RoomFixture.master));
 
 		room.exit(user1);
 		assertNotNull(room.getMaster());

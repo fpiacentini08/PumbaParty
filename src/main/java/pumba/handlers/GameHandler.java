@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import pumba.actions.Action;
@@ -12,7 +13,7 @@ import pumba.effects.Effect;
 import pumba.exceptions.ErrorMessages;
 import pumba.exceptions.PumbaException;
 import pumba.game.Game;
-import pumba.game.State;
+import pumba.game.MainState;
 import pumba.models.game.StepEnum;
 import pumba.players.Player;
 import pumba.users.User;
@@ -21,14 +22,14 @@ public class GameHandler
 {
 
 	private static Game game;
-	private static State actualState;
+	private static MainState actualState;
 
 	public static void startTestGame()
 	{
 		Set<User> users = new HashSet<>();
 		users.add(new User("pumba123", "test1"));
 		users.add(new User("simb@", "test2"));
-		users.add(new User("pepegrillo", "test3"));
+//		users.add(new User("pepegrillo", "test3"));
 		game = new Game(users);
 	}
 
@@ -40,7 +41,7 @@ public class GameHandler
 		return players;
 	}
 
-	public static State nextStep()
+	public static MainState nextStep()
 	{
 		return game.getState();
 	}
@@ -215,6 +216,15 @@ public class GameHandler
 		}
 		game.nextRound();
 		
+	}
+
+
+	public static void updateScores(Map<String, Integer> score)
+	{
+		for (Player player : game.getPlayers())
+		{
+			player.grantCoins(score.get(player.getUsername()));
+		}
 	}
 
 }

@@ -14,7 +14,7 @@ import pumba.board.cells.Position;
 import pumba.effects.Effect;
 import pumba.log.Log;
 import pumba.minigame.MiniGame;
-import pumba.minigame.impl.MinigameThrowTheDiceImpl;
+import pumba.minigame.throwthedice.ThrowTheDiceMinigame;
 import pumba.players.Player;
 import pumba.users.User;
 
@@ -26,7 +26,7 @@ public class Game
 	private List<MiniGame> minigames;
 	private Random rand = new Random();
 
-	private State state;
+	private MainState state;
 
 	public Game(Set<User> users)
 	{
@@ -41,9 +41,9 @@ public class Game
 			this.players.add(new Player(user, defaultPos));
 		}
 		List<MiniGame> minigames = new ArrayList<MiniGame>();
-		minigames.add(new MinigameThrowTheDiceImpl());
+		minigames.add(new ThrowTheDiceMinigame());
 		this.minigames = minigames;
-		state = new State(this.players.get(0));
+		state = new MainState(this.players.get(0));
 	}
 
 	public List<Player> getPlayers()
@@ -66,12 +66,12 @@ public class Game
 		return rounds;
 	}
 
-	public State getState()
+	public MainState getState()
 	{
 		return state;
 	}
 
-	public void setState(State state)
+	public void setState(MainState state)
 	{
 		this.state = state;
 	}
