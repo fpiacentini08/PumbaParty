@@ -22,23 +22,35 @@ public class GameHandler
 {
 
 	private static Game game;
-	private static MainState actualState;
 
+	private static Boolean isGameStarted()
+	{
+		return game != null;
+	}
+
+	public static Player currentPlayer() {
+		return game != null ? game.getState().getActivePlayer() : null;
+
+	}
+	
 	public static void startTestGame()
 	{
+		if (isGameStarted())
+		{
+			return;
+		}
 		Set<User> users = new HashSet<>();
 		users.add(new User("simb@", "test2"));
-//		users.add(new User("zazu00", "test3"));
-//		users.add(new User("Timon.I.AM", "test4"));
-//		users.add(new User("pumba123", "test1"));
-//		users.add(new User("scar22", "test5"));
+		users.add(new User("Timon.I.AM", "test4"));
+		users.add(new User("pumba123", "test1"));
+		// users.add(new User("zazu00", "test3"));
+		// users.add(new User("scar22", "test5"));
 		game = new Game(users);
 	}
 
 	public static List<Player> getPlayers()
 	{
 		List<Player> players = new ArrayList<>(game.getPlayers());
-		// Collections.sort(players, Collections.reverseOrder());
 		return players;
 	}
 
@@ -49,7 +61,7 @@ public class GameHandler
 
 	public static Integer throwDice() throws PumbaException
 	{
-		actualState = game.getState();
+		MainState actualState = game.getState();
 		if (!actualState.getActiveStep().equals(StepEnum.THROW_DICE.ordinal()))
 		{
 			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);
@@ -61,7 +73,7 @@ public class GameHandler
 
 	public static List<Position> getPossiblePositions() throws PumbaException
 	{
-		actualState = game.getState();
+		MainState actualState = game.getState();
 		if (!actualState.getActiveStep().equals(StepEnum.GET_POSSIBLE_POSITIONS.ordinal()))
 		{
 			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);
@@ -77,7 +89,7 @@ public class GameHandler
 
 	public static List<Position> move(Position finalPosition) throws PumbaException
 	{
-		actualState = game.getState();
+		MainState actualState = game.getState();
 		System.out.println(actualState.getActiveStep());
 		if (!actualState.getActiveStep().equals(StepEnum.MOVE.ordinal()))
 		{
@@ -103,7 +115,7 @@ public class GameHandler
 
 	public static String applyCellEffect() throws PumbaException
 	{
-		actualState = game.getState();
+		MainState actualState = game.getState();
 		if (!actualState.getActiveStep().equals(StepEnum.CELL_EFFECT.ordinal()))
 		{
 			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);
@@ -145,7 +157,7 @@ public class GameHandler
 
 	public static List<Action> getActivePlayerActions() throws PumbaException
 	{
-		actualState = game.getState();
+		MainState actualState = game.getState();
 		if (!actualState.getActiveStep().equals(StepEnum.SELECT_ACTION.ordinal()))
 		{
 			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);
@@ -157,7 +169,7 @@ public class GameHandler
 	public static String playAction(String actionDescription) throws PumbaException
 	{
 		StringBuilder resultDescription = new StringBuilder("");
-		actualState = game.getState();
+		MainState actualState = game.getState();
 		if (!actualState.getActiveStep().equals(StepEnum.PLAY_ACTION.ordinal()))
 		{
 			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);
@@ -190,14 +202,15 @@ public class GameHandler
 					otherPlayer.applyEffect(actionEffect);
 				}
 			}
-			resultDescription
-					.append("La bomba le saco " + Math.abs(actionEffect.getCoins()) + "\nbichos a los demas jugadores.");
+			resultDescription.append(
+					"La bomba le saco " + Math.abs(actionEffect.getCoins()) + "\nbichos a los demas jugadores.");
 
 			if (!hasBeenChanges)
 			{
 				resultDescription.append("\nPero nadie tiene bichos.\n");
 			}
-			else {
+			else
+			{
 				resultDescription.append("\nHakuna matata!\n");
 
 			}
@@ -209,7 +222,7 @@ public class GameHandler
 
 	public static void finishTurn() throws PumbaException
 	{
-		actualState = game.getState();
+		MainState actualState = game.getState();
 		if (!actualState.getActiveStep().equals(StepEnum.WAIT.ordinal()))
 		{
 			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);
@@ -220,7 +233,7 @@ public class GameHandler
 
 	public static void finishRound() throws PumbaException
 	{
-		actualState = game.getState();
+		MainState actualState = game.getState();
 		if (!actualState.getActiveStep().equals(StepEnum.MINIGAME.ordinal()))
 		{
 			throw new PumbaException(ErrorMessages.INVALID_STEP, ErrorMessages.INVALID_STEP);

@@ -20,7 +20,7 @@ public class MoveMessage extends SocketMessage
 
 	public MoveMessage()
 	{
-		super();
+		super(true);
 
 	}
 

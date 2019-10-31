@@ -19,7 +19,7 @@ public class ApplyCellEffectMessage extends SocketMessage
 
 	public ApplyCellEffectMessage()
 	{
-		super();
+		super(true);
 	}
 
 	@Override

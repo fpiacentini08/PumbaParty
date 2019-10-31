@@ -12,7 +12,7 @@ public class StartTestGameMessage extends SocketMessage
 
 	public StartTestGameMessage()
 	{
-		super();
+		super(false);
 	}
 
 	@Override
@@ -35,7 +35,5 @@ public class StartTestGameMessage extends SocketMessage
 		}
 
 	}
-
-
 
 }

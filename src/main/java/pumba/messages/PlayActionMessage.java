@@ -20,7 +20,7 @@ public class PlayActionMessage extends SocketMessage
 
 	public PlayActionMessage()
 	{
-		super();
+		super(true);
 	}
 
 	@Override

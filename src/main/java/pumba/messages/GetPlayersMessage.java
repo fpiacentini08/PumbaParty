@@ -17,7 +17,7 @@ public class GetPlayersMessage extends SocketMessage
 
 	public GetPlayersMessage()
 	{
-		super();
+		super(false);
 	}
 
 	@Override

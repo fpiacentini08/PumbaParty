@@ -15,7 +15,7 @@ public class ThrowDiceMessage extends SocketMessage
 
 	public ThrowDiceMessage()
 	{
-		super();
+		super(true);
 	}
 
 	@Override

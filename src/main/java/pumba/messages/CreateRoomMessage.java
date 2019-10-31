@@ -18,7 +18,7 @@ public class CreateRoomMessage extends SocketMessage
 
 	public CreateRoomMessage()
 	{
-		super();
+		super(false);
 	}
 
 	@Override
@@ -77,4 +77,5 @@ public class CreateRoomMessage extends SocketMessage
 		this.room = room;
 	}
 
+	
 }

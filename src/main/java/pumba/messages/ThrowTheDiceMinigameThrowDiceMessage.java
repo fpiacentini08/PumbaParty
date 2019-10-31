@@ -16,7 +16,7 @@ public class ThrowTheDiceMinigameThrowDiceMessage extends SocketMessage
 
 	public ThrowTheDiceMinigameThrowDiceMessage()
 	{
-		super();
+		super(false);
 	}
 
 	@Override

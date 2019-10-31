@@ -18,7 +18,7 @@ public class RegisterUserMessage extends SocketMessage
 	
 	public RegisterUserMessage(String username, String password)
 	{
-		super();
+		super(false);
 		this.username = username;
 		this.password = password;
 	}

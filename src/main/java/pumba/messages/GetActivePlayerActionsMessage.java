@@ -18,7 +18,7 @@ public class GetActivePlayerActionsMessage extends SocketMessage
 
 	public GetActivePlayerActionsMessage()
 	{
-		super();
+		super(false);
 	}
 
 	@Override

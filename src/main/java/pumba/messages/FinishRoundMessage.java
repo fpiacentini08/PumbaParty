@@ -13,7 +13,7 @@ public class FinishRoundMessage extends SocketMessage
 
 	public FinishRoundMessage()
 	{
-		super();
+		super(true);
 	}
 
 	@Override

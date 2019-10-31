@@ -19,7 +19,7 @@ public class GetPossiblePositionsMessage extends SocketMessage
 
 	public GetPossiblePositionsMessage()
 	{
-		super();
+		super(false);
 
 	}
 

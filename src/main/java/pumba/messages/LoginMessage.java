@@ -18,7 +18,7 @@ public class LoginMessage extends SocketMessage
 	
 	public LoginMessage(String username, String password)
 	{
-		super();
+		super(false);
 		this.username = username;
 		this.password = password;
 	}
@@ -26,7 +26,6 @@ public class LoginMessage extends SocketMessage
 	@Override
 	public void processResponse(Object object) 
 	{
-		ClientListener listener = (ClientListener) object;
 		try
 		{
 			UserHandler.login(username, password);

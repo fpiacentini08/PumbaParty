@@ -13,7 +13,7 @@ public class FinishTurnMessage extends SocketMessage
 
 	public FinishTurnMessage()
 	{
-		super();
+		super(true);
 	}
 
 	@Override

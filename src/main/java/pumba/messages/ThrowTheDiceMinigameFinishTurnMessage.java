@@ -13,7 +13,7 @@ public class ThrowTheDiceMinigameFinishTurnMessage extends SocketMessage
 
 	public ThrowTheDiceMinigameFinishTurnMessage()
 	{
-		super();
+		super(false);
 	}
 
 	@Override

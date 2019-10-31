@@ -31,7 +31,8 @@ public class ClientListener extends Thread
 		this.socket = socket;
 		this.out = new ObjectOutputStream(socket.getOutputStream());
 		this.in = new ObjectInputStream(socket.getInputStream());
-		GsonBuilder gsonBilder = new GsonBuilder().registerTypeAdapter(SocketMessage.class, new SocketMessageSerializer());
+		GsonBuilder gsonBilder = new GsonBuilder().registerTypeAdapter(SocketMessage.class,
+				new SocketMessageSerializer());
 		this.gson = gsonBilder.create();
 
 	}
@@ -43,7 +44,7 @@ public class ClientListener extends Thread
 			while (!this.disconnect)
 			{
 				this.message = this.receiveMessage();
-				this.message.processResponse(this);
+				this.message.preProcessResponse(this);
 			}
 		}
 		catch (IOException | ClassNotFoundException e)
@@ -74,7 +75,7 @@ public class ClientListener extends Thread
 
 	public SocketMessage receiveMessage() throws JsonSyntaxException, ClassNotFoundException, IOException
 	{
-		String inMessage = (String)this.in.readObject();
+		String inMessage = (String) this.in.readObject();
 		SocketMessage message = gson.fromJson(inMessage, SocketMessage.class);
 		Log.debugLine();
 		Log.debug("INBOUND MESSAGE");
@@ -126,6 +127,5 @@ public class ClientListener extends Thread
 	{
 		this.message = message;
 	}
-
 
 }

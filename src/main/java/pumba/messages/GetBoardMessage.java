@@ -23,7 +23,7 @@ public class GetBoardMessage extends SocketMessage
 
 	public GetBoardMessage()
 	{
-		super();
+		super(false);
 	}
 
 	@Override

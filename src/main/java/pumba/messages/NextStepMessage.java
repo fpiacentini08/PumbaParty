@@ -16,7 +16,7 @@ public class NextStepMessage extends SocketMessage
 
 	public NextStepMessage()
 	{
-		super();
+		super(false);
 	}
 
 	@Override
