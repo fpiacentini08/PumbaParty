@@ -33,16 +33,17 @@ public class GameHandler
 
 	}
 	
-	public static void startTestGame()
+	public static void startTestGame(String username)
 	{
 		if (isGameStarted())
 		{
+			game.addPlayer(new User(username, "test2"));
 			return;
 		}
 		Set<User> users = new HashSet<>();
-		users.add(new User("simb@", "test2"));
-		users.add(new User("Timon.I.AM", "test4"));
-		users.add(new User("pumba123", "test1"));
+		users.add(new User(username, "test2"));
+//		users.add(new User("Timon.I.AM", "test4"));
+//		users.add(new User("pumba123", "test1"));
 		// users.add(new User("zazu00", "test3"));
 		// users.add(new User("scar22", "test5"));
 		game = new Game(users);

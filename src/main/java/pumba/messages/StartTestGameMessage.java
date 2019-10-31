@@ -16,10 +16,21 @@ public class StartTestGameMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object)
+	public void processResponse(Object object) throws InterruptedException
 	{
-
-		GameHandler.startTestGame();
+		GameHandler.startTestGame(this.getClientId());
+		if (GameHandler.getPlayers().size() < 2)
+		{
+			System.out.println("Llego aca");
+			synchronized (this)
+			{
+				this.wait();
+			}
+		}
+		synchronized (this)
+		{
+			this.notifyAll();
+		}
 		this.setApproved(true);
 
 		for (ClientListener connected : PumbaServer.getConnectedClients())

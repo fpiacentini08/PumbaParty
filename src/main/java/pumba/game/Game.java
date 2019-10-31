@@ -242,4 +242,12 @@ public class Game
 
 	}
 
+	public void addPlayer(User user)
+	{
+		List<Cell> walkableCell = board.getWalkableCells();
+		Collections.shuffle(walkableCell);
+		Position defaultPos = walkableCell.get(0).getPosition();
+		this.players.add(new Player(user, defaultPos));
+	}
+
 }

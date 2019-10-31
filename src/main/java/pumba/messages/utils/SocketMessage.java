@@ -65,7 +65,7 @@ public abstract class SocketMessage
 		this.approved = approved;
 	}
 
-	public void preProcessResponse(Object object) throws PumbaException{
+	public void preProcessResponse(Object object) throws PumbaException, InterruptedException{
 		if( autenticate && GameHandler.currentPlayer() != null && !GameHandler.currentPlayer().getUsername().equals(this.clientId)){
 			notYourTurn(object);
 			return;
@@ -92,7 +92,7 @@ public abstract class SocketMessage
 
 	}
 
-	public abstract void processResponse(Object object) throws PumbaException;
+	public abstract void processResponse(Object object) throws PumbaException, InterruptedException;
 
 	@Override
 	public String toString()

@@ -51,7 +51,7 @@ public class ClientListener extends Thread
 		{
 			e.printStackTrace();
 		}
-		catch (PumbaException e)
+		catch (PumbaException | InterruptedException e)
 		{
 			e.printStackTrace();
 		}
