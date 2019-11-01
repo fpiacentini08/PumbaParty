@@ -13,14 +13,31 @@ public class ThrowDiceMessage extends SocketMessage
 
 	private Integer diceResult;
 
+	private static Integer cantPlayers = 0;
+
 	public ThrowDiceMessage()
 	{
-		super(true);
+		super(false);
 	}
 
 	@Override
-	public void processResponse(Object object)
+	public void processResponse(Object object) throws InterruptedException
 	{
+		if (cantPlayers < GameHandler.getPlayers().size())
+		{
+			cantPlayers++;
+			System.out.println(cantPlayers);
+			synchronized (this)
+			{
+				System.out.println("Espera!");
+				this.wait();
+			}
+		}
+		synchronized (this)
+		{
+			System.out.println("Libera!");
+			this.notifyAll();
+		}
 		try
 		{
 			diceResult = GameHandler.throwDice();

@@ -44,7 +44,7 @@ public class ClientListener extends Thread
 			while (!this.disconnect)
 			{
 				this.message = this.receiveMessage();
-				this.message.preProcessResponse(this);
+				this.message.processResponse(this);
 			}
 		}
 		catch (IOException | ClassNotFoundException e)

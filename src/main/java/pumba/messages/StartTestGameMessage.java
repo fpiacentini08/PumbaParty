@@ -21,7 +21,6 @@ public class StartTestGameMessage extends SocketMessage
 		GameHandler.startTestGame(this.getClientId());
 		if (GameHandler.getPlayers().size() < 2)
 		{
-			System.out.println("Llego aca");
 			synchronized (this)
 			{
 				this.wait();
