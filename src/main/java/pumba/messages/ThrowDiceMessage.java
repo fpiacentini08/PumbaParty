@@ -23,10 +23,10 @@ public class ThrowDiceMessage extends SocketMessage
 	@Override
 	public void processResponse(Object object) throws InterruptedException
 	{
-		if (cantPlayers < GameHandler.getPlayers().size())
+		if (ThrowDiceMessage.cantPlayers < GameHandler.getPlayers().size())
 		{
-			cantPlayers++;
-			System.out.println(cantPlayers);
+			ThrowDiceMessage.cantPlayers++;
+			System.out.println(ThrowDiceMessage.cantPlayers);
 			synchronized (this)
 			{
 				System.out.println("Espera!");

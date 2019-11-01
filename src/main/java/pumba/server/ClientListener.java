@@ -44,14 +44,10 @@ public class ClientListener extends Thread
 			while (!this.disconnect)
 			{
 				this.message = this.receiveMessage();
-				this.message.processResponse(this);
+				message.processResponse(this);
 			}
 		}
-		catch (IOException | ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-		catch (PumbaException | InterruptedException e)
+		catch (IOException | ClassNotFoundException | PumbaException | InterruptedException e)
 		{
 			e.printStackTrace();
 		}
