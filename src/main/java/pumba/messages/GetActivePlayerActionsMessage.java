@@ -9,8 +9,6 @@ import pumba.exceptions.PumbaException;
 import pumba.handlers.GameHandler;
 import pumba.messages.utils.SocketMessage;
 import pumba.models.actions.ActionReduced;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
 public class GetActivePlayerActionsMessage extends SocketMessage
 {
@@ -41,16 +39,14 @@ public class GetActivePlayerActionsMessage extends SocketMessage
 			this.setErrorMessage(e.getMessage());
 		}
 
-		for (ClientListener connected : PumbaServer.getConnectedClients())
+		try
 		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			currentClient().sendMessage(this);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

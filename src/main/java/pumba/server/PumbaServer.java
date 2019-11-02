@@ -161,9 +161,10 @@ public class PumbaServer extends Thread
 				Socket client = serverSocket.accept();
 				log.append(client.getInetAddress().getHostAddress() + " se ha conectado" + System.lineSeparator());
 
-				ClientListener atencion = new ClientListener(client);
-				atencion.start();
-				connectedClients.add(atencion);
+				ClientListener clientListener = new ClientListener(client);
+				connectedClients.add(clientListener);
+				clientListener.start();
+
 			}
 
 		}

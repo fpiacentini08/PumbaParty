@@ -5,8 +5,6 @@ import java.io.IOException;
 import pumba.exceptions.PumbaException;
 import pumba.handlers.GameHandler;
 import pumba.messages.utils.SocketMessage;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
 public class ThrowDiceMessage extends SocketMessage
 {
@@ -23,21 +21,6 @@ public class ThrowDiceMessage extends SocketMessage
 	@Override
 	public void processResponse(Object object) throws InterruptedException
 	{
-		if (ThrowDiceMessage.cantPlayers < GameHandler.getPlayers().size())
-		{
-			ThrowDiceMessage.cantPlayers++;
-			System.out.println(ThrowDiceMessage.cantPlayers);
-			synchronized (this)
-			{
-				System.out.println("Espera!");
-				this.wait();
-			}
-		}
-		synchronized (this)
-		{
-			System.out.println("Libera!");
-			this.notifyAll();
-		}
 		try
 		{
 			diceResult = GameHandler.throwDice();
@@ -49,16 +32,14 @@ public class ThrowDiceMessage extends SocketMessage
 			this.setErrorMessage(e.getMessage());
 		}
 
-		for (ClientListener connected : PumbaServer.getConnectedClients())
+		try
 		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			currentClient().sendMessage(this);
+			sendMessageToAlOtherClients(this);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 
 	}

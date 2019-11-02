@@ -8,8 +8,6 @@ import pumba.handlers.GameHandler;
 import pumba.messages.utils.SocketMessage;
 import pumba.models.players.PlayerReduced;
 import pumba.players.Player;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
 public class GetPlayersMessage extends SocketMessage
 {
@@ -32,16 +30,13 @@ public class GetPlayersMessage extends SocketMessage
 
 		this.setApproved(true);
 
-		for (ClientListener connected : PumbaServer.getConnectedClients())
+		try
 		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			currentClient().sendMessage(this);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 
 	}

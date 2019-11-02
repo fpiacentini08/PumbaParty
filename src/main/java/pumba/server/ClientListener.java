@@ -24,6 +24,8 @@ public class ClientListener extends Thread
 	private Gson gson;
 	private boolean disconnect = false;
 
+	private String clientId;
+
 	private SocketMessage message;
 
 	public ClientListener(Socket socket) throws IOException
@@ -43,8 +45,12 @@ public class ClientListener extends Thread
 		{
 			while (!this.disconnect)
 			{
-				this.message = this.receiveMessage();
-				message.processResponse(this);
+				synchronized (this)
+				{
+
+					this.message = this.receiveMessage();
+					this.message.processResponse(this);
+				}
 			}
 		}
 		catch (IOException | ClassNotFoundException | PumbaException | InterruptedException e)
@@ -122,6 +128,16 @@ public class ClientListener extends Thread
 	public void setMessage(SocketMessage message)
 	{
 		this.message = message;
+	}
+
+	public String getClientId()
+	{
+		return clientId;
+	}
+
+	public void setClientId(String clientId)
+	{
+		this.clientId = clientId;
 	}
 
 }

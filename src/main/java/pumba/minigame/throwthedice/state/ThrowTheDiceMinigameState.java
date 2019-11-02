@@ -10,10 +10,11 @@ public class ThrowTheDiceMinigameState extends State
 {
 	private String activePlayer;
 
-	private static final Integer[] steps = { ThrowTheDiceMinigameStateEnum.THROW_DICE.ordinal(), ThrowTheDiceMinigameStateEnum.WAIT.ordinal(),
-			ThrowTheDiceMinigameStateEnum.END.ordinal() };
+	private static final ThrowTheDiceMinigameStateEnum[] steps = { ThrowTheDiceMinigameStateEnum.THROW_DICE,
+			ThrowTheDiceMinigameStateEnum.WAIT, ThrowTheDiceMinigameStateEnum.END };
 
-	private static final List<Integer> stepsList = new ArrayList<Integer>(Arrays.asList(steps));
+	private static final List<ThrowTheDiceMinigameStateEnum> stepsList = new ArrayList<ThrowTheDiceMinigameStateEnum>(
+			Arrays.asList(steps));
 
 	public ThrowTheDiceMinigameState(String player)
 	{
@@ -30,7 +31,7 @@ public class ThrowTheDiceMinigameState extends State
 
 	public void nextState()
 	{
-		this.activeStep = steps[stepsList.indexOf(this.activeStep) + 1];
+		this.activeStep = steps[((ThrowTheDiceMinigameStateEnum) this.activeStep).ordinal() + 1];
 	}
 
 	public void previousState()

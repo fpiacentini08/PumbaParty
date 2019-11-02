@@ -7,12 +7,13 @@ import pumba.handlers.GameHandler;
 import pumba.messages.utils.SocketMessage;
 import pumba.models.game.StateReduced;
 import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
 public class NextStepMessage extends SocketMessage
 {
 
 	private StateReduced actualState;
+
+	private static Integer cantPlayers = 0;
 
 	public NextStepMessage()
 	{
@@ -20,25 +21,51 @@ public class NextStepMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object) 
+	public void processResponse(Object object)
 	{
 
-		MainState state = GameHandler.nextStep();
-
-		this.actualState = mapper.convertValue(state, StateReduced.class);
-
-		this.setApproved(true);
-
-		for (ClientListener connected : PumbaServer.getConnectedClients())
+		cantPlayers++;
+		System.out.println(cantPlayers);
+		if (cantPlayers < GameHandler.getPlayers().size())
 		{
 			try
 			{
-				connected.sendMessage(this);
+				synchronized (object)
+				{
+					object.wait();
+				}
 			}
-			catch (IOException e)
+			catch (InterruptedException e)
 			{
 				e.printStackTrace();
 			}
+		}
+		else
+		{
+			cantPlayers = 0;
+			MainState state = GameHandler.nextStep();
+
+			for (ClientListener client : notCurrentClients())
+			{
+				synchronized (client)
+				{
+					client.notifyAll();
+				}
+			}
+		}
+
+
+		this.actualState = mapper.convertValue(GameHandler.getCurrentState(), StateReduced.class);
+
+		this.setApproved(true);
+
+		try
+		{
+			currentClient().sendMessage(this);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 
 	}

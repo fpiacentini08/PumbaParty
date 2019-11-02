@@ -5,7 +5,6 @@ import java.io.IOException;
 import pumba.handlers.GameHandler;
 import pumba.messages.utils.SocketMessage;
 import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
 public class StartTestGameMessage extends SocketMessage
 {
@@ -18,32 +17,47 @@ public class StartTestGameMessage extends SocketMessage
 	@Override
 	public void processResponse(Object object) throws InterruptedException
 	{
+		((ClientListener) object).setClientId(this.getClientId());
 		GameHandler.startTestGame(this.getClientId());
-		if (GameHandler.getPlayers().size() < 2)
-		{
-			synchronized (this)
-			{
-				this.wait();
-			}
-		}
-		synchronized (this)
-		{
-			this.notifyAll();
-		}
-		this.setApproved(true);
 
-		for (ClientListener connected : PumbaServer.getConnectedClients())
+		if (GameHandler.getPlayers().size() < 2)
 		{
 			try
 			{
-				connected.sendMessage(this);
+				synchronized (object)
+				{
+					object.wait();
+				}
 			}
-			catch (IOException e)
+			catch (InterruptedException e)
 			{
 				e.printStackTrace();
 			}
 		}
+		else
+		{
+			for (ClientListener client : notCurrentClients())
+			{
+				synchronized (client)
+				{
+					client.notifyAll();
+				}
+			}
+		}
+
+		this.setApproved(true);
+
+		try
+		{
+			this.setClientId(currentClient().getClientId());
+			currentClient().sendMessage(this);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 
 	}
+
 
 }

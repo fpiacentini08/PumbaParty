@@ -13,8 +13,6 @@ import pumba.board.cells.Cell;
 import pumba.handlers.BoardHandler;
 import pumba.messages.utils.SocketMessage;
 import pumba.models.board.cells.CellReduced;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
 public class GetBoardMessage extends SocketMessage
 {
@@ -35,23 +33,21 @@ public class GetBoardMessage extends SocketMessage
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
 		Board board = BoardHandler.getBoard();
-		for(Cell cell : board.getCells()) {
+		for (Cell cell : board.getCells())
+		{
 			this.cells.add(mapper.convertValue(cell, CellReduced.class));
 		}
-		
+
 		this.dimension = Board.getDimension();
 		this.setApproved(true);
 
-		for (ClientListener connected : PumbaServer.getConnectedClients())
+		try
 		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			currentClient().sendMessage(this);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 
 	}
