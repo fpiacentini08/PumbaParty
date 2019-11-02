@@ -48,7 +48,7 @@ public class MoveMessage extends SocketMessage
 		try
 		{
 			currentClient().sendMessage(this);
-			sendMessageToAlOtherClients(this);
+			sendMessageToAllOtherClients(this);
 
 		}
 		catch (IOException e)

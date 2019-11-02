@@ -69,7 +69,6 @@ public class ClientListener extends Thread
 
 	public void sendMessage(SocketMessage message) throws IOException
 	{
-		Log.debugLine();
 		Log.debug("OUTBOUND MESSAGE");
 		Log.debug(gson.toJson(message, SocketMessage.class));
 		this.out.writeObject(gson.toJson(message, SocketMessage.class));
@@ -79,10 +78,8 @@ public class ClientListener extends Thread
 	{
 		String inMessage = (String) this.in.readObject();
 		SocketMessage message = gson.fromJson(inMessage, SocketMessage.class);
-		Log.debugLine();
 		Log.debug("INBOUND MESSAGE");
 		Log.debug(inMessage);
-		Log.debugLine();
 		return message;
 	}
 

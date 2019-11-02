@@ -65,9 +65,7 @@ public class MainState extends State
 		this.activeTurn = 1;
 		this.activePlayer = player;
 		this.activeStep = steps[0];
-		System.out.println(activeRound);
 		this.activeRound++;
-		System.out.println(activeRound);
 
 	}
 

@@ -90,7 +90,7 @@ public abstract class SocketMessage
 				.collect(Collectors.toList());
 	}
 	
-	protected void sendMessageToAlOtherClients(SocketMessage message) {
+	protected void sendMessageToAllOtherClients(SocketMessage message) {
 		for (ClientListener client : notCurrentClients())
 		{
 			message.setClientId(client.getClientId());

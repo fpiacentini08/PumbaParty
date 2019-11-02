@@ -9,8 +9,6 @@ import pumba.handlers.GameHandler;
 import pumba.messages.utils.SocketMessage;
 import pumba.models.players.PlayerReduced;
 import pumba.players.Player;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
 public class ApplyCellEffectMessage extends SocketMessage
 {
@@ -42,16 +40,14 @@ public class ApplyCellEffectMessage extends SocketMessage
 			this.setErrorMessage(e.getMessage());
 		}
 
-		for (ClientListener connected : PumbaServer.getConnectedClients())
+		try
 		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			currentClient().sendMessage(this);
+			sendMessageToAllOtherClients(this);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 
 	}

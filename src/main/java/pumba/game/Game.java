@@ -207,6 +207,9 @@ public class Game
 	public void nextPlayer()
 	{
 		Player activePlayer = getActivePlayer();
+		System.out.println("Jugador activo!!");
+		System.out.println(activePlayer.getUsername());
+
 		if (this.players.indexOf(activePlayer) < this.players.size() - 1)
 		{
 			this.state.nextPlayerTurn(this.players.get(this.players.indexOf(activePlayer) + 1));
@@ -227,10 +230,6 @@ public class Game
 
 	public void nextRound()
 	{
-		System.out.println("---------------------");
-		System.out.println(Game.rounds);
-		System.out.println(Game.rounds);
-		System.out.println("---------------------");
 		if (this.state.getActiveRound().compareTo(Game.rounds) < 0)
 		{
 			this.state.nextRound(this.players.get(0));

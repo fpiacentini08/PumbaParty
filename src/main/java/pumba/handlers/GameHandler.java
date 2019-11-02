@@ -40,10 +40,6 @@ public class GameHandler
 		}
 		Set<User> users = new HashSet<>();
 		users.add(new User(username, "test2"));
-//		users.add(new User("Timon.I.AM", "test4"));
-//		users.add(new User("pumba123", "test1"));
-		// users.add(new User("zazu00", "test3"));
-		// users.add(new User("scar22", "test5"));
 		game = new Game(users);
 	}
 
@@ -81,7 +77,6 @@ public class GameHandler
 	public static List<Position> move(Position finalPosition) throws PumbaException
 	{
 		MainState actualState = game.getState();
-		System.out.println(actualState.getActiveStep());
 		List<Position> possiblePositions = game.getBoard().move(actualState.getActivePlayer().getPosition(),
 				actualState.getActivePlayer().getLastDiceResult(), finalPosition);
 
@@ -94,7 +89,7 @@ public class GameHandler
 		else
 		{
 			player.setPosition(finalPosition);
-			actualState.nextState();
+//			actualState.nextState();
 		}
 		return possiblePositions;
 	}
@@ -141,6 +136,7 @@ public class GameHandler
 	{
 		MainState actualState = game.getState();
 		actualState.nextState();
+
 		return game.getActivePlayer().getActions();
 	}
 
@@ -189,23 +185,19 @@ public class GameHandler
 
 			}
 			actualState.nextState();
-
 		}
 		return resultDescription.toString();
 	}
 
 	public static void finishTurn() throws PumbaException
 	{
-		MainState actualState = game.getState();
+		System.out.println("Proximo jugador!!");
 		game.nextPlayer();
-
 	}
 
 	public static void finishRound() throws PumbaException
 	{
-		MainState actualState = game.getState();
 		game.nextRound();
-
 	}
 
 	public static void updateScores(Map<String, Integer> score)

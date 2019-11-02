@@ -25,7 +25,6 @@ public class NextStepMessage extends SocketMessage
 	{
 
 		cantPlayers++;
-		System.out.println(cantPlayers);
 		if (cantPlayers < GameHandler.getPlayers().size())
 		{
 			try

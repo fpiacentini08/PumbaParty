@@ -25,7 +25,6 @@ public class GetActivePlayerActionsMessage extends SocketMessage
 		try
 		{
 			List<Action> availableActions = GameHandler.getActivePlayerActions();
-			System.out.println(availableActions);
 			for (Action action : availableActions)
 			{
 				this.actions.add(mapper.convertValue(action, ActionReduced.class));
@@ -42,6 +41,7 @@ public class GetActivePlayerActionsMessage extends SocketMessage
 		try
 		{
 			currentClient().sendMessage(this);
+			sendMessageToAllOtherClients(this);
 		}
 		catch (IOException e)
 		{
