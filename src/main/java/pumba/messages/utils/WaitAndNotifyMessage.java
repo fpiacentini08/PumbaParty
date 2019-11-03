@@ -8,12 +8,14 @@ public abstract class WaitAndNotifyMessage extends SocketMessage
 {
 
 	protected abstract void executeActionBeforeWait(Object object);
+
 	protected abstract void executeActionBeforeNotify();
+
 	protected abstract void executeActionBeforeSending();
 
 	protected abstract Integer getGameHandlerPlayersSize();
 
-	private static Integer cantPlayers = 0;
+	protected static Integer cantPlayers = 0;
 
 	public WaitAndNotifyMessage()
 	{
@@ -25,7 +27,7 @@ public abstract class WaitAndNotifyMessage extends SocketMessage
 	{
 		synchronized (this)
 		{
-			
+
 			executeActionBeforeWait(object);
 			synchronized (cantPlayers)
 			{
@@ -37,6 +39,7 @@ public abstract class WaitAndNotifyMessage extends SocketMessage
 				{
 					synchronized (object)
 					{
+						System.out.println("Espera!");
 						object.wait();
 					}
 				}
@@ -47,22 +50,34 @@ public abstract class WaitAndNotifyMessage extends SocketMessage
 			}
 			else
 			{
+				System.out.println("Libera!");
 				cantPlayers = 0;
 
 				executeActionBeforeNotify();
-				
+				System.out.println("Antes de notificar!");
+
 				for (ClientListener client : notCurrentClients())
 				{
-					synchronized (client)
+					System.out.println("Cliente! : " + client.getClientId());
+
+					if (!client.getClientId().contains("LISTENER"))
 					{
-						client.notifyAll();
+						synchronized (client)
+						{
+							System.out.println("Notifica! : " + client.getClientId());
+
+							client.notifyAll();
+						}
 					}
+
 				}
 			}
 		}
 
+		System.out.println("Se fue!");
+
 		executeActionBeforeSending();
-		
+
 		this.setApproved(true);
 
 		try

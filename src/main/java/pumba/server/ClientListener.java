@@ -30,7 +30,7 @@ public class ClientListener extends Thread
 	private SocketMessage message;
 
 	private PumbaServer pumbaServer;
-	
+
 	public ClientListener(Socket socket, PumbaServer pumbaServer) throws IOException
 	{
 		this.pumbaServer = pumbaServer;
@@ -60,7 +60,10 @@ public class ClientListener extends Thread
 		catch (IOException | ClassNotFoundException | PumbaException | InterruptedException e)
 		{
 			pumbaServer.removeClient(this);
-			GameHandler.removePlayer(this.clientId);
+			if (this.clientId != null && !this.clientId.contains("LISTENER"))
+			{
+				GameHandler.removePlayer(this.clientId);
+			}
 			// e.printStackTrace();
 		}
 

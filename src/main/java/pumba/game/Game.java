@@ -207,9 +207,6 @@ public class Game
 	public void nextPlayer()
 	{
 		Player activePlayer = getActivePlayer();
-		System.out.println("Jugador activo!!");
-		System.out.println(activePlayer.getUsername());
-
 		if (this.players.indexOf(activePlayer) < this.players.size() - 1)
 		{
 			this.state.nextPlayerTurn(this.players.get(this.players.indexOf(activePlayer) + 1));

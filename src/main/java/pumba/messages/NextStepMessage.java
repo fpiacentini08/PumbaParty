@@ -35,6 +35,8 @@ public class NextStepMessage extends WaitAndNotifyMessage
 	@Override
 	protected Integer getGameHandlerPlayersSize()
 	{
+		System.out.println(GameHandler.getPlayers().size());
+		System.out.println("CONTO: " + WaitAndNotifyMessage.cantPlayers);
 		return GameHandler.getPlayers().size();
 	}
 

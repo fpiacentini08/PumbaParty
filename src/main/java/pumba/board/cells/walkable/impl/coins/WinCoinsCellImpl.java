@@ -14,7 +14,7 @@ public class WinCoinsCellImpl extends WalkableCell
 	
 	public WinCoinsCellImpl(Position pos)
 	{
-		super(pos, new Effect(rand.nextInt(maxCoins) + 1));
+		super(pos, new Effect((rand.nextInt(maxCoins) + 1) * 5));
 	}
 
 }

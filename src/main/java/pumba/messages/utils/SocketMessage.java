@@ -3,6 +3,7 @@ package pumba.messages.utils;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +14,7 @@ import pumba.exceptions.PumbaException;
 import pumba.server.ClientListener;
 import pumba.server.PumbaServer;
 
-public abstract class SocketMessage 
+public abstract class SocketMessage
 {
 	private String errorMessage;
 	private Boolean approved;
@@ -64,7 +65,7 @@ public abstract class SocketMessage
 	{
 		this.approved = approved;
 	}
-	
+
 	public abstract void processResponse(Object object) throws PumbaException, InterruptedException;
 
 	@Override
@@ -76,19 +77,21 @@ public abstract class SocketMessage
 
 	protected ClientListener currentClient()
 	{
-		return PumbaServer.getConnectedClients().stream()
-				.filter(clientListener -> clientListener.getClientId().equals(this.getClientId()))
-				.collect(Collectors.toList()).get(0);
+		Stream<ClientListener> filtered = PumbaServer.getConnectedClients().stream()
+				.filter(clientListener -> clientListener != null && clientListener.getClientId() != null
+						&& clientListener.getClientId().equals(getClientId()));
+		return filtered.collect(Collectors.toList()).get(0);
 	}
 
 	protected List<ClientListener> notCurrentClients()
 	{
-		return PumbaServer.getConnectedClients().stream()
-				.filter(clientListener -> !clientListener.getClientId().equals(this.getClientId()))
-				.collect(Collectors.toList());
+		Stream<ClientListener> filtered = PumbaServer.getConnectedClients().stream()
+				.filter(clientListener -> clientListener.getClientId() != null && !clientListener.getClientId().equals(this.getClientId()));
+		return filtered.collect(Collectors.toList());
 	}
-	
-	protected void sendMessageToAllOtherClients(SocketMessage message) {
+
+	protected void sendMessageToAllOtherClients(SocketMessage message)
+	{
 		for (ClientListener client : notCurrentClients())
 		{
 			message.setClientId(client.getClientId());

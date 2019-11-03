@@ -1,5 +1,6 @@
 package pumba.handlers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -13,7 +14,11 @@ import pumba.effects.Effect;
 import pumba.exceptions.PumbaException;
 import pumba.game.Game;
 import pumba.game.MainState;
+import pumba.messages.InterruptMessage;
+import pumba.messages.utils.SocketMessage;
 import pumba.players.Player;
+import pumba.server.ClientListener;
+import pumba.server.PumbaServer;
 import pumba.users.User;
 
 public class GameHandler
@@ -26,11 +31,12 @@ public class GameHandler
 		return game != null;
 	}
 
-	public static Player currentPlayer() {
+	public static Player currentPlayer()
+	{
 		return game != null ? game.getState().getActivePlayer() : null;
 
 	}
-	
+
 	public static void startTestGame(String username)
 	{
 		if (isGameStarted())
@@ -89,7 +95,7 @@ public class GameHandler
 		else
 		{
 			player.setPosition(finalPosition);
-//			actualState.nextState();
+			// actualState.nextState();
 		}
 		return possiblePositions;
 	}
@@ -215,10 +221,33 @@ public class GameHandler
 
 	public static void removePlayer(String clientId)
 	{
-		if(game.getActivePlayer().getUsername().equals(clientId)) {
+		if (game.getActivePlayer().getUsername().equals(clientId))
+		{
 			game.nextPlayer();
 		}
 		game.removePlayer(clientId);
+		sendInterruptMessageToAll();
+
+	}
+
+	private static void sendInterruptMessageToAll()
+	{
+		SocketMessage message = new InterruptMessage();
+		for (ClientListener allTimeListenerClient : PumbaServer.getConnectedClients())
+		{
+			if (allTimeListenerClient.getClientId() != null && allTimeListenerClient.getClientId().contains("LISTENER"))
+			{
+				message.setClientId(allTimeListenerClient.getClientId());
+				try
+				{
+					allTimeListenerClient.sendMessage(message);
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
 
 	}
 
