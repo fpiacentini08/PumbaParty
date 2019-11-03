@@ -31,8 +31,6 @@ public abstract class WaitAndNotifyMessage extends SocketMessage
 			{
 				cantPlayers++;
 			}
-			System.out.println("CANT JUGADORES: " + cantPlayers);
-			System.out.println("CANT JUGADORES ESPERADOS: " + getGameHandlerPlayersSize());
 			if (cantPlayers < getGameHandlerPlayersSize())
 			{
 				try
