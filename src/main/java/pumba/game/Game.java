@@ -244,6 +244,9 @@ public class Game
 	public void addPlayer(User user)
 	{
 		List<Cell> walkableCell = board.getWalkableCells();
+		for(Player player : this.players) {
+			walkableCell.removeIf(cell -> cell.getPosition().equals(player.getPosition()));
+		}
 		Collections.shuffle(walkableCell);
 		Position defaultPos = walkableCell.get(0).getPosition();
 		this.players.add(new Player(user, defaultPos));
