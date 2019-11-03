@@ -213,4 +213,13 @@ public class GameHandler
 		return game.getState();
 	}
 
+	public static void removePlayer(String clientId)
+	{
+		if(game.getActivePlayer().getUsername().equals(clientId)) {
+			game.nextPlayer();
+		}
+		game.removePlayer(clientId);
+
+	}
+
 }

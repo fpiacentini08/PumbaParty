@@ -244,12 +244,22 @@ public class Game
 	public void addPlayer(User user)
 	{
 		List<Cell> walkableCell = board.getWalkableCells();
-		for(Player player : this.players) {
+		for (Player player : this.players)
+		{
 			walkableCell.removeIf(cell -> cell.getPosition().equals(player.getPosition()));
 		}
 		Collections.shuffle(walkableCell);
 		Position defaultPos = walkableCell.get(0).getPosition();
 		this.players.add(new Player(user, defaultPos));
+	}
+
+	public void removePlayer(String clientId)
+	{
+		Player player = this.players.stream().filter(pl -> pl.getUsername().equals(clientId))
+				.collect(Collectors.toList()).get(0);
+
+		this.players.remove(player);
+
 	}
 
 }

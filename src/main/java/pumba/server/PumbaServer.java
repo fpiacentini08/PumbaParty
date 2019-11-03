@@ -90,12 +90,13 @@ public class PumbaServer extends Thread
 			{
 				try
 				{
-					server.stop();
 					for (ClientListener cliente : connectedClients)
 					{
 						cliente.closeConnections();
 					}
 					serverSocket.close();
+					server.interrupt();
+					log.append("Servidor detenido." + System.lineSeparator());
 				}
 				catch (IOException e1)
 				{
@@ -161,7 +162,7 @@ public class PumbaServer extends Thread
 				Socket client = serverSocket.accept();
 				log.append(client.getInetAddress().getHostAddress() + " se ha conectado" + System.lineSeparator());
 
-				ClientListener clientListener = new ClientListener(client);
+				ClientListener clientListener = new ClientListener(client, this);
 				connectedClients.add(clientListener);
 				clientListener.start();
 
@@ -188,6 +189,13 @@ public class PumbaServer extends Thread
 			dataBaseConnection = createEntityManager();
 		}
 		return dataBaseConnection;
+	}
+
+	public void removeClient(ClientListener clientListener)
+	{
+		log.append(clientListener.getHostAddress() + " se ha desconectado" + System.lineSeparator());
+		connectedClients.remove(clientListener);
+
 	}
 
 }

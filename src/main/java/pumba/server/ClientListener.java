@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 import pumba.exceptions.PumbaException;
+import pumba.handlers.GameHandler;
 import pumba.log.Log;
 import pumba.messages.utils.SocketMessage;
 import pumba.messages.utils.SocketMessageSerializer;
@@ -28,8 +29,11 @@ public class ClientListener extends Thread
 
 	private SocketMessage message;
 
-	public ClientListener(Socket socket) throws IOException
+	private PumbaServer pumbaServer;
+	
+	public ClientListener(Socket socket, PumbaServer pumbaServer) throws IOException
 	{
+		this.pumbaServer = pumbaServer;
 		this.socket = socket;
 		this.out = new ObjectOutputStream(socket.getOutputStream());
 		this.in = new ObjectInputStream(socket.getInputStream());
@@ -55,7 +59,9 @@ public class ClientListener extends Thread
 		}
 		catch (IOException | ClassNotFoundException | PumbaException | InterruptedException e)
 		{
-			e.printStackTrace();
+			pumbaServer.removeClient(this);
+			GameHandler.removePlayer(this.clientId);
+			// e.printStackTrace();
 		}
 
 		this.closeConnections();
