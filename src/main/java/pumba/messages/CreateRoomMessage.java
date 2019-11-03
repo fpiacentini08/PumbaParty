@@ -18,7 +18,7 @@ public class CreateRoomMessage extends SocketMessage
 
 	public CreateRoomMessage()
 	{
-		super(false);
+		super();
 	}
 
 	@Override

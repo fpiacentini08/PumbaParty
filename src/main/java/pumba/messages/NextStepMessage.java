@@ -1,72 +1,41 @@
 package pumba.messages;
 
-import java.io.IOException;
-
-import pumba.game.MainState;
 import pumba.handlers.GameHandler;
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.WaitAndNotifyMessage;
 import pumba.models.game.StateReduced;
-import pumba.server.ClientListener;
 
-public class NextStepMessage extends SocketMessage
+public class NextStepMessage extends WaitAndNotifyMessage
 {
 
 	private StateReduced actualState;
 
-	private static Integer cantPlayers = 0;
-
 	public NextStepMessage()
 	{
-		super(false);
+		super();
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeActionBeforeWait(Object object)
 	{
+		// DOES NOT DO ANYTHING
+	}
 
-		cantPlayers++;
-		if (cantPlayers < GameHandler.getPlayers().size())
-		{
-			try
-			{
-				synchronized (object)
-				{
-					object.wait();
-				}
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			cantPlayers = 0;
-			MainState state = GameHandler.nextStep();
+	@Override
+	protected void executeActionBeforeNotify()
+	{
+		GameHandler.nextStep();
+	}
 
-			for (ClientListener client : notCurrentClients())
-			{
-				synchronized (client)
-				{
-					client.notifyAll();
-				}
-			}
-		}
-
-
+	@Override
+	protected void executeActionBeforeSending()
+	{
 		this.actualState = mapper.convertValue(GameHandler.getCurrentState(), StateReduced.class);
+	}
 
-		this.setApproved(true);
-
-		try
-		{
-			currentClient().sendMessage(this);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
+	@Override
+	protected Integer getGameHandlerPlayersSize()
+	{
+		return GameHandler.getPlayers().size();
 	}
 
 }

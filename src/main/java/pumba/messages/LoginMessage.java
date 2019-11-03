@@ -18,7 +18,7 @@ public class LoginMessage extends SocketMessage
 	
 	public LoginMessage(String username, String password)
 	{
-		super(false);
+		super();
 		this.username = username;
 		this.password = password;
 	}

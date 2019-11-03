@@ -1,46 +1,24 @@
 package pumba.messages;
 
-import java.io.IOException;
-
 import pumba.exceptions.PumbaException;
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.OneOnAllMessage;
 import pumba.minigame.throwthedice.ThrowTheDiceMinigameResult;
 import pumba.minigame.throwthedice.handler.ThrowTheDiceMinigameHandler;
 
-public class ThrowTheDiceMinigameThrowDiceMessage extends SocketMessage
+public class ThrowTheDiceMinigameThrowDiceMessage extends OneOnAllMessage
 {
 
 	private ThrowTheDiceMinigameResult result;
 
 	public ThrowTheDiceMinigameThrowDiceMessage()
 	{
-		super(false);
+		super();
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeAction(Object object) throws PumbaException
 	{
-		try
-		{
-			this.result = ThrowTheDiceMinigameHandler.throwDice();
-			this.setApproved(true);
-		}
-		catch (PumbaException e)
-		{
-			this.setApproved(false);
-			this.setErrorMessage(e.getMessage());
-		}
-
-		try
-		{
-			currentClient().sendMessage(this);
-			sendMessageToAllOtherClients(this);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
+		this.result = ThrowTheDiceMinigameHandler.throwDice();
 	}
 
 }

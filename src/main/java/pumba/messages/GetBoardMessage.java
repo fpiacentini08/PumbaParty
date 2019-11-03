@@ -1,6 +1,5 @@
 package pumba.messages;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,22 +9,23 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import pumba.board.Board;
 import pumba.board.cells.Cell;
+import pumba.exceptions.PumbaException;
 import pumba.handlers.BoardHandler;
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.OneOnOneMessage;
 import pumba.models.board.cells.CellReduced;
 
-public class GetBoardMessage extends SocketMessage
+public class GetBoardMessage extends OneOnOneMessage
 {
 	private List<CellReduced> cells = new ArrayList<>();
 	private Integer dimension;
 
 	public GetBoardMessage()
 	{
-		super(false);
+		super();
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeAction(Object object) throws PumbaException
 	{
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -39,17 +39,6 @@ public class GetBoardMessage extends SocketMessage
 		}
 
 		this.dimension = Board.getDimension();
-		this.setApproved(true);
-
-		try
-		{
-			currentClient().sendMessage(this);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
 	}
 
 	public List<CellReduced> getCells()

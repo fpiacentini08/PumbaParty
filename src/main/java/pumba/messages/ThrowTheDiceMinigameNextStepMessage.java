@@ -1,71 +1,40 @@
 package pumba.messages;
 
-import java.io.IOException;
-
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.WaitAndNotifyMessage;
 import pumba.minigame.throwthedice.handler.ThrowTheDiceMinigameHandler;
 import pumba.minigame.throwthedice.state.ThrowTheDiceMinigameStateReduced;
-import pumba.server.ClientListener;
 
-public class ThrowTheDiceMinigameNextStepMessage extends SocketMessage
+public class ThrowTheDiceMinigameNextStepMessage extends WaitAndNotifyMessage
 {
 
 	private ThrowTheDiceMinigameStateReduced actualState;
 
-	private static Integer cantPlayers = 0;
-
 	public ThrowTheDiceMinigameNextStepMessage()
 	{
-		super(false);
+		super();
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeActionBeforeWait(Object object)
 	{
-
-		cantPlayers++;
-		if (cantPlayers < ThrowTheDiceMinigameHandler.getPlayers().size())
-		{
-			try
-			{
-				synchronized (object)
-				{
-					object.wait();
-				}
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			cantPlayers = 0;
-			this.actualState = mapper.convertValue(ThrowTheDiceMinigameHandler.nextStep(), ThrowTheDiceMinigameStateReduced.class);
-
-			for (ClientListener client : notCurrentClients())
-			{
-				synchronized (client)
-				{
-					client.notifyAll();
-				}
-			}
-		}
-
-
-		this.actualState = mapper.convertValue(ThrowTheDiceMinigameHandler.getCurrentState(), ThrowTheDiceMinigameStateReduced.class);
-
-		this.setApproved(true);
-
-		try
-		{
-			currentClient().sendMessage(this);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
+		// DOES NOT DO ANYTHING		
 	}
 
+	@Override
+	protected void executeActionBeforeNotify()
+	{
+		this.actualState = mapper.convertValue(ThrowTheDiceMinigameHandler.nextStep(), ThrowTheDiceMinigameStateReduced.class);
+	}
+
+	@Override
+	protected void executeActionBeforeSending()
+	{
+		this.actualState = mapper.convertValue(ThrowTheDiceMinigameHandler.getCurrentState(), ThrowTheDiceMinigameStateReduced.class);
+	}
+
+	@Override
+	protected Integer getGameHandlerPlayersSize()
+	{
+		return ThrowTheDiceMinigameHandler.getPlayers().size();
+	}
 }

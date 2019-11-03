@@ -17,7 +17,7 @@ public class GetAllRoomsMessage extends SocketMessage
 
 	public GetAllRoomsMessage()
 	{
-		super(false);
+		super();
 	}
 
 	@Override

@@ -1,79 +1,44 @@
 package pumba.messages;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.WaitAndNotifyMessage;
 import pumba.minigame.throwthedice.handler.ThrowTheDiceMinigameHandler;
-import pumba.server.ClientListener;
 
-public class ThrowTheDiceMinigameStart extends SocketMessage
+public class ThrowTheDiceMinigameStart extends WaitAndNotifyMessage
 {
 	private Map<String, Integer> players = new HashMap<>();
 	private List<String> playersNames;
 
-	private static Integer cantPlayers = 0;
-
 	public ThrowTheDiceMinigameStart()
 	{
-		super(false);
+		super();
 	}
 
 	@Override
-	public void processResponse(Object object) throws InterruptedException
+	protected void executeActionBeforeWait(Object object)
 	{
-		synchronized (this)
-		{
+		this.players = ThrowTheDiceMinigameHandler.start(playersNames);
+	}
 
-			this.players = ThrowTheDiceMinigameHandler.start(playersNames);
-			synchronized (cantPlayers)
-			{
-				cantPlayers++;
-			}
-			System.out.println("CANT JUGADORES: " + cantPlayers);
-			System.out.println("CANT JUGADORES ESPERADOS: " + ThrowTheDiceMinigameHandler.getPlayers().size());
-			if (cantPlayers < ThrowTheDiceMinigameHandler.getPlayers().size())
-			{
-				try
-				{
-					synchronized (object)
-					{
-						object.wait();
-					}
-				}
-				catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-			}
-			else
-			{
-				cantPlayers = 0;
+	@Override
+	protected void executeActionBeforeNotify()
+	{
+		// DOES NOT DO ANYTHING
+	}
 
-				for (ClientListener client : notCurrentClients())
-				{
-					synchronized (client)
-					{
-						client.notifyAll();
-					}
-				}
-			}
-		}
+	@Override
+	protected Integer getGameHandlerPlayersSize()
+	{
+		return ThrowTheDiceMinigameHandler.getPlayers().size();
+	}
 
-		this.setApproved(true);
-
-		try
-		{
-			this.setClientId(currentClient().getClientId());
-			currentClient().sendMessage(this);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
+	@Override
+	protected void executeActionBeforeSending()
+	{
+		// DOES NOT DO ANYTHING
 	}
 
 }

@@ -18,14 +18,12 @@ public abstract class SocketMessage
 	private String errorMessage;
 	private Boolean approved;
 	private String clientId;
-	private Boolean autenticate;
 
 	protected static ObjectMapper mapper = initializeMapper();
 
-	public SocketMessage(Boolean autenticate)
+	public SocketMessage()
 	{
 		super();
-		this.autenticate = autenticate;
 	}
 
 	String getErrorMessage()

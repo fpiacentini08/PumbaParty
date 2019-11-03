@@ -1,76 +1,49 @@
 package pumba.messages;
 
-import java.io.IOException;
-
 import pumba.exceptions.PumbaException;
 import pumba.handlers.GameHandler;
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.WaitAndNotifyMessage;
 import pumba.models.game.StateReduced;
-import pumba.server.ClientListener;
 
-public class FinishRoundMessage extends SocketMessage
+public class FinishRoundMessage extends WaitAndNotifyMessage
 {
 
 	private StateReduced actualState;
 
-	private static Integer cantPlayers = 0;
-
 	public FinishRoundMessage()
 	{
-		super(false);
+		super();
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeActionBeforeWait(Object object)
 	{
+		// DOES NOT DO ANYTHING
+	}
 
-		cantPlayers++;
-		if (cantPlayers < GameHandler.getPlayers().size())
-		{
-			try
-			{
-				synchronized (object)
-				{
-					object.wait();
-				}
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			cantPlayers = 0;
-			try
-			{
-				GameHandler.finishRound();
-			}
-			catch (PumbaException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			for (ClientListener client : notCurrentClients())
-			{
-				synchronized (client)
-				{
-					client.notifyAll();
-				}
-			}
-		}
-		this.setApproved(true);
-
+	@Override
+	protected void executeActionBeforeNotify()
+	{
 		try
 		{
-			currentClient().sendMessage(this);
+			GameHandler.finishRound();
 		}
-		catch (IOException e)
+		catch (PumbaException e)
 		{
 			e.printStackTrace();
-		}
+		}		
+	}
 
+	@Override
+	protected void executeActionBeforeSending()
+	{
+		// DOES NOT DO ANYTHING
+	}
+
+	@Override
+	protected Integer getGameHandlerPlayersSize()
+	{
+		return GameHandler.getPlayers().size();
 	}
 
 }
