@@ -4,15 +4,15 @@ import java.io.IOException;
 
 import pumba.messages.utils.SocketMessage;
 import pumba.minigame.throwthedice.handler.ThrowTheDiceMinigameHandler;
-import pumba.minigame.throwthedice.state.ThrowTheDiceMinigameState;
 import pumba.minigame.throwthedice.state.ThrowTheDiceMinigameStateReduced;
 import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
 public class ThrowTheDiceMinigameNextStepMessage extends SocketMessage
 {
 
 	private ThrowTheDiceMinigameStateReduced actualState;
+
+	private static Integer cantPlayers = 0;
 
 	public ThrowTheDiceMinigameNextStepMessage()
 	{
@@ -20,25 +20,50 @@ public class ThrowTheDiceMinigameNextStepMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object) 
+	public void processResponse(Object object)
 	{
 
-		ThrowTheDiceMinigameState state = ThrowTheDiceMinigameHandler.nextStep();
-
-		this.actualState = mapper.convertValue(state, ThrowTheDiceMinigameStateReduced.class);
-
-		this.setApproved(true);
-
-		for (ClientListener connected : PumbaServer.getConnectedClients())
+		cantPlayers++;
+		if (cantPlayers < ThrowTheDiceMinigameHandler.getPlayers().size())
 		{
 			try
 			{
-				connected.sendMessage(this);
+				synchronized (object)
+				{
+					object.wait();
+				}
 			}
-			catch (IOException e)
+			catch (InterruptedException e)
 			{
 				e.printStackTrace();
 			}
+		}
+		else
+		{
+			cantPlayers = 0;
+			this.actualState = mapper.convertValue(ThrowTheDiceMinigameHandler.nextStep(), ThrowTheDiceMinigameStateReduced.class);
+
+			for (ClientListener client : notCurrentClients())
+			{
+				synchronized (client)
+				{
+					client.notifyAll();
+				}
+			}
+		}
+
+
+		this.actualState = mapper.convertValue(ThrowTheDiceMinigameHandler.getCurrentState(), ThrowTheDiceMinigameStateReduced.class);
+
+		this.setApproved(true);
+
+		try
+		{
+			currentClient().sendMessage(this);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 
 	}

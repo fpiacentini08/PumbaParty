@@ -6,14 +6,11 @@ import java.util.Map;
 
 import pumba.messages.utils.SocketMessage;
 import pumba.minigame.throwthedice.handler.ThrowTheDiceMinigameHandler;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
 public class ThrowTheDiceMinigameGetPlayers extends SocketMessage
 {
 	private Map<String, Integer> players = new HashMap<>();
-	
-	
+
 	public ThrowTheDiceMinigameGetPlayers()
 	{
 		super(false);
@@ -27,16 +24,13 @@ public class ThrowTheDiceMinigameGetPlayers extends SocketMessage
 
 		this.setApproved(true);
 
-		for (ClientListener connected : PumbaServer.getConnectedClients())
+		try
 		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			currentClient().sendMessage(this);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 
 	}

@@ -5,8 +5,6 @@ import java.io.IOException;
 import pumba.exceptions.PumbaException;
 import pumba.messages.utils.SocketMessage;
 import pumba.minigame.throwthedice.handler.ThrowTheDiceMinigameHandler;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
 public class ThrowTheDiceMinigameFinishTurnMessage extends SocketMessage
 {
@@ -30,16 +28,14 @@ public class ThrowTheDiceMinigameFinishTurnMessage extends SocketMessage
 			this.setErrorMessage(e.getMessage());
 		}
 
-		for (ClientListener connected : PumbaServer.getConnectedClients())
+		try
 		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			currentClient().sendMessage(this);
+			sendMessageToAllOtherClients(this);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 
 	}
