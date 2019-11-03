@@ -219,6 +219,9 @@ public class Game
 
 	public Player getActivePlayer()
 	{
+		if(this.state.getActivePlayer() == null) {
+			return null;
+		}
 		List<Player> activePlayer = this.players.stream()
 				.filter(player -> player.getUsername().equals(this.state.getActivePlayer().getUsername()))
 				.collect(Collectors.toList());

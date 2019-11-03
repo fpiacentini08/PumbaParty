@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import pumba.actions.Action;
+import pumba.board.Board;
 import pumba.board.cells.Position;
 import pumba.effects.Effect;
 import pumba.exceptions.PumbaException;
@@ -221,6 +222,10 @@ public class GameHandler
 
 	public static void removePlayer(String clientId)
 	{
+		if(game.getActivePlayer() == null) {
+			return;
+		}
+		
 		if (game.getActivePlayer().getUsername().equals(clientId))
 		{
 			game.nextPlayer();
@@ -249,6 +254,11 @@ public class GameHandler
 			}
 		}
 
+	}
+
+	public static Board getBoard()
+	{
+		return game.getBoard();
 	}
 
 }
