@@ -222,10 +222,11 @@ public class GameHandler
 
 	public static void removePlayer(String clientId)
 	{
-		if(game.getActivePlayer() == null) {
+		if (game.getActivePlayer() == null)
+		{
 			return;
 		}
-		
+
 		if (game.getActivePlayer().getUsername().equals(clientId))
 		{
 			game.nextPlayer();

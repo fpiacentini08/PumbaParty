@@ -16,7 +16,10 @@ public class StartTestGameMessage extends WaitAndNotifyMessage
 	protected void executeActionBeforeWait(Object object)
 	{
 		((ClientListener) object).setClientId(this.getClientId());
-		GameHandler.startTestGame(this.getClientId());
+		synchronized (this)
+		{
+			GameHandler.startTestGame(this.getClientId());
+		}
 	}
 
 	@Override
