@@ -37,7 +37,7 @@ public class StartTestGameMessage extends WaitAndNotifyMessage
 	@Override
 	protected Integer getGameHandlerPlayersSize()
 	{
-		return 2;
+		return GameHandler.getCantPlayers();
 	}
 
 }

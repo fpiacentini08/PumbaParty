@@ -27,6 +27,8 @@ public class GameHandler
 
 	private static Game game;
 
+	private static Integer cantPlayers;
+
 	private static Boolean isGameStarted()
 	{
 		return game != null;
@@ -260,6 +262,16 @@ public class GameHandler
 	public static Board getBoard()
 	{
 		return game.getBoard();
+	}
+	
+	public static void setCantPlayers(Integer cantPlayers)
+	{
+		GameHandler.cantPlayers = cantPlayers;
+	}
+
+	public static Integer getCantPlayers()
+	{
+		return GameHandler.cantPlayers;
 	}
 
 }

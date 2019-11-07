@@ -28,7 +28,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>pumba.server.PumbaServer</mainClass>
+							<mainClass>pumba.ServerMain</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

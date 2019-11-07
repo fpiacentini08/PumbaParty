@@ -38,7 +38,7 @@ public class PumbaServer extends Thread
 
 	private static EntityManager dataBaseConnection;
 
-	public static void main(String[] args)
+	public static void startServer()
 	{
 		startUI();
 	}
