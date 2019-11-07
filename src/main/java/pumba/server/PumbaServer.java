@@ -155,7 +155,7 @@ public class PumbaServer extends Thread
 			serverSocket = new ServerSocket(PUERTO);
 			log.append("Servidor esperando conexiones..." + System.lineSeparator());
 
-			dataBaseConnection = createEntityManager();
+//			dataBaseConnection = createEntityManager();
 
 			while (true)
 			{
@@ -173,7 +173,7 @@ public class PumbaServer extends Thread
 		{
 			log.append("Fallo la conexion." + System.lineSeparator());
 			e.printStackTrace();
-			dataBaseConnection.close();
+//			dataBaseConnection.close();
 		}
 	}
 

@@ -32,7 +32,7 @@ public class Game
 	{
 		this.board = new Board();
 		this.players = new ArrayList<>();
-		List<Cell> walkableCell = board.getWalkableCells();
+		List<Cell> walkableCell = this.board.getWalkableCells();
 		Collections.shuffle(walkableCell);
 		int i = 0;
 		for (User user : users)
@@ -243,7 +243,7 @@ public class Game
 
 	public void addPlayer(User user)
 	{
-		List<Cell> walkableCell = board.getWalkableCells();
+		List<Cell> walkableCell = this.board.getWalkableCells();
 		for (Player player : this.players)
 		{
 			walkableCell.removeIf(cell -> cell.getPosition().equals(player.getPosition()));
