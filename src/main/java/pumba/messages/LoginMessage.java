@@ -26,7 +26,6 @@ public class LoginMessage extends SocketMessage
 	@Override
 	public void processResponse(Object object) 
 	{
-		ClientListener listener = (ClientListener) object;
 		try
 		{
 			UserHandler.login(username, password);

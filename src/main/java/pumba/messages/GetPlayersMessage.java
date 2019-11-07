@@ -1,17 +1,15 @@
 package pumba.messages;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import pumba.exceptions.PumbaException;
 import pumba.handlers.GameHandler;
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.OneOnOneMessage;
 import pumba.models.players.PlayerReduced;
 import pumba.players.Player;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
-public class GetPlayersMessage extends SocketMessage
+public class GetPlayersMessage extends OneOnOneMessage
 {
 	private List<PlayerReduced> players = new ArrayList<>();
 
@@ -21,29 +19,13 @@ public class GetPlayersMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeAction(Object object) throws PumbaException
 	{
-
 		List<Player> gamePlayers = GameHandler.getPlayers();
 		for (Player player : gamePlayers)
 		{
 			this.players.add(mapper.convertValue(player, PlayerReduced.class));
 		}
-
-		this.setApproved(true);
-
-		for (ClientListener connected : PumbaServer.getConnectedClients())
-		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-
 	}
 
 }

@@ -1,6 +1,5 @@
 package pumba.messages;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +9,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import pumba.board.Board;
 import pumba.board.cells.Cell;
+import pumba.exceptions.PumbaException;
 import pumba.handlers.BoardHandler;
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.OneOnOneMessage;
 import pumba.models.board.cells.CellReduced;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
-public class GetBoardMessage extends SocketMessage
+public class GetBoardMessage extends OneOnOneMessage
 {
 	private List<CellReduced> cells = new ArrayList<>();
 	private Integer dimension;
@@ -27,7 +25,7 @@ public class GetBoardMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeAction(Object object) throws PumbaException
 	{
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -35,25 +33,12 @@ public class GetBoardMessage extends SocketMessage
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
 		Board board = BoardHandler.getBoard();
-		for(Cell cell : board.getCells()) {
+		for (Cell cell : board.getCells())
+		{
 			this.cells.add(mapper.convertValue(cell, CellReduced.class));
 		}
-		
+
 		this.dimension = Board.getDimension();
-		this.setApproved(true);
-
-		for (ClientListener connected : PumbaServer.getConnectedClients())
-		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-
 	}
 
 	public List<CellReduced> getCells()

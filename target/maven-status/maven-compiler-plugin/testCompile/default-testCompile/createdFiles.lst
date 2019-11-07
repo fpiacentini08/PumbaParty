@@ -1,0 +1,15 @@
+pumba\effects\EffectFixture.class
+pumba\board\cells\PositionTest.class
+pumba\board\BoardTest.class
+pumba\room\RoomFixture.class
+pumba\board\cells\notwalkable\NotPlayableCellTest.class
+pumba\actions\ActionFixture.class
+pumba\roomsmenu\RoomsMenuTest.class
+pumba\room\RoomTest.class
+pumba\board\cells\PositionFixture.class
+pumba\player\PlayerFixture.class
+pumba\board\cells\walkable\WalkableCellImplTest.class
+pumba\users\UserTest.class
+pumba\users\UserFixture.class
+pumba\player\PlayerTest.class
+pumba\effects\EffectTest.class

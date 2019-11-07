@@ -38,7 +38,7 @@ public class PumbaServer extends Thread
 
 	private static EntityManager dataBaseConnection;
 
-	public static void main(String[] args)
+	public static void startServer()
 	{
 		startUI();
 	}
@@ -90,12 +90,13 @@ public class PumbaServer extends Thread
 			{
 				try
 				{
-					server.stop();
 					for (ClientListener cliente : connectedClients)
 					{
 						cliente.closeConnections();
 					}
 					serverSocket.close();
+					server.interrupt();
+					log.append("Servidor detenido." + System.lineSeparator());
 				}
 				catch (IOException e1)
 				{
@@ -154,16 +155,17 @@ public class PumbaServer extends Thread
 			serverSocket = new ServerSocket(PUERTO);
 			log.append("Servidor esperando conexiones..." + System.lineSeparator());
 
-			dataBaseConnection = createEntityManager();
+//			dataBaseConnection = createEntityManager();
 
 			while (true)
 			{
 				Socket client = serverSocket.accept();
 				log.append(client.getInetAddress().getHostAddress() + " se ha conectado" + System.lineSeparator());
 
-				ClientListener atencion = new ClientListener(client);
-				atencion.start();
-				connectedClients.add(atencion);
+				ClientListener clientListener = new ClientListener(client, this);
+				connectedClients.add(clientListener);
+				clientListener.start();
+
 			}
 
 		}
@@ -171,7 +173,7 @@ public class PumbaServer extends Thread
 		{
 			log.append("Fallo la conexion." + System.lineSeparator());
 			e.printStackTrace();
-			dataBaseConnection.close();
+//			dataBaseConnection.close();
 		}
 	}
 
@@ -187,6 +189,13 @@ public class PumbaServer extends Thread
 			dataBaseConnection = createEntityManager();
 		}
 		return dataBaseConnection;
+	}
+
+	public void removeClient(ClientListener clientListener)
+	{
+		log.append(clientListener.getHostAddress() + " se ha desconectado" + System.lineSeparator());
+		connectedClients.remove(clientListener);
+
 	}
 
 }

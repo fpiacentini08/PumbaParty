@@ -77,4 +77,5 @@ public class CreateRoomMessage extends SocketMessage
 		this.room = room;
 	}
 
+	
 }

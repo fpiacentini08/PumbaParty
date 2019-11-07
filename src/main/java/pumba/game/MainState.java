@@ -12,12 +12,12 @@ public class MainState extends State
 
 	protected Player activePlayer;
 
-	private static final Integer[] steps = { StepEnum.THROW_DICE.ordinal(), StepEnum.GET_POSSIBLE_POSITIONS.ordinal(),
-			StepEnum.MOVE.ordinal(), StepEnum.CELL_EFFECT.ordinal(), StepEnum.SELECT_ACTION.ordinal(),
-			StepEnum.PLAY_ACTION.ordinal(), StepEnum.WAIT.ordinal(), StepEnum.MINIGAME.ordinal(),
-			StepEnum.END.ordinal() };
+	private static final StepEnum[] steps = { StepEnum.THROW_DICE, StepEnum.GET_POSSIBLE_POSITIONS,
+			StepEnum.MOVE, StepEnum.CELL_EFFECT, StepEnum.SELECT_ACTION,
+			StepEnum.PLAY_ACTION, StepEnum.WAIT, StepEnum.MINIGAME,
+			StepEnum.END };
 
-	private static final List<Integer> stepsList = new ArrayList<Integer>(Arrays.asList(steps));
+	private static final List<StepEnum> stepsList = new ArrayList<StepEnum>(Arrays.asList(steps));
 
 	public MainState(Player player)
 	{
@@ -44,7 +44,7 @@ public class MainState extends State
 
 	public void throwDiceAgain()
 	{
-		this.activeStep = steps[stepsList.indexOf(StepEnum.THROW_DICE.ordinal())];
+		this.activeStep = steps[stepsList.indexOf(StepEnum.THROW_DICE)];
 	}
 
 	public void nextPlayerTurn(Player player)
@@ -65,9 +65,7 @@ public class MainState extends State
 		this.activeTurn = 1;
 		this.activePlayer = player;
 		this.activeStep = steps[0];
-		System.out.println(activeRound);
 		this.activeRound++;
-		System.out.println(activeRound);
 
 	}
 

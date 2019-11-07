@@ -146,7 +146,7 @@ public class Board
 
 	public List<Cell> getWalkableCells()
 	{
-		List<Cell> walkableCells = cells.stream().filter(cell -> cell.getWalkable() && cell instanceof CommonCellImpl)
+		List<Cell> walkableCells = this.cells.stream().filter(cell -> cell.getWalkable())
 				.collect(Collectors.toList());
 		return walkableCells;
 	}

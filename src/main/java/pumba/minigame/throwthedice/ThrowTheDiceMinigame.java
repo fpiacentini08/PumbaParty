@@ -77,7 +77,6 @@ public class ThrowTheDiceMinigame implements MiniGame
 		String activePlayer = this.state.getActivePlayer();
 		if (players.indexOf(activePlayer) < players.size() - 1)
 		{
-			System.out.println("paso por aca");
 			this.state.nextPlayerTurn(players.get(players.indexOf(activePlayer) + 1));
 		}
 		else

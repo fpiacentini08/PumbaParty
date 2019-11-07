@@ -110,18 +110,18 @@ public class BoardTest
 
 	}
 
-	@Test
-	public void boardTestMoveTestPrueba()
-	{
-		Position initialPosition = new Position(3, 18);
-		Integer steps = 2;
-		Board board = new Board();
-
-		List<Position> possiblePositions = board.getPossiblePositions(initialPosition, steps);
-
-		assertNotNull(possiblePositions);
-
-	}
+//	@Test
+//	public void boardTestMoveTestPrueba()
+//	{
+//		Position initialPosition = new Position(3, 18);
+//		Integer steps = 2;
+//		Board board = new Board();
+//
+//		List<Position> possiblePositions = board.getPossiblePositions(initialPosition, steps);
+//
+//		assertNotNull(possiblePositions);
+//
+//	}
 	
 	@Test
 	public void boardTestMove01Test()

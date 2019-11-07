@@ -1,18 +1,15 @@
 package pumba.messages;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import pumba.board.cells.Position;
 import pumba.exceptions.PumbaException;
 import pumba.handlers.GameHandler;
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.OneOnAllMessage;
 import pumba.models.board.cells.PositionReduced;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
-public class MoveMessage extends SocketMessage
+public class MoveMessage extends OneOnAllMessage
 {
 
 	PositionReduced destination;
@@ -25,40 +22,18 @@ public class MoveMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeAction(Object object) throws PumbaException
 	{
-		try
+		Position finalPosition = mapper.convertValue(destination, Position.class);
+		List<Position> positions = GameHandler.move(finalPosition);
+		for (Position pos : positions)
 		{
-			Position finalPosition = mapper.convertValue(destination, Position.class);
-			List<Position> positions = GameHandler.move(finalPosition);
-			for (Position pos : positions)
-			{
-				possiblePositions.add(mapper.convertValue(pos, PositionReduced.class));
-			}
-			if (positions.size() > 1)
-			{
-				this.destination = null;
-			}
-			this.setApproved(true);
+			possiblePositions.add(mapper.convertValue(pos, PositionReduced.class));
 		}
-		catch (PumbaException e)
+		if (positions.size() > 1)
 		{
-			this.setApproved(false);
-			this.setErrorMessage(e.getMessage());
+			this.destination = null;
 		}
-
-		for (ClientListener connected : PumbaServer.getConnectedClients())
-		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-
 	}
 
 }

@@ -1,45 +1,44 @@
 package pumba.messages;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.WaitAndNotifyMessage;
 import pumba.minigame.throwthedice.handler.ThrowTheDiceMinigameHandler;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
-public class ThrowTheDiceMinigameStart extends SocketMessage
+public class ThrowTheDiceMinigameStart extends WaitAndNotifyMessage
 {
 	private Map<String, Integer> players = new HashMap<>();
 	private List<String> playersNames;
 
-	ThrowTheDiceMinigameStart()
+	public ThrowTheDiceMinigameStart()
 	{
 		super();
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeActionBeforeWait(Object object)
 	{
-
 		this.players = ThrowTheDiceMinigameHandler.start(playersNames);
+	}
 
-		this.setApproved(true);
+	@Override
+	protected void executeActionBeforeNotify()
+	{
+		// DOES NOT DO ANYTHING
+	}
 
-		for (ClientListener connected : PumbaServer.getConnectedClients())
-		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
+	@Override
+	protected Integer getGameHandlerPlayersSize()
+	{
+		return ThrowTheDiceMinigameHandler.getPlayers().size();
+	}
 
+	@Override
+	protected void executeActionBeforeSending()
+	{
+		// DOES NOT DO ANYTHING
 	}
 
 }

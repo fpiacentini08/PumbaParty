@@ -1,13 +1,10 @@
 package pumba.messages;
 
-import java.io.IOException;
-
 import pumba.handlers.GameHandler;
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.WaitAndNotifyMessage;
 import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
-public class StartTestGameMessage extends SocketMessage
+public class StartTestGameMessage extends WaitAndNotifyMessage
 {
 
 	public StartTestGameMessage()
@@ -16,26 +13,31 @@ public class StartTestGameMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeActionBeforeWait(Object object)
 	{
-
-		GameHandler.startTestGame();
-		this.setApproved(true);
-
-		for (ClientListener connected : PumbaServer.getConnectedClients())
+		((ClientListener) object).setClientId(this.getClientId());
+		synchronized (this)
 		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			GameHandler.startTestGame(this.getClientId());
 		}
-
 	}
 
+	@Override
+	protected void executeActionBeforeNotify()
+	{
+		// DOES NOT DO ANYTHING
+	}
 
+	@Override
+	protected void executeActionBeforeSending()
+	{
+		// DOES NOT DO ANYTHING
+	}
+
+	@Override
+	protected Integer getGameHandlerPlayersSize()
+	{
+		return GameHandler.getCantPlayers();
+	}
 
 }

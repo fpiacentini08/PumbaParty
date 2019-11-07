@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 import pumba.exceptions.PumbaException;
+import pumba.handlers.GameHandler;
 import pumba.log.Log;
 import pumba.messages.utils.SocketMessage;
 import pumba.messages.utils.SocketMessageSerializer;
@@ -24,14 +25,20 @@ public class ClientListener extends Thread
 	private Gson gson;
 	private boolean disconnect = false;
 
+	private String clientId;
+
 	private SocketMessage message;
 
-	public ClientListener(Socket socket) throws IOException
+	private PumbaServer pumbaServer;
+
+	public ClientListener(Socket socket, PumbaServer pumbaServer) throws IOException
 	{
+		this.pumbaServer = pumbaServer;
 		this.socket = socket;
 		this.out = new ObjectOutputStream(socket.getOutputStream());
 		this.in = new ObjectInputStream(socket.getInputStream());
-		GsonBuilder gsonBilder = new GsonBuilder().registerTypeAdapter(SocketMessage.class, new SocketMessageSerializer());
+		GsonBuilder gsonBilder = new GsonBuilder().registerTypeAdapter(SocketMessage.class,
+				new SocketMessageSerializer());
 		this.gson = gsonBilder.create();
 
 	}
@@ -42,17 +49,22 @@ public class ClientListener extends Thread
 		{
 			while (!this.disconnect)
 			{
-				this.message = this.receiveMessage();
-				this.message.processResponse(this);
+				synchronized (this)
+				{
+
+					this.message = this.receiveMessage();
+					this.message.processResponse(this);
+				}
 			}
 		}
-		catch (IOException | ClassNotFoundException e)
+		catch (IOException | ClassNotFoundException | PumbaException | InterruptedException e)
 		{
-			e.printStackTrace();
-		}
-		catch (PumbaException e)
-		{
-			e.printStackTrace();
+			pumbaServer.removeClient(this);
+			if (this.clientId != null && !this.clientId.contains("LISTENER"))
+			{
+				GameHandler.removePlayer(this.clientId);
+			}
+			// e.printStackTrace();
 		}
 
 		this.closeConnections();
@@ -66,7 +78,6 @@ public class ClientListener extends Thread
 
 	public void sendMessage(SocketMessage message) throws IOException
 	{
-		Log.debugLine();
 		Log.debug("OUTBOUND MESSAGE");
 		Log.debug(gson.toJson(message, SocketMessage.class));
 		this.out.writeObject(gson.toJson(message, SocketMessage.class));
@@ -74,12 +85,10 @@ public class ClientListener extends Thread
 
 	public SocketMessage receiveMessage() throws JsonSyntaxException, ClassNotFoundException, IOException
 	{
-		String inMessage = (String)this.in.readObject();
+		String inMessage = (String) this.in.readObject();
 		SocketMessage message = gson.fromJson(inMessage, SocketMessage.class);
-		Log.debugLine();
 		Log.debug("INBOUND MESSAGE");
 		Log.debug(inMessage);
-		Log.debugLine();
 		return message;
 	}
 
@@ -127,5 +136,14 @@ public class ClientListener extends Thread
 		this.message = message;
 	}
 
+	public String getClientId()
+	{
+		return clientId;
+	}
+
+	public void setClientId(String clientId)
+	{
+		this.clientId = clientId;
+	}
 
 }

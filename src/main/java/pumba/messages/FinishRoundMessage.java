@@ -1,15 +1,14 @@
 package pumba.messages;
 
-import java.io.IOException;
-
 import pumba.exceptions.PumbaException;
 import pumba.handlers.GameHandler;
-import pumba.messages.utils.SocketMessage;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
+import pumba.messages.utils.WaitAndNotifyMessage;
+import pumba.models.game.StateReduced;
 
-public class FinishRoundMessage extends SocketMessage
+public class FinishRoundMessage extends WaitAndNotifyMessage
 {
+
+	private StateReduced actualState;
 
 	public FinishRoundMessage()
 	{
@@ -17,31 +16,34 @@ public class FinishRoundMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeActionBeforeWait(Object object)
+	{
+		// DOES NOT DO ANYTHING
+	}
+
+	@Override
+	protected void executeActionBeforeNotify()
 	{
 		try
 		{
 			GameHandler.finishRound();
-			this.setApproved(true);
 		}
 		catch (PumbaException e)
 		{
-			this.setApproved(false);
-			this.setErrorMessage(e.getMessage());
-		}
+			e.printStackTrace();
+		}		
+	}
 
-		for (ClientListener connected : PumbaServer.getConnectedClients())
-		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
+	@Override
+	protected void executeActionBeforeSending()
+	{
+		// DOES NOT DO ANYTHING
+	}
 
+	@Override
+	protected Integer getGameHandlerPlayersSize()
+	{
+		return GameHandler.getPlayers().size();
 	}
 
 }

@@ -32,7 +32,7 @@ public class Game
 	{
 		this.board = new Board();
 		this.players = new ArrayList<>();
-		List<Cell> walkableCell = board.getWalkableCells();
+		List<Cell> walkableCell = this.board.getWalkableCells();
 		Collections.shuffle(walkableCell);
 		int i = 0;
 		for (User user : users)
@@ -219,6 +219,9 @@ public class Game
 
 	public Player getActivePlayer()
 	{
+		if(this.state.getActivePlayer() == null) {
+			return null;
+		}
 		List<Player> activePlayer = this.players.stream()
 				.filter(player -> player.getUsername().equals(this.state.getActivePlayer().getUsername()))
 				.collect(Collectors.toList());
@@ -227,10 +230,6 @@ public class Game
 
 	public void nextRound()
 	{
-		System.out.println("---------------------");
-		System.out.println(Game.rounds);
-		System.out.println(Game.rounds);
-		System.out.println("---------------------");
 		if (this.state.getActiveRound().compareTo(Game.rounds) < 0)
 		{
 			this.state.nextRound(this.players.get(0));
@@ -239,6 +238,27 @@ public class Game
 		{
 			this.state.endGame();
 		}
+
+	}
+
+	public void addPlayer(User user)
+	{
+		List<Cell> walkableCell = this.board.getWalkableCells();
+		for (Player player : this.players)
+		{
+			walkableCell.removeIf(cell -> cell.getPosition().equals(player.getPosition()));
+		}
+		Collections.shuffle(walkableCell);
+		Position defaultPos = walkableCell.get(0).getPosition();
+		this.players.add(new Player(user, defaultPos));
+	}
+
+	public void removePlayer(String clientId)
+	{
+		Player player = this.players.stream().filter(pl -> pl.getUsername().equals(clientId))
+				.collect(Collectors.toList()).get(0);
+
+		this.players.remove(player);
 
 	}
 

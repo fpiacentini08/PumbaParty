@@ -1,15 +1,10 @@
 package pumba.messages;
 
-import java.io.IOException;
-
-import pumba.game.MainState;
 import pumba.handlers.GameHandler;
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.WaitAndNotifyMessage;
 import pumba.models.game.StateReduced;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
-public class NextStepMessage extends SocketMessage
+public class NextStepMessage extends WaitAndNotifyMessage
 {
 
 	private StateReduced actualState;
@@ -20,27 +15,29 @@ public class NextStepMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object) 
+	protected void executeActionBeforeWait(Object object)
 	{
+		// DOES NOT DO ANYTHING
+	}
 
-		MainState state = GameHandler.nextStep();
+	@Override
+	protected void executeActionBeforeNotify()
+	{
+		GameHandler.nextStep();
+	}
 
-		this.actualState = mapper.convertValue(state, StateReduced.class);
+	@Override
+	protected void executeActionBeforeSending()
+	{
+		this.actualState = mapper.convertValue(GameHandler.getCurrentState(), StateReduced.class);
+	}
 
-		this.setApproved(true);
-
-		for (ClientListener connected : PumbaServer.getConnectedClients())
-		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-
+	@Override
+	protected Integer getGameHandlerPlayersSize()
+	{
+		System.out.println(GameHandler.getPlayers().size());
+		System.out.println("CONTO: " + WaitAndNotifyMessage.cantPlayers);
+		return GameHandler.getPlayers().size();
 	}
 
 }

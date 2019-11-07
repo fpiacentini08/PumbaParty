@@ -1,18 +1,15 @@
 package pumba.messages;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import pumba.board.cells.Position;
 import pumba.exceptions.PumbaException;
 import pumba.handlers.GameHandler;
-import pumba.messages.utils.SocketMessage;
+import pumba.messages.utils.OneOnOneMessage;
 import pumba.models.board.cells.PositionReduced;
-import pumba.server.ClientListener;
-import pumba.server.PumbaServer;
 
-public class GetPossiblePositionsMessage extends SocketMessage
+public class GetPossiblePositionsMessage extends OneOnOneMessage
 {
 
 	List<PositionReduced> possiblePositions = new ArrayList<>();
@@ -24,35 +21,13 @@ public class GetPossiblePositionsMessage extends SocketMessage
 	}
 
 	@Override
-	public void processResponse(Object object)
+	protected void executeAction(Object object) throws PumbaException
 	{
-		try
+		List<Position> positions = GameHandler.getPossiblePositions();
+		for (Position pos : positions)
 		{
-			List<Position> positions = GameHandler.getPossiblePositions();
-			for (Position pos : positions)
-			{
-				possiblePositions.add(mapper.convertValue(pos, PositionReduced.class));
-			}
-			this.setApproved(true);
+			possiblePositions.add(mapper.convertValue(pos, PositionReduced.class));
 		}
-		catch (PumbaException e)
-		{
-			this.setApproved(false);
-			this.setErrorMessage(e.getMessage());
-		}
-
-		for (ClientListener connected : PumbaServer.getConnectedClients())
-		{
-			try
-			{
-				connected.sendMessage(this);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-
 	}
 
 }

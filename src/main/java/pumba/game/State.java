@@ -4,7 +4,7 @@ public class State
 {
 	protected Integer activeTurn;
 	protected Integer activeRound;
-	protected Integer activeStep;
+	protected Object activeStep;
 
 
 	public State()
@@ -24,12 +24,12 @@ public class State
 		this.activeTurn = activeTurn;
 	}
 
-	public Integer getActiveStep()
+	public Object getActiveStep()
 	{
 		return activeStep;
 	}
 
-	public void setActiveStep(Integer activeStep)
+	public void setActiveStep(Object activeStep)
 	{
 		this.activeStep = activeStep;
 	}

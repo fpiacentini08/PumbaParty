@@ -1,5 +1,7 @@
 package pumba.actions.impl;
 
+import java.util.Random;
+
 import pumba.actions.Action;
 import pumba.effects.Effect;
 
@@ -18,7 +20,7 @@ public class ActionThrowBomb extends Action
 		if (this.getAvailable())
 		{
 			this.setAvailable(false);
-			return new Effect(-20);
+			return new Effect((-1 - new Random().nextInt(100)) * 5);
 		}
 		return null;
 	}
