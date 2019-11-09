@@ -1,2 +1,3 @@
 # PumbaParty
-Juego para progra avanzada 2ºc 2019
+Juego para progra avanzada 2Âºc 2019
+Un besito para todos los que me miran el git <3
